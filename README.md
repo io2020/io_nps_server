@@ -1,2 +1,30 @@
-# io_nps_server
-Nps内网穿透Api服务端；Net5.0
+# ionps
+
+#### 介绍
+ionps
+Net5.0
+serilog
+autofac
+automapper
+freesql
+jwt
+idgenerator
+miniprofiler
+swagger
+……
+
+#### 软件架构
+软件架构说明
+
+
+#### 安装教程
+
+1.  xxxx
+2.  xxxx
+3.  xxxx
+
+#### 使用说明
+
+1.  xxxx
+2.  xxxx
+3.  xxxx

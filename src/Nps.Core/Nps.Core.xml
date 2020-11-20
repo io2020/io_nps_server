@@ -1,0 +1,2611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nps.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Nps.Core.Aop.Attributes.DisableAuditingAttribute">
+            <summary>
+            禁用审计日志追踪
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Aop.Attributes.DisableSqlCurdAttribute">
+            <summary>
+            禁用SQL语句记录
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Aop.Attributes.IdGeneratorAttribute">
+            <summary>
+            实体属性启用Id生成器标记
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Aop.Attributes.TransactionalAttribute">
+            <summary>
+            事务
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Aop.Attributes.TransactionalAttribute.Propagation">
+            <summary>
+            事务传播方式
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Aop.Attributes.TransactionalAttribute.IsolationLevel">
+            <summary>
+            事务隔离级别
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor">
+            <summary>
+            工作单元异步Aop
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.#ctor(FreeSql.UnitOfWorkManager,Microsoft.Extensions.Logging.ILogger{Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor})">
+            <summary>
+            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor"/>实例
+            </summary>
+            <param name="unitOfWorkManager">UnitOfWorkManager</param>
+            <param name="logger">ILogger</param>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.TryBegin(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            是否需要启动事务
+            </summary>
+            <param name="invocation">IInvocation</param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptSynchronous(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            拦截同步执行的方法
+            </summary>
+            <param name="invocation">IInvocation</param>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptAsynchronous(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            拦截返回结果为Task的方法
+            </summary>
+            <param name="invocation">IInvocation</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptAsynchronous``1(Castle.DynamicProxy.IInvocation)" -->
+        <member name="T:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor">
+            <summary>
+            工作单元Aop
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor.#ctor(Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor)">
+            <summary>
+            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor"/>实例
+            </summary>
+            <param name="interceptor">UnitOfWorkAsyncInterceptor</param>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            开启拦截
+            </summary>
+            <param name="invocation">IInvocation</param>
+        </member>
+        <member name="T:Nps.Core.Caching.ICaching">
+            <summary>
+            缓存接口
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Exists(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.ExistsAsync(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Get(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Get``1(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <typeparam name="T">byte[] 或其他类型</typeparam>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.GetAsync(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.GetAsync``1(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <typeparam name="T">byte[] 或其他类型</typeparam>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Set(System.String,System.Object)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="expire">有效期</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.SetAsync(System.String,System.Object)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.SetAsync(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="expire">有效期</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.Remove(System.String[])">
+            <summary>
+            用于在 key 存在时删除 key
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.RemoveAsync(System.String[])">
+            <summary>
+            用于在 key 存在时删除 key
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.ICaching.RemoveByPatternAsync(System.String)">
+            <summary>
+            用于在 key 模板存在时删除
+            </summary>
+            <param name="pattern">key模板</param>
+        </member>
+        <member name="T:Nps.Core.Caching.MemoryCache">
+            <summary>
+            内存缓存
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            初始化
+            </summary>
+            <param name="memoryCache">IMemoryCache</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Exists(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.ExistsAsync(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Get(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Get``1(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <typeparam name="T">byte[] 或其他类型</typeparam>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.GetAsync(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.GetAsync``1(System.String)">
+            <summary>
+            获取指定 key 的值
+            </summary>
+            <typeparam name="T">byte[] 或其他类型</typeparam>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Set(System.String,System.Object)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="expire">有效期</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.SetAsync(System.String,System.Object)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.SetAsync(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置指定 key 的值，所有写入参数object都支持string | byte[] | 数值 | 对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="expire">有效期</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.Remove(System.String[])">
+            <summary>
+            用于在 key 存在时删除 key
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.RemoveAsync(System.String[])">
+            <summary>
+            用于在 key 存在时删除 key
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Nps.Core.Caching.MemoryCache.RemoveByPatternAsync(System.String)">
+            <summary>
+            用于在 key 模板存在时删除
+            </summary>
+            <param name="pattern">key模板</param>
+        </member>
+        <member name="T:Nps.Core.Data.ExecuteResult`1">
+            <summary>
+            统一Api响应结果输出
+            </summary>
+            <typeparam name="TResult">响应结果</typeparam>
+        </member>
+        <member name="P:Nps.Core.Data.ExecuteResult`1.IsSuccess">
+            <summary>
+            是否成功标记
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.ExecuteResult`1.Status">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.ExecuteResult`1.Message">
+            <summary>
+            执行消息
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.ExecuteResult`1.Data">
+            <summary>
+            返回数据
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult`1.Ok(`0,Nps.Core.Infrastructure.StatusCode,System.String)">
+            <summary>
+            成功
+            </summary>
+            <param name="data">返回数据</param>
+            <param name="status">状态码</param>
+            <param name="message">执行消息</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult`1.Error(System.String,Nps.Core.Infrastructure.StatusCode,`0)">
+            <summary>
+            失败
+            </summary>
+            <param name="message">执行消息</param>
+            <param name="status">状态码</param>
+            <param name="data">返回数据</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="T:Nps.Core.Data.ExecuteResult">
+            <summary>
+            统一Api响应结果输出
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Ok">
+            <summary>
+            成功
+            </summary>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Ok``1(``0)">
+            <summary>
+            成功
+            </summary>
+            <param name="data">返回数据</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Ok``1(``0,Nps.Core.Infrastructure.StatusCode)">
+            <summary>
+            成功
+            </summary>
+            <param name="data">返回数据</param>
+            <param name="status">状态码</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Ok``1(``0,Nps.Core.Infrastructure.StatusCode,System.String)">
+            <summary>
+            成功
+            </summary>
+            <param name="data">返回数据</param>
+            <param name="status">状态码</param>
+            <param name="message">执行消息</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Error">
+            <summary>
+            失败
+            </summary>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Error(System.String)">
+            <summary>
+            失败
+            </summary>
+            <param name="message">执行消息</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Error(System.String,Nps.Core.Infrastructure.StatusCode)">
+            <summary>
+            失败
+            </summary>
+            <param name="message">执行消息</param>
+            <param name="status">状态码</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Core.Data.ExecuteResult.Error``1(System.String,Nps.Core.Infrastructure.StatusCode,``0)">
+            <summary>
+            失败
+            </summary>
+            <param name="message">执行消息</param>
+            <param name="status">状态码</param>
+            <param name="data">返回数据</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="T:Nps.Core.Data.IExecuteResult">
+            <summary>
+            统一Api响应结果输出
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.IExecuteResult.IsSuccess">
+            <summary>
+            是否请求成功
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.IExecuteResult.Status">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.IExecuteResult.Message">
+            <summary>
+            执行消息
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Data.IExecuteResult`1">
+            <summary>
+            统一Api响应结果输出
+            </summary>
+            <typeparam name="TResult">响应结果</typeparam>
+        </member>
+        <member name="P:Nps.Core.Data.IExecuteResult`1.Data">
+            <summary>
+            响应结果
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Data.PagingInput">
+            <summary>
+            分页信息输入
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.PagingInput.PageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.PagingInput.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Data.PagingInput`1">
+            <summary>
+            分页查询条件
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.PagingInput`1.Filter">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Data.PagingOutput`1">
+            <summary>
+            分页数据输出
+            </summary>
+            <typeparam name="TData">数据集</typeparam>
+        </member>
+        <member name="P:Nps.Core.Data.PagingOutput`1.Total">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Data.PagingOutput`1.List">
+            <summary>
+            分页查询数据列表
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Data.PagingOutput`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Data.PagingOutput`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="datas">分页数据</param>
+        </member>
+        <member name="M:Nps.Core.Data.PagingOutput`1.#ctor(System.Collections.Generic.List{`0},System.Int64)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="datas">分页数据</param>
+            <param name="total">数据总数</param>
+        </member>
+        <member name="T:Nps.Core.Entities.CreateAuditEntity">
+            <summary>
+            新增审计属性
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.CreateAuditEntity`1">
+            <summary>
+            新增审计属性
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.CreateAuditEntity`1.CreateUserId">
+            <summary>
+            创建者ID
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.CreateAuditEntity`1.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.FullAuditEntity">
+            <summary>
+            新增、更新、删除全量审计属性实体模型
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.FullAuditEntity`1">
+            <summary>
+            新增、更新、删除全量审计属性实体模型
+            </summary>
+            <typeparam name="TKey">主键泛型</typeparam>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.CreateUserId">
+            <summary>
+            创建者ID
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.UpdateUserId">
+            <summary>
+            最后修改人Id
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.DeleteUserId">
+            <summary>
+            删除人id
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.FullAuditEntity`1.DeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.ICreateAuditEntity">
+            <summary>
+            创建审计属性
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.ICreateAuditEntity.CreateUserId">
+            <summary>
+            创建者ID
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IDeleteAuditEntity">
+            <summary>
+            删除审计属性
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IDeleteAuditEntity.DeleteUserId">
+            <summary>
+            删除人id
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IHasCreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IHasCreateTime.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IHasDeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IHasDeleteTime.DeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IHasGroup">
+            <summary>
+            数据归属组
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IHasGroup.GroupId">
+            <summary>
+            数据归属组 为数据做数据权限提供方便
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IHasRevision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IHasRevision.Revision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IHasUpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IHasUpdateTime.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.ISoftDelete">
+            <summary>
+            软删除
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.ISoftDelete.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IUpdateAuditEntity">
+            <summary>
+            更新审计属性
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Entities.IUpdateAuditEntity.UpdateUserId">
+            <summary>
+            最后修改人Id
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.Entity`1">
+            <summary>
+            定义实体基类
+            </summary>
+            <typeparam name="TKey">泛型主键</typeparam>
+        </member>
+        <member name="P:Nps.Core.Entities.Entity`1.Id">
+            <summary>
+            主键Id，id启用生成器标识
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Entities.Entity`1.ToString">
+            <summary>
+            重载
+            </summary>
+            <returns>ToString()</returns>
+        </member>
+        <member name="T:Nps.Core.Entities.Entity">
+            <summary>
+            定义主键为long类型实体基类
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IEntity">
+            <summary>
+            定义实体基类接口
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Entities.IEntity`1">
+            <summary>
+            定义实体主键
+            </summary>
+            <typeparam name="TKey">主键类型</typeparam>
+        </member>
+        <member name="P:Nps.Core.Entities.IEntity`1.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Check">
+            <summary>
+            参数合法性检查类
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.Required``1(System.Boolean,System.String)">
+            <summary>
+            验证指定值的断言<paramref name="assertion"/>是否为真，如果不为真，抛出指定消息<paramref name="message"/>的指定类型<typeparamref name="TException"/>异常
+            </summary>
+            <typeparam name="TException">异常类型</typeparam>
+            <param name="assertion">要验证的断言。</param>
+            <param name="message">异常消息。</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.Required``1(``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            验证指定值的断言表达式是否为真，不为值抛出<see cref="T:System.Exception"/>异常
+            </summary>
+            <param name="value"></param>
+            <param name="assertionFunc">要验证的断言表达式</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.Required``2(``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            验证指定值的断言表达式是否为真，不为真抛出<typeparamref name="TException"/>异常
+            </summary>
+            <typeparam name="T">要判断的值的类型</typeparam>
+            <typeparam name="TException">抛出的异常类型</typeparam>
+            <param name="value">要判断的值</param>
+            <param name="assertionFunc">要验证的断言表达式</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.NotNull``1(``0,System.String)">
+            <summary>
+            检查参数不能为空引用，否则抛出<see cref="T:System.ArgumentNullException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.NotNullOrEmpty(System.String,System.String)">
+            <summary>
+            检查字符串不能为空引用或空字符串，否则抛出<see cref="T:System.ArgumentNullException"/>异常或<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.NotEmpty(System.Guid,System.String)">
+            <summary>
+            检查Guid值不能为Guid.Empty，否则抛出<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.NotNullOrEmpty``1(System.Collections.Generic.IReadOnlyList{``0},System.String)">
+            <summary>
+            检查集合不能为空引用或空集合，否则抛出<see cref="T:System.ArgumentNullException"/>异常或<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <typeparam name="T">集合项的类型。</typeparam>
+            <param name="list"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.HasNoNulls``1(System.Collections.Generic.IReadOnlyList{``0},System.String)">
+            <summary>
+            检查集合中没有包含值为null的项
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.LessThan``1(``0,System.String,``0,System.Boolean)">
+            <summary>
+            检查参数必须小于[或可等于，参数<paramref name="canEqual"/>]指定值，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="target">要比较的值。</param>
+            <param name="canEqual">是否可等于。</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.GreaterThan``1(``0,System.String,``0,System.Boolean)">
+            <summary>
+            检查参数必须大于[或可等于，参数<paramref name="canEqual"/>]指定值，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="target">要比较的值。</param>
+            <param name="canEqual">是否可等于。</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.Between``1(``0,System.String,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            检查参数必须在指定范围之间，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="start">比较范围的起始值。</param>
+            <param name="end">比较范围的结束值。</param>
+            <param name="startEqual">是否可等于起始值</param>
+            <param name="endEqual">是否可等于结束值</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.DirectoryExists(System.String,System.String)">
+            <summary>
+            检查指定路径的文件夹必须存在，否则抛出<see cref="T:System.IO.DirectoryNotFoundException"/>异常。
+            </summary>
+            <param name="directory"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Check.FileExists(System.String,System.String)">
+            <summary>
+            检查指定路径的文件必须存在，否则抛出<see cref="T:System.IO.FileNotFoundException"/>异常。
+            </summary>
+            <param name="filename"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException">当文件路径为null时</exception>
+            <exception cref="T:System.IO.FileNotFoundException">当文件路径不存在时</exception>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Configs.AppSettings">
+            <summary>
+            配置帮助类
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.Configs.AppSettings.WriteLine">
+            <summary>
+            输出内容
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.Configs.AppSettings.Configuration">
+            <summary>
+            应用程序配置属性
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化
+            </summary>
+            <param name="configuration">应用程序配置属性</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Load(System.String,System.String)">
+            <summary>
+            加载配置文件
+            </summary>
+            <param name="configFileName">配置文件名。默认：appsettings.json</param>
+            <param name="basePath">基路径</param>
+            <returns>返回配置文件信息</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])">
+            <summary>
+            获取节点值
+            </summary>
+            <param name="sections">节点参数配置</param>
+            <returns>返回节点值</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get``1(System.String[])">
+            <summary>
+            获取节点值
+            </summary>
+            <typeparam name="T">泛型，值类型</typeparam>
+            <param name="sections">节点参数配置</param>
+            <returns>返回节点值</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String)">
+            <summary>
+            获取节点值
+            </summary>
+            <param name="sections">节点参数配置</param>
+            <returns>返回节点值</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get``1(System.String)">
+            <summary>
+            获取节点值
+            </summary>
+            <typeparam name="T">泛型，值类型</typeparam>
+            <param name="sections">节点参数配置</param>
+            <returns>返回节点值</returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Exceptions.NpsException">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.Exceptions.NpsException._code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.Exceptions.NpsException._errorCode">
+            <summary>
+            错误码，当为0时，代表正常
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Exceptions.NpsException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Exceptions.NpsException.#ctor(System.String,Nps.Core.Infrastructure.StatusCode,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="errorCode">错误码，当为0时，代表正常</param>
+            <param name="code">状态码</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Exceptions.NpsException.GetCode">
+            <summary>
+            获取状态码
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Exceptions.NpsException.GetErrorCode">
+            <summary>
+            获取错误码，当为0时，代表正常
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Extensions.Extention">
+            <summary>
+            用于参数检查的扩展方法
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.Require``1(System.Boolean,System.String)">
+            <summary>
+            验证指定值的断言<paramref name="assertion"/>是否为真，如果不为真，抛出指定消息<paramref name="message"/>的指定类型<typeparamref name="TException"/>异常
+            </summary>
+            <typeparam name="TException">异常类型</typeparam>
+            <param name="assertion">要验证的断言。</param>
+            <param name="message">异常消息。</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.Required``1(``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            验证指定值的断言表达式是否为真，不为值抛出<see cref="T:System.Exception"/>异常
+            </summary>
+            <param name="value"></param>
+            <param name="assertionFunc">要验证的断言表达式</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.Required``2(``0,System.Func{``0,System.Boolean},System.String)">
+            <summary>
+            验证指定值的断言表达式是否为真，不为真抛出<typeparamref name="TException"/>异常
+            </summary>
+            <typeparam name="T">要判断的值的类型</typeparam>
+            <typeparam name="TException">抛出的异常类型</typeparam>
+            <param name="value">要判断的值</param>
+            <param name="assertionFunc">要验证的断言表达式</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckNotNull``1(``0,System.String)">
+            <summary>
+            检查参数不能为空引用，否则抛出<see cref="T:System.ArgumentNullException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckNotNullOrEmpty(System.String,System.String)">
+            <summary>
+            检查字符串不能为空引用或空字符串，否则抛出<see cref="T:System.ArgumentNullException"/>异常或<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckNotEmpty(System.Guid,System.String)">
+            <summary>
+            检查Guid值不能为Guid.Empty，否则抛出<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckNotNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            检查集合不能为空引用或空集合，否则抛出<see cref="T:System.ArgumentNullException"/>异常或<see cref="T:System.ArgumentException"/>异常。
+            </summary>
+            <typeparam name="T">集合项的类型。</typeparam>
+            <param name="collection"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckLessThan``1(``0,System.String,``0,System.Boolean)">
+            <summary>
+            检查参数必须小于[或可等于，参数canEqual]指定值，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="target">要比较的值。</param>
+            <param name="canEqual">是否可等于。</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckGreaterThan``1(``0,System.String,``0,System.Boolean)">
+            <summary>
+            检查参数必须大于[或可等于，参数canEqual]指定值，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="target">要比较的值。</param>
+            <param name="canEqual">是否可等于。</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckBetween``1(``0,System.String,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            检查参数必须在指定范围之间，否则抛出<see cref="T:System.ArgumentOutOfRangeException"/>异常。
+            </summary>
+            <typeparam name="T">参数类型。</typeparam>
+            <param name="value"></param>
+            <param name="paramName">参数名称。</param>
+            <param name="start">比较范围的起始值。</param>
+            <param name="end">比较范围的结束值。</param>
+            <param name="startEqual">是否可等于起始值</param>
+            <param name="endEqual">是否可等于结束值</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckDirectoryExists(System.String,System.String)">
+            <summary>
+            检查指定路径的文件夹必须存在，否则抛出<see cref="T:System.IO.DirectoryNotFoundException"/>异常。
+            </summary>
+            <param name="directory"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.CheckFileExists(System.String,System.String)">
+            <summary>
+            检查指定路径的文件必须存在，否则抛出<see cref="T:System.IO.FileNotFoundException"/>异常。
+            </summary>
+            <param name="filename"></param>
+            <param name="paramName">参数名称。</param>
+            <exception cref="T:System.ArgumentNullException">当文件路径为null时</exception>
+            <exception cref="T:System.IO.FileNotFoundException">当文件路径不存在时</exception>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.ToJson(System.Object,System.Boolean)">
+            <summary>
+            将对象序列化成Json字符串
+            </summary>
+            <param name="obj">需要序列化的对象</param>
+            <param name="isNullValue">序列化时是否去掉空值，默认不去掉</param>
+            <returns>返回Json字符串</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.FromJson``1(System.String)">
+            <summary>
+            将Json字符串反序列化为对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="jsonStr">Json字符串</param>
+            <returns>返回T</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.ToList``1(System.String)">
+            <summary>
+            将Json字符串转为List'T'
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="jsonStr">Json字符串</param>
+            <returns>返回List'T'</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.ToTable(System.String)">
+            <summary>
+            将Json字符串转换为DataTable对象
+            </summary>
+            <param name="jsonStr">Json字符串</param>
+            <returns>返回DataTable对象</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extention.ToJObject(System.String)">
+            <summary>
+            将Json字符串转换为JObject对象
+            </summary>
+            <param name="jsonStr">Json字符串</param>
+            <returns>返回JObject对象</returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Helpers.EncryptHelper">
+            <summary>
+            加密操作
+            说明：
+            1、AES加密整理自支付宝SDK
+            2、RSA加密采用 https://github.com/stulzq/DotnetCore.RSA/blob/master/DotnetCore.RSA/RSAHelper.cs
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Md5By16(System.String)">
+            <summary>
+            Md5加密，返回16位结果
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Md5By16(System.String,System.Text.Encoding)">
+            <summary>
+            Md5加密，返回16位结果
+            </summary>
+            <param name="value">值</param>
+            <param name="encoding">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Md5By32(System.String)">
+            <summary>
+            Md5加密，返回32位结果
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Md5By32(System.String,System.Text.Encoding)">
+            <summary>
+            Md5加密，返回32位结果
+            </summary>
+            <param name="value">值</param>
+            <param name="encoding">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Md5(System.String,System.Text.Encoding,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Md5加密
+            </summary>
+            <param name="value">值</param>
+            <param name="encoding">字符编码</param>
+            <param name="startIndex">开始索引</param>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Base64Encrypt(System.String)">
+            <summary>
+            Base64加密
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Base64Encrypt(System.String,System.Text.Encoding)">
+            <summary>
+            Base64加密
+            </summary>
+            <param name="value">值</param>
+            <param name="encoding">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Base64Decrypt(System.String)">
+            <summary>
+            Base64解密
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.EncryptHelper.Base64Decrypt(System.String,System.Text.Encoding)">
+            <summary>
+            Base64解密
+            </summary>
+            <param name="value">值</param>
+            <param name="encoding">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Helpers.ReflectionHelper">
+            <summary>
+            反射 操作
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsDeriveClassFrom``1(System.Type,System.Boolean)">
+            <summary>
+            判断当前类型是否可由指定类型派生
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsDeriveClassFrom(System.Type,System.Type,System.Boolean)">
+            <summary>
+            判断当前类型是否可由指定类型派生
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsGenericAssignableFrom(System.Type,System.Type)">
+            <summary>
+            判断当前泛型类型是否可由指定类型的实例填充
+            </summary>
+            <param name="genericType">泛型类型</param>
+            <param name="type">指定类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsAsync(System.Reflection.MethodInfo)">
+            <summary>
+            方法是否是异步
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsBaseOn(System.Type,System.Type)">
+            <summary>
+            返回当前类型是否是指定基类的派生类
+            </summary>
+            <param name="type">当前类型</param>
+            <param name="baseType">要判断的基类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsBaseOn``1(System.Type)">
+            <summary>
+            返回当前类型是否是指定基类的派生类
+            </summary>
+            <typeparam name="TBaseType">要判断的基类型</typeparam>
+            <param name="type">当前类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Helpers.RegexHelper">
+            <summary>
+            验证 操作
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsEmail(System.String,System.Boolean)">
+            <summary>
+            是否邮箱
+            </summary>
+            <param name="value">邮箱地址</param>
+            <param name="isRestrict">是否按严格模式验证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.HasEmail(System.String,System.Boolean)">
+            <summary>
+            是否存在邮箱
+            </summary>
+            <param name="value">值</param>
+            <param name="isRestrict">是否按严格模式验证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPhoneNumber(System.String)">
+            <summary>
+            是否合法的手机号码
+            </summary>
+            <param name="value">手机号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMobileNumberSimple(System.String,System.Boolean)">
+            <summary>
+            是否手机号码
+            </summary>
+            <param name="value">手机号码</param>
+            <param name="isRestrict">是否按严格模式验证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMobileNumber(System.String)">
+            <summary>
+            是否手机号码
+            </summary>
+            <param name="value">手机号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.HasMobileNumberSimple(System.String,System.Boolean)">
+            <summary>
+            是否存在手机号码
+            </summary>
+            <param name="value">值</param>
+            <param name="isRestrict">是否按严格模式验证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaMobilePhone(System.String)">
+            <summary>
+            是否中国移动号码
+            </summary>
+            <param name="value">手机号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaUnicomPhone(System.String)">
+            <summary>
+            是否中国联通号码
+            </summary>
+            <param name="value">手机号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaTelecomPhone(System.String)">
+            <summary>
+            是否中国电信号码
+            </summary>
+            <param name="value">手机号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsTel(System.String)">
+            <summary>
+            是否中国电话，格式：010-85849685
+            </summary>
+            <param name="value">电话</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsIdCard(System.String)">
+            <summary>
+            是否身份证号码
+            </summary>
+            <param name="value">身份证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsBase64String(System.String)">
+            <summary>
+            是否Base64编码
+            </summary>
+            <param name="value">Base64字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsGuid(System.String)">
+            <summary>
+            是否Guid
+            </summary>
+            <param name="guid">Guid字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUrl(System.String)">
+            <summary>
+            是否Url地址（统一资源定位）
+            </summary>
+            <param name="value">url地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUri(System.String)">
+            <summary>
+            是否Uri（统一资源标识）
+            </summary>
+            <param name="value">uri</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMainDomainUrl(System.String)">
+            <summary>
+            是否主域名或者www开头的域名
+            </summary>
+            <param name="value">url地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMainDomain(System.String)">
+            <summary>
+            是否主域名
+            </summary>
+            <param name="value">域名字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDomain(System.String)">
+            <summary>
+            是否域名
+            </summary>
+            <param name="value">域名字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMac(System.String)">
+            <summary>
+            是否Mac地址
+            </summary>
+            <param name="value">Mac地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPositiveInteger(System.String)">
+            <summary>
+            是否大于0的正整数
+            </summary>
+            <param name="value">正整数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsInt32(System.String)">
+            <summary>
+            是否Int32类型
+            </summary>
+            <param name="value">整数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDouble(System.String)">
+            <summary>
+            是否Double类型
+            </summary>
+            <param name="value">小数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDouble(System.String,System.Double,System.Double,System.Int32)">
+            <summary>
+            是否Double类型
+            </summary>
+            <param name="value">小数</param>
+            <param name="minValue">最小值</param>
+            <param name="maxValue">最大值</param>
+            <param name="digit">小数位数，如果是0则不检测</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordOne(System.String)">
+            <summary>
+            是否密码One的格式，6-25位包含特殊字符
+            </summary>
+            <param name="value">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordOne(System.String,System.Int32,System.Int32)">
+            <summary>
+            是否密码One的格式，指定密码长度，包含特殊字符
+            </summary>
+            <param name="value">密码</param>
+            <param name="min">最小长度</param>
+            <param name="max">最大长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordTwo(System.String)">
+            <summary>
+            是否密码Two的格式，6-25位包含特殊字符
+            </summary>
+            <param name="value">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLoginName(System.String)">
+            <summary>
+            是否登录账号，6-30位长度
+            </summary>
+            <param name="value">登录账号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLoginName(System.String,System.Int32,System.Int32)">
+            <summary>
+            是否登录账号
+            </summary>
+            <param name="value">登录账号</param>
+            <param name="min">最小长度</param>
+            <param name="max">最大长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsBandCard(System.String)">
+            <summary>
+            是否银行卡号，16位或19位银行卡（简单校验）
+            </summary>
+            <param name="value">银行卡号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsSafeSqlString(System.String)">
+            <summary>
+            是否安全Sql语句
+            </summary>
+            <param name="value">sql语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsVersion(System.String,System.Int32)">
+            <summary>
+            是否有效版本号，范例：1.3,1.1.5,1.25.256
+            </summary>
+            <param name="value">版本号</param>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChineseWord(System.String)">
+            <summary>
+            是否中文字符
+            </summary>
+            <param name="value">中文字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinese(System.String)">
+            <summary>
+            是否中文
+            </summary>
+            <param name="value">中文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsContainsChinese(System.String)">
+            <summary>
+            是否包含中文
+            </summary>
+            <param name="value">中文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsContainsNumber(System.String)">
+            <summary>
+            是否包含数字
+            </summary>
+            <param name="value">数字</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsIpAddress(System.String)">
+            <summary>
+            是否IP地址
+            </summary>
+            <param name="value">ip地址</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsInteger(System.String)">
+            <summary>
+            是否整数
+            </summary>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUnicode(System.String)">
+            <summary>
+            是否Unicode字符串
+            </summary>
+            <param name="value">unicode字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLengthStr(System.String,System.Int32,System.Int32)">
+            <summary>
+            字符串长度是否在指定范围内，一个中文为2个字符
+            </summary>
+            <param name="value">字符串</param>
+            <param name="begin">开始</param>
+            <param name="end">结束</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinesePostalCode(System.String)">
+            <summary>
+            是否中国邮政编码，6位数字
+            </summary>
+            <param name="value">邮政编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsNormalChar(System.String)">
+            <summary>
+            是否正常字符，字母、数字、下划线的组合
+            </summary>
+            <param name="value">字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPostfix(System.String,System.String[])">
+            <summary>
+            是否指定后缀
+            </summary>
+            <param name="value">字符串</param>
+            <param name="postfixs">后缀名数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDecimal(System.String)">
+            <summary>
+            是否数字型
+            </summary>
+            <param name="value">数字</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsRepeat(System.String)">
+            <summary>
+            是否重复，范例：112,返回true
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsQQ(System.String)">
+            <summary>
+            是否合法QQ号码
+            </summary>
+            <param name="value">QQ号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsColorValue(System.String)">
+            <summary>
+            是否颜色值。检查颜色值是否为3/6位的合法颜色值。例如：FFF、FFFFFF
+            </summary>
+            <param name="value">颜色值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsWideWord(System.String)">
+            <summary>
+            是否全角字符，包含汉字在内
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsNarrowWord(System.String)">
+            <summary>
+            是否半角字符，包含汉字在内
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsOnlyNumber(System.String)">
+            <summary>
+            是否数字。0-9的数字，不包含符号"."和"-"
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUpperCaseChar(System.String)">
+            <summary>
+            是否大写英文字母组成的字符串
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUpperCaseChar(System.Char)">
+            <summary>
+            是否大写英文字母
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLowerCaseChar(System.String)">
+            <summary>
+            是否小写英文字母组成的字符串
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLowerCaseChar(System.Char)">
+            <summary>
+            是否小写英文字母
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsTime(System.String)">
+            <summary>
+            是否时间格式
+            </summary>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.Boolean)">
+            <summary>
+            是否日期
+            </summary>
+            <param name="value">日期字符串</param>
+            <param name="isRegex">是否正则验证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.String)">
+            <summary>
+            是否日期
+            </summary>
+            <param name="value">日期字符串</param>
+            <param name="format">格式化字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            是否日期
+            </summary>
+            <param name="value">日期字符串</param>
+            <param name="format">格式化字符串</param>
+            <param name="provider">格式化提供者</param>
+            <param name="styles">日期格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDateTimeMin(System.String,System.DateTime)">
+            <summary>
+            是否大于最小时间
+            </summary>
+            <param name="value">时间</param>
+            <param name="min">最小时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDateTimeMax(System.String,System.DateTime)">
+            <summary>
+            是否小于最大时间
+            </summary>
+            <param name="value">时间</param>
+            <param name="max">最大时间</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Core.GuidGenerator">
+            <summary>
+            有序Guid生成器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.GuidGenerator.#ctor(Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuid)">
+            <summary>
+            获取<see cref="T:Nps.Core.Infrastructure.IdGenerators.Core.GuidGenerator"/>类型的实例
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.GuidGenerator.Create">
+            <summary>
+            创建ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Core.LongIdGenerator">
+            <summary>
+            雪花ID生成器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.LongIdGenerator.#ctor(Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId)">
+            <summary>
+            构造函数，初始化一个<see cref="T:Nps.Core.Infrastructure.IdGenerators.Core.LongIdGenerator"/>实例
+            </summary>
+            <param name="snowflakeId">雪花算法</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.LongIdGenerator.Create">
+            <summary>
+            生成雪花Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Core.StringIdGenerator">
+            <summary>
+            ObjectId 生成器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.StringIdGenerator.#ctor">
+            <summary>
+            获取<see cref="T:Nps.Core.Infrastructure.IdGenerators.Core.StringIdGenerator"/>类型的实例
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Core.StringIdGenerator.Create">
+            <summary>
+            创建ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId">
+            <summary>
+            Id生成器，代码出自：https://github.com/tangxuehua/ecommon/blob/master/src/ECommon/Utilities/ObjectId.cs
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.#ctor(System.DateTime,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp (expressed as a DateTime).</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.#ctor(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Empty">
+            <summary>
+            Gets an instance of ObjectId where the value is empty.
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Timestamp">
+            <summary>
+            Gets the timestamp.
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Machine">
+            <summary>
+            Gets the machine.
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Pid">
+            <summary>
+            Gets the PID.
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Increment">
+            <summary>
+            Gets the increment.
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.CreationTime">
+            <summary>
+            Gets the creation time (derived from the timestamp).
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_LessThan(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than the second ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_LessThanOrEqual(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_Equality(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_Inequality(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are not equal.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_GreaterThanOrEqual(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.op_GreaterThan(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId,Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than the second ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GenerateNewId">
+            <summary>
+            Generates a new ObjectId with a unique value.
+            </summary>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GenerateNewId(System.DateTime)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the timestamp component based on a given DateTime).
+            </summary>
+            <param name="timestamp">The timestamp component (expressed as a DateTime).</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GenerateNewId(System.Int32)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the given timestamp).
+            </summary>
+            <param name="timestamp">The timestamp component.</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GenerateNewStringId">
+            <summary>
+            Generates a new ObjectId string with a unique value.
+            </summary>
+            <returns>The string value of the new generated ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Pack(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Packs the components of an ObjectId into a byte array.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Parse(System.String)">
+            <summary>
+            Parses a string and creates a new ObjectId.
+            </summary>
+            <param name="s">The string value.</param>
+            <returns>A ObjectId.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Unpack(System.Byte[],System.Int32@,System.Int32@,System.Int16@,System.Int32@)">
+            <summary>
+            Unpacks a byte array into the components of an ObjectId.
+            </summary>
+            <param name="bytes">A byte array.</param>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GetCurrentProcessId">
+            <summary>
+            Gets the current process id.  This method exists because of how CAS operates on the call stack, checking
+            for permissions before executing the method.  Hence, if we inlined this call, the calling method would not execute
+            before throwing an exception requiring the try/catch at an even higher level that we don't necessarily control.
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.CompareTo(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="other">The other ObjectId.</param>
+            <returns>A 32-bit signed integer that indicates whether this ObjectId is less than, equal to, or greather than the other.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Equals(Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.Equals(System.Object)">
+            <summary>
+            Compares this ObjectId to another object.
+            </summary>
+            <param name="obj">The other object.</param>
+            <returns>True if the other object is an ObjectId and equal to this one.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ToByteArray">
+            <summary>
+            Converts the ObjectId to a byte array.
+            </summary>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ToString">
+            <summary>
+            Returns a string representation of the value.
+            </summary>
+            <returns>A string representation of the value.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ParseHexString(System.String)">
+            <summary>
+            Parses a hex string into its equivalent byte array.
+            </summary>
+            <param name="s">The hex string to parse.</param>
+            <returns>The byte equivalent of the hex string.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ToHexString(System.Byte[])">
+            <summary>
+            Converts a byte array to a hex string.
+            </summary>
+            <param name="bytes">The byte array.</param>
+            <returns>A hex string.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ToMillisecondsSinceEpoch(System.DateTime)">
+            <summary>
+            Converts a DateTime to number of milliseconds since Unix epoch.
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>Number of seconds since Unix epoch.</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.ObjectId.ToUniversalTime(System.DateTime)">
+            <summary>
+            Converts a DateTime to UTC (with special handling for MinValue and MaxValue).
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>The DateTime in UTC.</returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuid">
+            <summary>
+            有序Guid生成器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuid.#ctor(Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="sequentialGuidType">有序Guid类型</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuid.Create">
+            <summary>
+            生成有序Guid，使用默认SequentialAsString方案
+            </summary>
+            <returns>Guid</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuid.Create(Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType)">
+            <summary>
+            生成有序Guid
+            </summary>
+            <param name="guidType">有序Guid类型</param>
+            <returns>Guid</returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType">
+            <summary>
+            有序Guid类型
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType.SequentialAsString">
+            <summary>
+            生成的GUID 按照字符串顺序排列 MySql、PostgreSQL
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType.SequentialAsBinary">
+            <summary>
+            生成的GUID 按照二进制的顺序排列  Oracle
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.IdGenerators.Ids.SequentialGuidType.SequentialAtEnd">
+            <summary>
+            生成的GUID 按照末尾部分排列 SQL Server
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId" -->
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.DataCenterId">
+            <summary>
+            数据中心ID(0~31) 
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.WorkerId">
+            <summary>
+            工作机器ID(0~31) 
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.Sequence">
+            <summary>
+            毫秒内序列(0~4095) 
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.LastTimestamp">
+            <summary>
+            上次生成ID的时间截 
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.#ctor(System.Int64,System.Int64)">
+            <summary>
+            雪花ID
+            </summary>
+            <param name="dataCenterId">数据中心ID</param>
+            <param name="workerId">工作机器ID</param>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.NextId">
+            <summary>
+            获得下一个ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.AnalyzeSnowflakeId(System.Int64)">
+            <summary>
+            解析雪花ID
+            </summary>
+            <returns>返回解析结果</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.GetNextTimestamp(System.Int64)">
+            <summary>
+            阻塞到下一个毫秒，直到获得新的时间戳
+            </summary>
+            <param name="lastTimestamp">上次生成ID的时间截</param>
+            <returns>当前时间戳</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.Ids.SnowflakeId.GetCurrentTimestamp">
+            <summary>
+            获取当前时间戳
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.IGuidGenerator">
+            <summary>
+            定义有序GUID生成器
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.IIdGenerator`1">
+            <summary>
+            ID 生成器
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.IdGenerators.IIdGenerator`1.Create">
+            <summary>
+            创建 ID
+            </summary>
+            <returns>返回ID</returns>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.ILongIdGenerator">
+            <summary>
+            定义雪花Id生成器
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.IdGenerators.IStringIdGenerator">
+            <summary>
+            定义ObjectId生成器
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.StatusCode">
+            <summary>
+            资源操作返回码
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.Success">
+            <summary>
+            操作成功
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.UnknownError">
+            <summary>
+            未知错误
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.ServerUnknownError">
+            <summary>
+            服务器未知错误
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.Error">
+            <summary>
+            操作失败
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.AuthenticationFailed">
+            <summary>
+            认证失败
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.NoPermission">
+            <summary>
+            无权限
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.NotFound">
+            <summary>
+            资源不存在
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.ParameterError">
+            <summary>
+            参数错误
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.RefreshTokenError">
+            <summary>
+            令牌刷新异常
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.TokenInvalidation">
+            <summary>
+            令牌失效
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.TokenExpired">
+            <summary>
+            令牌过期
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.RepeatField">
+            <summary>
+            字段重复
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.Forbidden">
+            <summary>
+            禁止操作
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.StatusCode.ManyRequests">
+            <summary>
+            请求过于频繁，请稍后重试
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_Between">
+            <summary>
+              查找类似 参数“{0}”的值必须在“{1}”与“{2}”之间。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_BetweenNotEqual">
+            <summary>
+              查找类似 参数“{0}”的值必须在“{1}”与“{2}”之间，且不能等于“{3}”。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_DirectoryNotExists">
+            <summary>
+              查找类似 指定的目录路径“{0}”不存在。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_FileNotExists">
+            <summary>
+              查找类似 指定的文件路径“{0}”不存在。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotContainsNull_Collection">
+            <summary>
+              查找类似 集合“{0}”中不能包含null的项 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotEmpty_Guid">
+            <summary>
+              查找类似 参数“{0}”的值不能为Guid.Empty 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotGreaterThan">
+            <summary>
+              查找类似 参数“{0}”的值必须大于“{1}”。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotGreaterThanOrEqual">
+            <summary>
+              查找类似 参数“{0}”的值必须大于或等于“{1}”。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotLessThan">
+            <summary>
+              查找类似 参数“{0}”的值必须小于“{1}”。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotLessThanOrEqual">
+            <summary>
+              查找类似 参数“{0}”的值必须小于或等于“{1}”。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotNull">
+            <summary>
+              查找类似 参数“{0}”不能为空引用。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotNullOrEmpty_Collection">
+            <summary>
+              查找类似 参数“{0}”不能为空引用或空集合。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Properties.Resources.ParameterCheck_NotNullOrEmpty_String">
+            <summary>
+              查找类似 参数“{0}”不能为空引用或空字符串。 的本地化字符串。
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Repositories.FreeSqlRepository`1">
+            <summary>
+            实现FreeSql ORM仓储
+            </summary>
+            <typeparam name="TEntity">实体类型</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Repositories.FreeSqlRepository`1.#ctor(FreeSql.UnitOfWorkManager,Nps.Core.Security.ICurrentUser)" -->
+        <member name="T:Nps.Core.Repositories.FreeSqlRepository`2">
+            <summary>
+            实现FreeSql ORM仓储
+            </summary>
+            <typeparam name="TEntity">实体类型</typeparam>
+            <typeparam name="TKey">主键类型</typeparam>
+        </member>
+        <member name="F:Nps.Core.Repositories.FreeSqlRepository`2._currentUser">
+            <summary>
+            当前登录用户
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Repositories.FreeSqlRepository`2.#ctor(FreeSql.UnitOfWorkManager,Nps.Core.Security.ICurrentUser)" -->
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Insert(`0)">
+            <summary>
+            插入实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回实体对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.InsertAsync(`0)">
+            <summary>
+            插入实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回实体对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Insert(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量插入实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回实体列表对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.InsertAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量插入实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回实体列表对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Update(`0)">
+            <summary>
+            更新实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.UpdateAsync(`0)">
+            <summary>
+            更新实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Update(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量更新实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.UpdateAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量更新实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.InsertOrUpdate(`0)">
+            <summary>
+            插入或更新实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回实体对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.InsertOrUpdateAsync(`0)">
+            <summary>
+            插入或更新实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回实体对象</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Delete(`1)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="id">主键值</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Delete(`0)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Delete(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量删除实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件删除实体
+            </summary>
+            <param name="predicate">实体删除条件</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.DeleteAsync(`1)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="id">主键值</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.DeleteAsync(`0)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="entity">实体</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.DeleteAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量删除实体
+            </summary>
+            <param name="entities">实体列表</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:Nps.Core.Repositories.FreeSqlRepository`2.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件删除实体
+            </summary>
+            <param name="predicate">实体删除条件</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="T:Nps.Core.Repositories.IFreeSqlRepository`1">
+            <summary>
+            定义FreeSql ORM仓储
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Repositories.IFreeSqlRepository`2">
+            <summary>
+            定义FreeSql ORM仓储
+            当需要给公共仓储增加方法时，在此方法中增加
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Security.CurrentUser">
+            <summary>
+            当前认证用户
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.IsAuthenticated">
+            <summary>
+            是否已认证
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.UserName">
+            <summary>
+            用户账户
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.NikeName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.Mobile">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.CurrentUser.Roles">
+            <summary>
+            用户角色集合
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUser.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            构造函数，初始化一个<see cref="T:Nps.Core.Security.CurrentUser"/>实例
+            </summary>
+            <param name="httpContextAccessor">IHttpContextAccessor</param>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUser.IsInRole(System.String)">
+            <summary>
+            是否包含某个角色
+            </summary>
+            <param name="roleName">验证的角色名称</param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUser.FindClaim(System.String)">
+            <summary>
+            根据ClaimType查找Claim
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUser.FindClaims(System.String)">
+            <summary>
+            根据ClaimType查找Claim集合
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUser.GetAllClaims">
+            <summary>
+            获取所有的Claim
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Security.CurrentUserExtensions">
+            <summary>
+            CurrentUser扩展
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUserExtensions.FindClaimValue(Nps.Core.Security.ICurrentUser,System.String)">
+            <summary>
+            根据ClaimType查询ClaimValue
+            </summary>
+            <param name="currentUser">ICurrentUser</param>
+            <param name="claimType">ClaimType</param>
+            <returns>返回ClaimValue</returns>
+        </member>
+        <member name="M:Nps.Core.Security.CurrentUserExtensions.FindClaimValue``1(Nps.Core.Security.ICurrentUser,System.String)">
+            <summary>
+            根据ClaimType查询ClaimValue
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="currentUser">ICurrentUser</param>
+            <param name="claimType">ClaimType</param>
+            <returns>返回ClaimValue</returns>
+        </member>
+        <member name="T:Nps.Core.Security.ICurrentUser">
+            <summary>
+            当前登录用户信息
+            Reference Volo.Abp.Security
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.IsAuthenticated">
+            <summary>
+            是否已认证
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.UserName">
+            <summary>
+            用户账户
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.NikeName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.Mobile">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.ICurrentUser.Roles">
+            <summary>
+            用户角色集合
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.ICurrentUser.IsInRole(System.String)">
+            <summary>
+            是否包含某个角色
+            </summary>
+            <param name="roleName">验证的角色名称</param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Nps.Core.Security.ICurrentUser.FindClaim(System.String)">
+            <summary>
+            根据ClaimType查找Claim
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.ICurrentUser.FindClaims(System.String)">
+            <summary>
+            根据ClaimType查找Claim集合
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.ICurrentUser.GetAllClaims">
+            <summary>
+            获取所有的Claim
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Security.NpsClaimTypes">
+            <summary>
+            Define ClaimTypes
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.UserId">
+            <summary>
+            Default: <see cref="F:System.Security.Claims.ClaimTypes.NameIdentifier"/>
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.UserName">
+            <summary>
+            Default: <see cref="F:System.Security.Claims.ClaimTypes.Name"/>
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.NikeName">
+            <summary>
+            Default: <see cref="F:System.Security.Claims.ClaimTypes.GivenName"/>
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.Mobile">
+            <summary>
+            Default: "MobilePhone".
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.Email">
+            <summary>
+            Default: <see cref="F:System.Security.Claims.ClaimTypes.Email"/>
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.NpsClaimTypes.Role">
+            <summary>
+            Default: <see cref="F:System.Security.Claims.ClaimTypes.Role"/>
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Security.Tokens">
+            <summary>
+            用户访问令牌
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.Tokens.#ctor(System.String,System.String)">
+            <summary>
+            构造函数，初始化一个<see cref="T:Nps.Core.Security.Tokens"/>实例
+            </summary>
+            <param name="accessToken">访问Token</param>
+            <param name="refreshToken">刷新Token</param>
+        </member>
+        <member name="P:Nps.Core.Security.Tokens.AccessToken">
+            <summary>
+            Access_Token
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Security.Tokens.RefreshToken">
+            <summary>
+            Refresh_Token
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Security.Tokens.ToString">
+            <summary>
+            重载
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Services.DomainService">
+            <summary>
+            实现领域服务
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.ServiceProvider">
+            <summary>
+            IServiceProvider
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Services.DomainService.ServiceProviderLock">
+            <summary>
+            线程锁
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Services.DomainService.LazyGetRequiredService``1(``0@)">
+            <summary>
+            从DI容器中获取服务引用
+            </summary>
+            <typeparam name="TService">需要获取的实例对象</typeparam>
+            <param name="reference">返回实例</param>
+            <returns>返回实例</returns>
+        </member>
+        <member name="M:Nps.Core.Services.DomainService.LazyGetRequiredService``1(System.Type,``0@)">
+            <summary>
+            从DI容器中获取服务引用
+            </summary>
+            <typeparam name="TRef">服务引用</typeparam>
+            <param name="serviceType">对象类型</param>
+            <param name="reference">服务引用</param>
+            <returns>返回服务引用</returns>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.CurrentUser">
+            <summary>
+            获取当前用户对象
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.Mapper">
+            <summary>
+            获取AutoMapper对象
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.Db">
+            <summary>
+            获取ORM对象
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.UnitOfWorkManager">
+            <summary>
+            获取工作单元对象
+            </summary>
+        </member>
+        <member name="P:Nps.Core.Services.DomainService.AuthorizationService">
+            <summary>
+            获取认证服务
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Services.IDomainService">
+            <summary>
+            定义领域服务
+            </summary>
+        </member>
+    </members>
+</doc>

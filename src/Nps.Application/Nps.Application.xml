@@ -1,0 +1,588 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nps.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Nps.Application.Account.Dtos.LoginInput">
+            <summary>
+            用户登录Dto
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Account.Dtos.LoginInput.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Account.Dtos.LoginInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="M:Nps.Application.Account.Services.ITokenService.LoginAsync(Nps.Application.Account.Dtos.LoginInput)">
+            <summary>
+            登录
+            </summary>
+            <param name="input">登录参数</param>
+            <returns>返回Token</returns>
+        </member>
+        <member name="M:Nps.Application.Account.Services.ITokenService.GetRefreshTokenAsync(System.String)">
+            <summary>
+            刷新token
+            </summary>
+            <param name="refreshToken">刷新Token</param>
+            <returns>返回Token</returns>
+        </member>
+        <member name="T:Nps.Application.Account.Services.JwtTokenService">
+            <summary>
+            Jwt认证服务
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.AuthKeyOutput">
+            <summary>
+            AuthKey输出结果
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.AuthKeyOutput.Status">
+            <summary>
+            执行结果 1=成功
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.AuthKeyOutput.CryptAuthKey">
+            <summary>
+            加密后的AuthKey
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.AuthKeyOutput.CryptType">
+            <summary>
+            加密方式
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.BaseApiResult">
+            <summary>
+            NpsApi执行结果
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.BaseApiResult.Status">
+            <summary>
+            执行结果 1=成功
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.BaseApiResult.Message">
+            <summary>
+            执行消息
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.BaseAuthInput">
+            <summary>
+            基础验证
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.BaseAuthInput.AuthKey">
+            <summary>
+            auth_key的生成方式为：md5(配置文件中的auth_key+当前时间戳)
+            md5 32位 小写
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.BaseAuthInput.Timestamp">
+            <summary>
+            当前时间戳（秒） 为保证安全，时间戳的有效范围为20秒内，所以每次提交请求必须重新生成。
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelIdInput">
+            <summary>
+            客户端隧道输入模型
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelIdInput.Id">
+            <summary>
+            隧道的id
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelListInput">
+            <summary>
+            根据客户端id查询客户端隧道列表
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListInput.ClientId">
+            <summary>
+            穿透隧道的客户端id
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListInput.ProtocolType">
+            <summary>
+            协议类型
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListInput.KeyWords">
+            <summary>
+            搜索
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListInput.Offset">
+            <summary>
+            分页(第几页)
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListInput.Limit">
+            <summary>
+            条数(分页显示的条数)
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelAddInput">
+            <summary>
+            添加客户端隧道
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.ProtocolType">
+            <summary>
+            协议类型
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.ServerPort">
+            <summary>
+            服务端端口 服务端生成 设计从10001开始，最大值60000
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.TargetPort">
+            <summary>
+            目标(ip:端口)
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.ClientId">
+            <summary>
+            穿透隧道的客户端id
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelEditInput">
+            <summary>
+            编辑客户端隧道
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelEditInput.Id">
+            <summary>
+            隧道的id
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelListOutput">
+            <summary>
+            客户端隧道列表输出
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListOutput.Datas">
+            <summary>
+            客户端隧道列表
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelListOutput.Total">
+            <summary>
+            客户端隧道总数
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelDetail">
+            <summary>
+            隧道详细信息
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.Id">
+            <summary>
+            隧道id
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.ServerPort">
+            <summary>
+            隧道端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.Status">
+            <summary>
+            隧道是否可用
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.RunStatus">
+            <summary>
+            隧道是否运行
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.Client">
+            <summary>
+            隧道所属客户端详细信息
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.Remark">
+            <summary>
+            隧道备注
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelDetail.Target">
+            <summary>
+            隧道连接目标
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelTarget">
+            <summary>
+            隧道连接目标
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelTarget.TargetAddress">
+            <summary>
+            目标地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelTarget.TargetAddressArray">
+            <summary>
+            目标地址数组
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelTarget.LocalProxy">
+            <summary>
+            是否启用本地代理
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ChannelOutput">
+            <summary>
+            单个隧道信息
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelOutput.Status">
+            <summary>
+            执行结果 1=成功
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelOutput.Data">
+            <summary>
+            客户端详细信息
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientIdInput">
+            <summary>
+            客户端Id输入模型
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientIdInput.Id">
+            <summary>
+            客户端Id
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientListInput">
+            <summary>
+            查询客户端列表
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListInput.KeyWords">
+            <summary>
+            搜索
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListInput.OrderType">
+            <summary>
+            排序asc 正序 desc倒序
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListInput.Offset">
+            <summary>
+            分页(第几页)
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListInput.Limit">
+            <summary>
+            条数(分页显示的条数)
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientAddInput">
+            <summary>
+            添加客户端
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.AppSecret">
+            <summary>
+            客户端验证密钥
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.IsConfigConnAllow">
+            <summary>
+            是否允许客户端以配置文件模式连接 1允许 0不允许
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.IsCompress">
+            <summary>
+            是否压缩1允许 0不允许
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.IsCrypt">
+            <summary>
+            是否加密（1或者0）1允许 0不允许
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientEditInput">
+            <summary>
+            根据客户端id编辑
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientEditInput.Id">
+            <summary>
+            客户端Id
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientListOutput">
+            <summary>
+            客户端列表输出
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.ClientConnectPort">
+            <summary>
+            nps客户端连接端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.IP">
+            <summary>
+            nps服务器IP
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.Datas">
+            <summary>
+            客户端列表
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.Total">
+            <summary>
+            客户端总数
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientDetail">
+            <summary>
+            客户端详细信息
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.Id">
+            <summary>
+            客户端id
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.AppSecret">
+            <summary>
+            客户端验证密钥
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.LastConnectAddress">
+            <summary>
+            最后一次连接客户端IP地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.Remark">
+            <summary>
+            客户端备注
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.Status">
+            <summary>
+            客户端是否可用
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientDetail.IsConnect">
+            <summary>
+            客户端是否连接
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ClientOutput">
+            <summary>
+            单个客户端信息
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientOutput.Status">
+            <summary>
+            执行结果 1=成功
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientOutput.Data">
+            <summary>
+            客户端详细信息
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.Dtos.ServerTimeOutput">
+            <summary>
+            获取服务器当前时间戳
+            </summary>
+        </member>
+        <member name="P:Nps.Application.NpsApi.Dtos.ServerTimeOutput.Timestamp">
+            <summary>
+            时间戳（秒）
+            </summary>
+        </member>
+        <member name="T:Nps.Application.NpsApi.INpsApi">
+            <summary>
+            Nps服务端接口列表
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.AuthKeyAsync">
+            <summary>
+            获取服务端authKey
+            </summary>
+            <returns>将返回加密后的authKey，采用aes cbc加密，请使用与服务端配置文件中cryptKey相同的密钥进行解密</returns>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.SystemTimeAsync">
+            <summary>
+            获取服务端时间
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.ClientListAsync(Nps.Application.NpsApi.Dtos.ClientListInput)">
+            <summary>
+            获取客户端列表
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.ClientAsync(Nps.Application.NpsApi.Dtos.ClientIdInput)">
+            <summary>
+            根据Id获取指定的客户端
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.AddClientAsync(Nps.Application.NpsApi.Dtos.ClientAddInput)">
+            <summary>
+            添加客户端
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.EditClientAsync(Nps.Application.NpsApi.Dtos.ClientEditInput)">
+            <summary>
+            编辑客户端
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.DeleteClientAsync(Nps.Application.NpsApi.Dtos.ClientIdInput)">
+            <summary>
+            删除客户端
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.ChannelListAsync(Nps.Application.NpsApi.Dtos.ChannelListInput)">
+            <summary>
+            获取客户端隧道列表
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.ChannelAsync(Nps.Application.NpsApi.Dtos.ChannelIdInput)">
+            <summary>
+            获取单个隧道
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.AddChannelAsync(Nps.Application.NpsApi.Dtos.ChannelAddInput)">
+            <summary>
+            添加隧道
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.EditChannelAsync(Nps.Application.NpsApi.Dtos.ChannelEditInput)">
+            <summary>
+            编辑隧道
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.DeleteChannelAsync(Nps.Application.NpsApi.Dtos.ChannelIdInput)">
+            <summary>
+            删除隧道
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.StartChannelAsync(Nps.Application.NpsApi.Dtos.ChannelIdInput)">
+            <summary>
+            启动隧道
+            </summary>
+        </member>
+        <member name="M:Nps.Application.NpsApi.INpsApi.StopChannelAsync(Nps.Application.NpsApi.Dtos.ChannelIdInput)">
+            <summary>
+            停止隧道
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsServerInput">
+            <summary>
+            Nps服务器查询条件
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerInput.HostIP">
+            <summary>
+            服务器主机IP
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsServerOutput">
+            <summary>
+            Nps服务器输出结果
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.Id">
+            <summary>
+            服务器Id
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostDomain">
+            <summary>
+            服务地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostIP">
+            <summary>
+            服务IP地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostPort">
+            <summary>
+            服务端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ClientConnectPort">
+            <summary>
+            客户端连接端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ProtocolType">
+            <summary>
+            连接协议类型
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Services.INpsServerService">
+            <summary>
+            Nps服务器服务
+            </summary>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsServerService.GetAsync(System.String)">
+            <summary>
+            根据服务器IP查询服务器信息
+            </summary>
+            <param name="hostIP">服务IP</param>
+            <returns>返回服务器信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsServerService.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">
+            <summary>
+            根据条件分页查询服务器信息
+            </summary>
+            <param name="input">查询条件</param>
+            <returns>服务器信息列表</returns>
+        </member>
+        <member name="T:Nps.Application.Nps.Services.NpsServerService">
+            <summary>
+            Nps服务器服务
+            </summary>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsServerService.#ctor(Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer})">
+            <summary>
+            初始化一个<see cref="T:Nps.Application.Nps.Services.NpsServerService"/>实例
+            </summary>
+            <param name="npsServerRepository">NpsServer仓储</param>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsServerService.GetAsync(System.String)">
+            <summary>
+            根据服务器IP查询服务器信息
+            </summary>
+            <param name="hostIP">服务IP</param>
+            <returns>返回服务器信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsServerService.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">
+            <summary>
+            根据条件分页查询服务器信息
+            </summary>
+            <param name="input">查询条件</param>
+            <returns>服务器信息列表</returns>
+        </member>
+    </members>
+</doc>

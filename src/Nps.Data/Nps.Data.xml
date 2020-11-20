@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nps.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Nps.Data.Entities.ActionTrackLog">
+            <summary>
+            接口调用日志表
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.HostDomain">
+            <summary>
+            请求域名
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ApiMethod">
+            <summary>
+            请求接口提交方法
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ApiPath">
+            <summary>
+            请求接口地址
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ApiParams">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.UserAgent">
+            <summary>
+            用户代理
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.IP">
+            <summary>
+            设备IP
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ExecuteMilliseconds">
+            <summary>
+            接口响应耗时（毫秒）
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.StatusCode">
+            <summary>
+            接口响应状态码
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ExecuteResult">
+            <summary>
+            接口响应结果
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.ExecuteMessage">
+            <summary>
+            接口响应消息
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.ActionTrackLog.Revision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.NpsAppSecret">
+            <summary>
+            Nps应用密钥表
+            一个设备对应一个密钥
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.NpsServerId">
+            <summary>
+            所属Nps服务器Id
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.NpsServer">
+            <summary>
+            所属Nps服务器
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.DeviceUniqueId">
+            <summary>
+            设备唯一标识，不同用户允许重复
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.AppSecret">
+            <summary>
+            设备对应的唯一密钥，所有均不重复
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.NpsClient">
+            <summary>
+            Nps客户端
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.CreateUserId">
+            <summary>
+            创建者ID
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.DeleteUserId">
+            <summary>
+            删除人id
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsAppSecret.DeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.NpsChannel">
+            <summary>
+            Nps隧道
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.NpsClientId">
+            <summary>
+            所属客户端Id
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.NpsClient">
+            <summary>
+            所属客户端
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.RemoteChannelId">
+            <summary>
+            Nps服务器隧道Id
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.ServerPort">
+            <summary>
+            服务端口 服务端生成 设计从10001开始，最大值60000
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.TargetAddress">
+            <summary>
+            目标地址(ip:端口)，支持只输入端口号
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.Status">
+            <summary>
+            隧道是否可用
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.RunStatus">
+            <summary>
+            隧道是否运行
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.Remark">
+            <summary>
+            隧道备注信息
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsChannel.Revision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.NpsClient">
+            <summary>
+            Nps客户端
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.NpsAppSecretId">
+            <summary>
+            设备应用密钥id 1:1导航属性
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.NpsAppSecret">
+            <summary>
+            设备应用密钥
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.RemoteClientId">
+            <summary>
+            Nps服务器客户端Id
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.IsConfigConnAllow">
+            <summary>
+            是否允许客户端以配置文件模式连接 1允许 0不允许
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.IsCompress">
+            <summary>
+            是否压缩1允许 0不允许
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.IsCrypt">
+            <summary>
+            是否加密（1或者0）1允许 0不允许
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.Status">
+            <summary>
+            客户端是否可用
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.IsConnect">
+            <summary>
+            客户端是否连接
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.LastConnectAddress">
+            <summary>
+            最后一次连接客户端IP地址
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.Remark">
+            <summary>
+            客户端备注信息
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.Revision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsClient.NpsChannels">
+            <summary>
+            客户端所有隧道列表
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.NpsServer">
+            <summary>
+            Nps服务器表
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.HostDomain">
+            <summary>
+            服务地址
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.HostIP">
+            <summary>
+            服务IP地址
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.HostPort">
+            <summary>
+            服务端口
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.ClientConnectPort">
+            <summary>
+            客户端连接端口
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.ProtocolType">
+            <summary>
+            连接协议类型
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.HttpPort">
+            <summary>
+            Http端口
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.HttpsPort">
+            <summary>
+            Https端口
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.Version">
+            <summary>
+            服务端版本
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.NpsServer.NpsAppSecrets">
+            <summary>
+            服务器所有设备密钥列表
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.SqlCurdLog">
+            <summary>
+            SQLCurd语句日志表
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.SqlCurdLog.FullName">
+            <summary>
+            实体类型全部名称
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.SqlCurdLog.ExecuteMilliseconds">
+            <summary>
+            SQL语句执行时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.SqlCurdLog.Sql">
+            <summary>
+            SQL语句
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.SqlCurdLog.Revision">
+            <summary>
+            乐观锁
+            </summary>
+        </member>
+        <member name="T:Nps.Data.Entities.User">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.NikeName">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.Mobile">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.Password">
+            <summary>
+            用户密码
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.LastLoginTime">
+            <summary>
+            最后一次登录的时间
+            </summary>
+        </member>
+        <member name="P:Nps.Data.Entities.User.RefreshToken">
+            <summary>
+            JWT 登录，保存生成的随机token值。
+            </summary>
+        </member>
+        <member name="T:Nps.Data.FreeSql.FreeSqlCollectionExtension">
+            <summary>
+            FreeSql扩展-集合列表，分页
+            </summary>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPaging``1(FreeSql.ISelect{``0},Nps.Core.Data.PagingInput,System.Int64@)">
+            <summary>
+            分页查询返回ISelect对象
+            </summary>
+            <typeparam name="TEntity">查询实体对象</typeparam>
+            <param name="source">查询数据源</param>
+            <param name="input">分页信息</param>
+            <param name="count">查询数据总数</param>
+            <returns>返回ISelect对象</returns>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPagingList``1(FreeSql.ISelect{``0},Nps.Core.Data.PagingInput,System.Int64@)">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="TEntity">查询实体对象</typeparam>
+            <param name="source">查询数据源</param>
+            <param name="input">分页信息</param>
+            <param name="count">查询数据总数</param>
+            <returns>返回分页查询结果</returns>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPagingListAsync``1(FreeSql.ISelect{``0},Nps.Core.Data.PagingInput,System.Int64@)">
+            <summary>
+            异步分页查询
+            </summary>
+            <typeparam name="TEntity">查询实体对象</typeparam>
+            <param name="source">查询数据源</param>
+            <param name="input">分页信息</param>
+            <param name="count">查询数据总数</param>
+            <returns>返回分页查询结果</returns>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPagingList``2(FreeSql.ISelect{``0},Nps.Core.Data.PagingInput,System.Int64@)">
+            <summary>
+            分页查询，返回输出结果数据集
+            </summary>
+            <typeparam name="TEntity">查询实体对象</typeparam>
+            <typeparam name="TResult">输出结果对象</typeparam>
+            <param name="source">查询数据源</param>
+            <param name="input">分页信息</param>
+            <param name="count">查询数据总数</param>
+            <returns>分页查询，返回输出结果数据集</returns>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPagingListAsync``2(FreeSql.ISelect{``0},Nps.Core.Data.PagingInput,System.Int64@)">
+            <summary>
+            异步分页查询，返回输出结果数据集
+            </summary>
+            <typeparam name="TEntity">查询实体对象</typeparam>
+            <typeparam name="TResult">输出结果对象</typeparam>
+            <param name="source">查询数据源</param>
+            <param name="input">分页信息</param>
+            <param name="count">查询数据总数</param>
+            <returns>分页查询，返回输出结果数据集</returns>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlCollectionExtension.ToPagingOutput``1(System.Collections.Generic.List{``0},System.Int64)">
+            <summary>
+            输出分页结果对象
+            </summary>
+            <typeparam name="TEntity">输出数据对象</typeparam>
+            <param name="list">输出数据集</param>
+            <param name="count">查询数据总数</param>
+            <returns>输出分页结果对象</returns>
+        </member>
+        <member name="T:Nps.Data.FreeSql.FreeSqlConfigEntityExtension">
+            <summary>
+            FreeSql扩展--设置实体属性
+            </summary>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlConfigEntityExtension.ConfigEntity(FreeSql.ICodeFirst)">
+            <summary>
+            设置实体属性
+            </summary>
+            <param name="codeFirst">ICodeFirst对象</param>
+            <returns>返回ICodeFirst对象</returns>
+        </member>
+        <member name="T:Nps.Data.FreeSql.FreeSqlEntitySyncStructure">
+            <summary>
+            FreeSql同步实体
+            </summary>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlEntitySyncStructure.FindIEntities(System.String[])">
+            <summary>
+            根据程序集查找所有实现IEntity的实体
+            </summary>
+            <param name="assemblyStrings">程序集名称列表</param>
+            <returns>返回程序集中所有继承IEntity的实体</returns>
+        </member>
+        <member name="T:Nps.Data.FreeSql.FreeSqlSeedDataExtension">
+            <summary>
+            FreeSql扩展--初始化数据
+            </summary>
+        </member>
+        <member name="M:Nps.Data.FreeSql.FreeSqlSeedDataExtension.SeedData(FreeSql.ICodeFirst,System.Boolean)">
+            <summary>
+            初始化数据
+            </summary>
+            <param name="codeFirst">ICodeFirst对象</param>
+            <param name="isSyncData">是否初始化数据</param>
+            <returns>返回ICodeFirst对象</returns>
+        </member>
+    </members>
+</doc>
