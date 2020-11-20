@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{50B8E70C-0CAE-4ADC-AA1E-AE1FF95EDA75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{4D5A028E-AB63-454C-8158-40FAAC15644A}"
-	ProjectSection(SolutionItems) = preProject
-		doc\项目介绍.txt = doc\项目介绍.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6E0B8642-8F79-446E-98B9-8118CB80577A}"
 EndProject
