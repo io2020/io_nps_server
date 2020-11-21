@@ -187,7 +187,7 @@ namespace Nps.Application.Nps.Services
                 {//远程添加成功后，将数据写入本地Nps客户端表中
                     npsAppSecret.NpsClient = await _npsClientRepository.InsertAsync(new NpsClient
                     {
-                        NpsAppSecretId = npsAppSecret.Id,
+                        Id = npsAppSecret.Id,
                         IsConfigConnectAllow = input.IsConfigConnectAllow,
                         IsCompress = input.IsCompress,
                         IsCrypt = input.IsCrypt,
@@ -368,6 +368,8 @@ namespace Nps.Application.Nps.Services
                 return npsAppSecret;
             }
 
+            //先查询，再更新，否则报异常
+            _npsChannelRepository.Attach(npsAppSecret.NpsClient.NpsChannels);
             for (int index = 0; index < npsAppSecret.NpsClient.NpsChannels.Count; index++)
             {
                 var npsChannel = npsAppSecret.NpsClient.NpsChannels[index];
@@ -379,7 +381,6 @@ namespace Nps.Application.Nps.Services
                     npsChannel.RunStatus = remoteChannel.RunStatus;
                 }
             }
-
             await _npsChannelRepository.UpdateAsync(npsAppSecret.NpsClient.NpsChannels);
 
             return npsAppSecret;

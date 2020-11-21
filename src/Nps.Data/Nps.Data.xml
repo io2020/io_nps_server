@@ -155,11 +155,6 @@
             Nps客户端
             </summary>
         </member>
-        <member name="P:Nps.Data.Entities.NpsClient.NpsAppSecretId">
-            <summary>
-            设备应用密钥id 1:1导航属性
-            </summary>
-        </member>
         <member name="P:Nps.Data.Entities.NpsClient.NpsAppSecret">
             <summary>
             设备应用密钥

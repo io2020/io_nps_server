@@ -44,7 +44,7 @@
             <summary>
             根据服务器IP查询服务器信息
             </summary>
-            <param name="hostIP">服务IP</param>
+            <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
         <member name="M:Nps.Api.Controllers.Nps.ServerController.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">

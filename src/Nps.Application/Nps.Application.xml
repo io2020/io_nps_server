@@ -309,7 +309,7 @@
             客户端验证密钥
             </summary>
         </member>
-        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.IsConfigConnAllow">
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientAddInput.IsConfigConnectAllow">
             <summary>
             是否允许客户端以配置文件模式连接 1允许 0不允许
             </summary>
@@ -344,9 +344,9 @@
             nps客户端连接端口
             </summary>
         </member>
-        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.IP">
+        <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.ServerIPAddress">
             <summary>
-            nps服务器IP
+            nps服务器IP地址
             </summary>
         </member>
         <member name="P:Nps.Application.NpsApi.Dtos.ClientListOutput.Datas">
@@ -510,7 +510,7 @@
             需要开通的端口列表
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsConfigConnAllow">
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsConfigConnectAllow">
             <summary>
             是否允许客户端以配置文件模式连接
             </summary>
@@ -575,7 +575,7 @@
             Nps服务器查询条件
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerInput.HostIP">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerInput.ServerIPAddress">
             <summary>
             服务器主机IP
             </summary>
@@ -620,12 +620,6 @@
             Nps客户端服务接口
             </summary>
         </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetListAsync">
-            <summary>
-            分页查询所有已开通服务列表
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Nps.Application.Nps.Services.INpsClientService.GetAsync(System.String)">
             <summary>
             根据设备唯一标识，查询已开通服务列表
@@ -633,12 +627,18 @@
             <param name="deviceUniqueId">设备唯一标识</param>
             <returns></returns>
         </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetListAsync">
+            <summary>
+            分页查询所有已开通服务列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Nps.Application.Nps.Services.INpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsOpenInput)">
             <summary>
             开通服务
             </summary>
             <param name="input">开通服务参数</param>
-            <returns>返回执行结果</returns>
+            <returns>返回设备已开通端口结果</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.INpsClientService.DeleteAsync">
             <summary>
@@ -706,7 +706,7 @@
             根据设备唯一识别编码，查询Nps应用密钥、Nps服务器、Nps客户端、Nps隧道
             </summary>
             <param name="deviceUniqueId">设备唯一识别编码</param>
-            <returns>返回设备相关信息</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsAppSecretIfCheckNullAsync(System.String,Nps.Data.Entities.NpsAppSecret)">
             <summary>
@@ -714,7 +714,7 @@
             </summary>
             <param name="deviceUniqueId">设备唯一识别编码</param>
             <param name="npsAppSecret">NpsAppSecret</param>
-            <returns>返回设备密钥信息</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsClientIfCheckNullAsync(Nps.Application.Nps.Dots.NpsOpenInput,Nps.Data.Entities.NpsAppSecret)">
             <summary>
@@ -722,18 +722,18 @@
             </summary>
             <param name="input">开通客户端输入参数</param>
             <param name="npsAppSecret">NpsAppSecret</param>
-            <returns>返回设备客户端</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.UpdateNpsClientOrNpsServerIfCheckNotNullAsync(Nps.Data.Entities.NpsAppSecret)">
             <summary>
             检查是否更新NpsAppSecret、NpsServer、NpsClient
             </summary>
             <param name="npsAppSecret">NpsAppSecret</param>
-            <returns>返回执行结果</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetClientOutputAsync(System.String)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetRemoteClientOutputAsync(System.String)">
             <summary>
-            根据设备应用唯一秘钥，从服务器查询客户端信息
+            根据设备应用唯一秘钥，从服务器查询应用密钥对应客户端信息
             </summary>
             <param name="deviceAppSecret">设备应用唯一秘钥</param>
             <returns>返回服务器客户端信息</returns>
@@ -744,23 +744,23 @@
             </summary>
             <param name="input">设备开通服务输入参数</param>
             <param name="npsAppSecret">NpsAppSecret</param>
-            <returns>返回执行结果</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.UpdateNpsChannelsIfCheckNotNullAsync(Nps.Data.Entities.NpsAppSecret)">
             <summary>
             检查是否更新NpsChannels
             </summary>
             <param name="npsAppSecret">NpsAppSecret</param>
-            <returns>返回执行结果</returns>
+            <returns>返回NpsAppSecret</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetChannelOutputAsync(System.Int32)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetRemoteChannelOutputAsync(System.Int32)">
             <summary>
             根据服务器客户端Id，从服务器查询客户端隧道信息
             </summary>
             <param name="remoteClientId">服务器客户端Id</param>
             <returns>返回服务器客户端隧道信息</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.Prepare">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.BeforeRequestNpsApiAsync">
             <summary>
             请求Api前准备验签内容
             </summary>
@@ -781,7 +781,7 @@
             <summary>
             根据服务器IP查询服务器信息
             </summary>
-            <param name="hostIP">服务IP</param>
+            <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsServerService.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">

@@ -11,14 +11,9 @@ namespace Nps.Data.Entities
     public class NpsClient : FullAuditEntity, IHasRevision
     {
         /// <summary>
-        /// 设备应用密钥id 1:1导航属性
+        /// 设备应用密钥，1:1导航属性时直接用各自Id进行关联，无需再从新指定
         /// </summary>
-        public long NpsAppSecretId { get; set; }
-
-        /// <summary>
-        /// 设备应用密钥
-        /// </summary>
-        [Navigate(nameof(NpsAppSecretId))]
+        [Navigate(nameof(Id))]
         public NpsAppSecret NpsAppSecret { get; set; }
 
         /// <summary>
