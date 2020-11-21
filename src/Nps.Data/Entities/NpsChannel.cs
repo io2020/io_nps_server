@@ -33,7 +33,7 @@ namespace Nps.Data.Entities
         /// <summary>
         /// 目标地址(ip:端口)，支持只输入端口号
         /// </summary>
-        public string TargetAddress { get; set; }
+        public string DeviceAddress { get; set; }
 
         /// <summary>
         /// 隧道是否可用

@@ -77,7 +77,7 @@ namespace Nps.Application.NpsApi.Dtos
         /// 目标(ip:端口)
         /// </summary>
         [JsonProperty("target")]
-        public string TargetPort { get; set; }
+        public string TargetAddress { get; set; }
 
         /// <summary>
         /// 穿透隧道的客户端id

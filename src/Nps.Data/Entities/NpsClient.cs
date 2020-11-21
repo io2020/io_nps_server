@@ -29,7 +29,7 @@ namespace Nps.Data.Entities
         /// <summary>
         /// 是否允许客户端以配置文件模式连接 1允许 0不允许
         /// </summary>
-        public bool IsConfigConnAllow { get; set; }
+        public bool IsConfigConnectAllow { get; set; }
 
         /// <summary>
         /// 是否压缩1允许 0不允许

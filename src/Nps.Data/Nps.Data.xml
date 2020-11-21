@@ -95,29 +95,9 @@
             Nps客户端
             </summary>
         </member>
-        <member name="P:Nps.Data.Entities.NpsAppSecret.CreateUserId">
+        <member name="P:Nps.Data.Entities.NpsAppSecret.Revision">
             <summary>
-            创建者ID
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsAppSecret.CreateTime">
-            <summary>
-            创建时间
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsAppSecret.IsDeleted">
-            <summary>
-            是否删除
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsAppSecret.DeleteUserId">
-            <summary>
-            删除人id
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsAppSecret.DeleteTime">
-            <summary>
-            删除时间
+            乐观锁
             </summary>
         </member>
         <member name="T:Nps.Data.Entities.NpsChannel">
@@ -145,7 +125,7 @@
             服务端口 服务端生成 设计从10001开始，最大值60000
             </summary>
         </member>
-        <member name="P:Nps.Data.Entities.NpsChannel.TargetAddress">
+        <member name="P:Nps.Data.Entities.NpsChannel.DeviceAddress">
             <summary>
             目标地址(ip:端口)，支持只输入端口号
             </summary>
@@ -190,7 +170,7 @@
             Nps服务器客户端Id
             </summary>
         </member>
-        <member name="P:Nps.Data.Entities.NpsClient.IsConfigConnAllow">
+        <member name="P:Nps.Data.Entities.NpsClient.IsConfigConnectAllow">
             <summary>
             是否允许客户端以配置文件模式连接 1允许 0不允许
             </summary>
@@ -240,19 +220,9 @@
             Nps服务器表
             </summary>
         </member>
-        <member name="P:Nps.Data.Entities.NpsServer.HostDomain">
-            <summary>
-            服务地址
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsServer.HostIP">
+        <member name="P:Nps.Data.Entities.NpsServer.ServerIPAddress">
             <summary>
             服务IP地址
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsServer.HostPort">
-            <summary>
-            服务端口
             </summary>
         </member>
         <member name="P:Nps.Data.Entities.NpsServer.ClientConnectPort">
@@ -263,21 +233,6 @@
         <member name="P:Nps.Data.Entities.NpsServer.ProtocolType">
             <summary>
             连接协议类型
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsServer.HttpPort">
-            <summary>
-            Http端口
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsServer.HttpsPort">
-            <summary>
-            Https端口
-            </summary>
-        </member>
-        <member name="P:Nps.Data.Entities.NpsServer.Version">
-            <summary>
-            服务端版本
             </summary>
         </member>
         <member name="P:Nps.Data.Entities.NpsServer.NpsAppSecrets">

@@ -27,18 +27,18 @@ namespace Nps.Api.Controllers.Nps
         /// <summary>
         /// 根据服务器IP查询服务器信息
         /// </summary>
-        /// <param name="hostIP">服务IP</param>
+        /// <param name="serverIPAddress">服务器IP地址</param>
         /// <returns>返回服务器信息</returns>
-        [HttpGet("{hostIP}")]
-        public async Task<IExecuteResult> GetAsync(string hostIP)
+        [HttpGet("{serverIPAddress}")]
+        public async Task<IExecuteResult> GetAsync(string serverIPAddress)
         {
-            hostIP.CheckNotNullOrEmpty("服务器IP不能为空");
-            if (!RegexHelper.IsIpAddress(hostIP))
+            serverIPAddress.CheckNotNullOrEmpty("服务器IP不能为空");
+            if (!RegexHelper.IsIpAddress(serverIPAddress))
             {
                 return ExecuteResult.Error("请输入正确的IP地址格式", Core.Infrastructure.StatusCode.ParameterError);
             }
 
-            return ExecuteResult.Ok(await _npsServerService.GetAsync(hostIP));
+            return ExecuteResult.Ok(await _npsServerService.GetAsync(serverIPAddress));
         }
 
         /// <summary>

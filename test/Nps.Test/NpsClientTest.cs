@@ -34,13 +34,13 @@ namespace Nps.Test
             var input = new NpsOpenInput
             {
                 DeviceUniqueId = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                OpenPorts = new List<string> { "5555", "6666", "7777", "8888", "9999", "3333", "2222" },
-                Remarks = "开通端口单元测试"
+                OpenPorts = new List<string> { "1111", "2222", "3333" },//, "4444", "5555"
+                Remark = "开通端口单元测试"
             };
 
             var openResult = await _npsClientService.OpenAsync(input);
 
-            Assert.True(openResult);
+            Assert.NotNull(openResult);
         }
     }
 }

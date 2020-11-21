@@ -121,7 +121,7 @@ namespace Nps.Test
                 Timestamp = serverTime.Timestamp,
                 Remark = $"测试添加客户端隧道_{_serverPort++}",
                 ServerPort = _serverPort,
-                TargetPort = "6677",
+                TargetAddress = "6677",
                 ClientId = 9
             });
 
@@ -135,7 +135,7 @@ namespace Nps.Test
                 Id = 7,
                 Remark = $"测试编辑客户端隧道_{_serverPort++}",
                 ServerPort = _serverPort,
-                TargetPort = "6677",
+                TargetAddress = "6677",
                 ClientId = 9
             });
 

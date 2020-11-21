@@ -15,10 +15,10 @@ namespace Nps.Application.NpsApi.Dtos
         public string ClientConnectPort { get; set; }
 
         /// <summary>
-        /// nps服务器IP
+        /// nps服务器IP地址
         /// </summary>
         [JsonProperty("ip")]
-        public string IP { get; set; }
+        public string ServerIPAddress { get; set; }
 
         /// <summary>
         /// 客户端列表

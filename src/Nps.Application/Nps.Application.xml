@@ -149,7 +149,7 @@
             服务端端口 服务端生成 设计从10001开始，最大值60000
             </summary>
         </member>
-        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.TargetPort">
+        <member name="P:Nps.Application.NpsApi.Dtos.ChannelAddInput.TargetAddress">
             <summary>
             目标(ip:端口)
             </summary>
@@ -525,9 +525,49 @@
             是否加密
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.Remarks">
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.Remark">
             <summary>
             备注信息
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsOpenedOutput">
+            <summary>
+            设备开通端口输出
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedOutput.DeviceUniqueId">
+            <summary>
+            设备唯一识别编码
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedOutput.OpenPorts">
+            <summary>
+            已开通端口列表
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsOpenedPortOutput">
+            <summary>
+            开通端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ServerIPAddress">
+            <summary>
+            服务器地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ClientConnectPort">
+            <summary>
+            客户端连接端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ServerPort">
+            <summary>
+            服务器端口
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.DeviceAddress">
+            <summary>
+            客户端地址，ip+端口/端口
             </summary>
         </member>
         <member name="T:Nps.Application.Nps.Dots.NpsServerInput">
@@ -642,34 +682,83 @@
             Nps客户端服务
             </summary>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.#ctor(Microsoft.Extensions.Logging.ILogger{Nps.Application.Nps.Services.NpsClientService},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsAppSecret},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsClient},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsChannel},Nps.Application.NpsApi.INpsApi,Nps.Core.Infrastructure.IdGenerators.IGuidGenerator)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.#ctor(Microsoft.Extensions.Logging.ILogger{Nps.Application.Nps.Services.NpsClientService},Nps.Application.NpsApi.INpsApi,Nps.Core.Infrastructure.IdGenerators.IGuidGenerator,Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsAppSecret},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsClient},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsChannel})">
             <summary>
             初始化一个<see cref="T:Nps.Application.Nps.Services.NpsClientService"/>实例
             </summary>
             <param name="logger">日志对象</param>
+            <param name="npsApi">Nps服务器Api</param>
+            <param name="guidGenerator">有序GUID生成器</param>
             <param name="npsServerRepository">Nps服务器仓储</param>
             <param name="npsAppSecretRepository">Nps应用密钥仓储</param>
             <param name="npsClientRepository">Nps客户端仓储</param>
             <param name="npsChannelRepository">Nps隧道仓储</param>
-            <param name="npsApi">Nps服务器Api</param>
-            <param name="guidGenerator">有序GUID生成器</param>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsOpenInput)">
+            <summary>
+            设备开通服务
+            </summary>
+            <param name="input">设备开通服务输入参数</param>
+            <returns>返回执行结果</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.GetNpsAppSecretAsync(System.String)">
             <summary>
-            检测设备是否已创建过唯一识别密钥,
-            如果不存在，则创建
+            根据设备唯一识别编码，查询Nps应用密钥、Nps服务器、Nps客户端、Nps隧道
             </summary>
-            <param name="deviceUniqueId">设备唯一识别码</param>
+            <param name="deviceUniqueId">设备唯一识别编码</param>
+            <returns>返回设备相关信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsAppSecretIfCheckNullAsync(System.String,Nps.Data.Entities.NpsAppSecret)">
+            <summary>
+            检测设备是否已创建过唯一识别密钥，如果不存在，则创建
+            </summary>
+            <param name="deviceUniqueId">设备唯一识别编码</param>
+            <param name="npsAppSecret">NpsAppSecret</param>
             <returns>返回设备密钥信息</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetNpsClientAsync(Nps.Data.Entities.NpsAppSecret,Nps.Application.Nps.Dots.NpsOpenInput)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsClientIfCheckNullAsync(Nps.Application.Nps.Dots.NpsOpenInput,Nps.Data.Entities.NpsAppSecret)">
             <summary>
-            检测设备是否已创建过客户端
-            如果不存在，则创建
+            检测设备是否已创建过客户端，如果不存在，则创建
             </summary>
-            <param name="npsAppSecret">设备唯一密钥</param>
             <param name="input">开通客户端输入参数</param>
+            <param name="npsAppSecret">NpsAppSecret</param>
             <returns>返回设备客户端</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.UpdateNpsClientOrNpsServerIfCheckNotNullAsync(Nps.Data.Entities.NpsAppSecret)">
+            <summary>
+            检查是否更新NpsAppSecret、NpsServer、NpsClient
+            </summary>
+            <param name="npsAppSecret">NpsAppSecret</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetClientOutputAsync(System.String)">
+            <summary>
+            根据设备应用唯一秘钥，从服务器查询客户端信息
+            </summary>
+            <param name="deviceAppSecret">设备应用唯一秘钥</param>
+            <returns>返回服务器客户端信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsChannelIfCheckNullAsync(Nps.Application.Nps.Dots.NpsOpenInput,Nps.Data.Entities.NpsAppSecret)">
+            <summary>
+            检查是否已创建服务器客户端隧道，如果不存在，则创建
+            </summary>
+            <param name="input">设备开通服务输入参数</param>
+            <param name="npsAppSecret">NpsAppSecret</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.UpdateNpsChannelsIfCheckNotNullAsync(Nps.Data.Entities.NpsAppSecret)">
+            <summary>
+            检查是否更新NpsChannels
+            </summary>
+            <param name="npsAppSecret">NpsAppSecret</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetChannelOutputAsync(System.Int32)">
+            <summary>
+            根据服务器客户端Id，从服务器查询客户端隧道信息
+            </summary>
+            <param name="remoteClientId">服务器客户端Id</param>
+            <returns>返回服务器客户端隧道信息</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.Prepare">
             <summary>

@@ -22,7 +22,7 @@ namespace Nps.Test
                 PageSize = 10,
                 Filter = new Application.Nps.Dots.NpsServerInput
                 {
-                    HostIP = "8.131.77.125"
+                    ServerIPAddress = "8.131.77.125"
                 }
             });
 

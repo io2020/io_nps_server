@@ -8,6 +8,6 @@
         /// <summary>
         /// 服务器主机IP
         /// </summary>
-        public string HostIP { get; set; }
+        public string ServerIPAddress { get; set; }
     }
 }

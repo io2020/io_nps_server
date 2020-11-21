@@ -19,7 +19,7 @@ namespace Nps.Application.Nps.Validation
 
             RuleFor(x => x.OpenPorts).NotNull().WithMessage("设备需要开通的端口号不能为空");
 
-            RuleFor(x => x.Remarks)
+            RuleFor(x => x.Remark)
                 .MaximumLength(100).WithName("设备备注信息")
                 .WithMessage("{PropertyName}长度不能大于{MinLength}字符");
         }

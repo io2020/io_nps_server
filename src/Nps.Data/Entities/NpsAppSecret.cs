@@ -1,6 +1,5 @@
 ﻿using FreeSql.DataAnnotations;
 using Nps.Core.Entities;
-using System;
 
 namespace Nps.Data.Entities
 {
@@ -9,7 +8,7 @@ namespace Nps.Data.Entities
     /// 一个设备对应一个密钥
     /// </summary>
     [Table(Name = "Nps_AppSecret")]
-    public class NpsAppSecret : Entity, ICreateAuditEntity, IDeleteAuditEntity
+    public class NpsAppSecret : FullAuditEntity, IHasRevision
     {
         /// <summary>
         /// 所属Nps服务器Id
@@ -41,33 +40,9 @@ namespace Nps.Data.Entities
         public NpsClient NpsClient { get; set; }
 
         /// <summary>
-        /// 创建者ID
+        /// 乐观锁
         /// </summary>
-        [Column(Position = -5)]
-        public long CreateUserId { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        [Column(Position = -4)]
-        public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// 是否删除
-        /// </summary>
-        [Column(Position = -3)]
-        public bool IsDeleted { get; set; }
-
-        /// <summary>
-        /// 删除人id
-        /// </summary>
-        [Column(Position = -2)]
-        public long? DeleteUserId { get; set; }
-
-        /// <summary>
-        /// 删除时间
-        /// </summary>
-        [Column(Position = -1)]
-        public DateTime? DeleteTime { get; set; }
+        [Column(IsVersion = true, Position = -1)]
+        public long Revision { get; set; }
     }
 }

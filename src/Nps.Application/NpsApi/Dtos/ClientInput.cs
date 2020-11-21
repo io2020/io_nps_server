@@ -65,7 +65,7 @@ namespace Nps.Application.NpsApi.Dtos
         /// 是否允许客户端以配置文件模式连接 1允许 0不允许
         /// </summary>
         [JsonProperty("config_conn_allow")]
-        public int IsConfigConnAllow { get; set; } = 1;
+        public int IsConfigConnectAllow { get; set; } = 1;
 
         /// <summary>
         /// 是否压缩1允许 0不允许

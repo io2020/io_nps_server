@@ -20,7 +20,7 @@ namespace Nps.Application.Nps.Dots
         /// <summary>
         /// 是否允许客户端以配置文件模式连接
         /// </summary>
-        public bool IsConfigConnAllow { get; set; } = true;
+        public bool IsConfigConnectAllow { get; set; } = true;
 
         /// <summary>
         /// 是否压缩
@@ -35,6 +35,6 @@ namespace Nps.Application.Nps.Dots
         /// <summary>
         /// 备注信息
         /// </summary>
-        public string Remarks { get; set; }
+        public string Remark { get; set; }
     }
 }
