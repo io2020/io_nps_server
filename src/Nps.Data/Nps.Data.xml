@@ -157,7 +157,7 @@
         </member>
         <member name="P:Nps.Data.Entities.NpsClient.NpsAppSecret">
             <summary>
-            设备应用密钥
+            设备应用密钥，1:1导航属性时直接用各自Id进行关联，无需再从新指定
             </summary>
         </member>
         <member name="P:Nps.Data.Entities.NpsClient.RemoteClientId">
