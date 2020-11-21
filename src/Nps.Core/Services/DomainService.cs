@@ -52,12 +52,14 @@ namespace Nps.Core.Services
         }
 
         private ICurrentUser _currentUser;
+
         /// <summary>
         /// 获取当前用户对象
         /// </summary>
         public ICurrentUser CurrentUser => LazyGetRequiredService(ref _currentUser);
 
         private IMapper _mapper;
+
         /// <summary>
         /// 获取AutoMapper对象
         /// </summary>
