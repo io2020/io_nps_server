@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using FreeSql;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Nps.Core.Security;
 using System;
@@ -64,23 +62,5 @@ namespace Nps.Core.Services
         /// 获取AutoMapper对象
         /// </summary>
         public IMapper Mapper => LazyGetRequiredService(ref _mapper);
-
-        private IFreeSql _db;
-        /// <summary>
-        /// 获取ORM对象
-        /// </summary>
-        public IFreeSql Db => LazyGetRequiredService(ref _db);
-
-        private UnitOfWorkManager unitOfWorkManager;
-        /// <summary>
-        /// 获取工作单元对象
-        /// </summary>
-        public UnitOfWorkManager UnitOfWorkManager => LazyGetRequiredService(ref unitOfWorkManager);
-
-        private IAuthorizationService _authorizationService;
-        /// <summary>
-        /// 获取认证服务
-        /// </summary>
-        public IAuthorizationService AuthorizationService => LazyGetRequiredService(ref _authorizationService);
     }
 }

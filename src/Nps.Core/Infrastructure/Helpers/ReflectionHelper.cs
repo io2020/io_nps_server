@@ -1,8 +1,6 @@
 ﻿using Nps.Core.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Nps.Core.Infrastructure.Helpers
 {
@@ -68,15 +66,6 @@ namespace Nps.Core.Infrastructure.Helpers
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// 方法是否是异步
-        /// </summary>
-        public static bool IsAsync(this MethodInfo method)
-        {
-            return method.ReturnType == typeof(Task)
-                || method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
         }
 
         /// <summary>

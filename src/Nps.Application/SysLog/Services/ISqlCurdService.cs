@@ -1,10 +1,16 @@
 ﻿using Nps.Application.SysLog.Dtos;
-using Nps.Core.Data;
 
 namespace Nps.Application.SysLog.Services
 {
+    /// <summary>
+    /// SQL语句写入服务接口
+    /// </summary>
     public interface ISqlCurdService
     {
-        IExecuteResult AddLog(SqlCurdAddInput input);
+        /// <summary>
+        /// 记录业务执行SQL执行语句
+        /// </summary>
+        /// <param name="input">写入参数</param>
+        void Create(SqlCurdAddInput input);
     }
 }

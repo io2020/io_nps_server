@@ -1,4 +1,5 @@
 ﻿using DotNetCore.Security;
+using Microsoft.Extensions.Logging;
 using Nps.Application.Account.Dtos;
 using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.Exceptions;
@@ -7,7 +8,6 @@ using Nps.Core.Repositories;
 using Nps.Core.Security;
 using Nps.Core.Services;
 using Nps.Data.Entities;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -42,7 +42,6 @@ namespace Nps.Application.Account.Services
             _logger.LogInformation("Login With Jwt Begin;");
 
             var user = await _userRepository
-                .Select
                 .Where(x => x.UserName == input.UserName || x.Email == input.UserName)
                 .ToOneAsync();
 
@@ -67,7 +66,6 @@ namespace Nps.Application.Account.Services
         public async Task<Tokens> GetRefreshTokenAsync(string refreshToken)
         {
             var user = await _userRepository
-                .Select
                 .Where(x => x.RefreshToken == refreshToken)
                 .ToOneAsync();
 
@@ -110,7 +108,7 @@ namespace Nps.Application.Account.Services
             return new Tokens(token, refreshToken);
         }
 
-        private string GenerateToken(int size = 32)
+        private static string GenerateToken(int size = 32)
         {
             var randomNumber = new byte[size];
             using var rng = RandomNumberGenerator.Create();

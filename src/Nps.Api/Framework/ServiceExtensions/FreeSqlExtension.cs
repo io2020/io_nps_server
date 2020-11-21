@@ -75,13 +75,12 @@ namespace Nps.Api.Framework.ServiceExtensions
                 {
                     //添加MiniProfiler监控SQL性能
                     MiniProfiler.Current.CustomTiming("SQL：", $"【SQL语句】：{e.Sql}，耗时：{e.ElapsedMilliseconds}毫秒");
-
                     //若实体中不含DisableSqlCurd标记，则将记录写入至数据库
                     if (e.EntityType.GetCustomAttribute<DisableSqlCurdAttribute>(false) == null)
                     {
                         //获取ISqlCurdService对象，在获取之前需要注入
                         var sqlCurdService = services.BuildServiceProvider().GetRequiredService<ISqlCurdService>();
-                        sqlCurdService.AddLog(new SqlCurdAddInput
+                        sqlCurdService.Create(new SqlCurdAddInput
                         {
                             FullName = e.EntityType.FullName,
                             ExecuteMilliseconds = e.ElapsedMilliseconds,
@@ -131,7 +130,7 @@ namespace Nps.Api.Framework.ServiceExtensions
             //连接数据库
             try
             {
-                using var objPool = freeSql.Ado.MasterPool.Get();
+                using var masterPool = freeSql.Ado.MasterPool.Get();
             }
             catch (Exception ex)
             {

@@ -225,6 +225,7 @@ namespace Nps.Application.Nps.Services
             {
                 var remoteNpsClient = clientListOutput.Datas[0];
 
+                _npsClientRepository.Attach(npsAppSecret.NpsClient);
                 npsAppSecret.NpsClient.RemoteClientId = remoteNpsClient.Id;
                 npsAppSecret.NpsClient.Status = remoteNpsClient.Status;
                 npsAppSecret.NpsClient.IsConnect = remoteNpsClient.IsConnect;
@@ -247,6 +248,7 @@ namespace Nps.Application.Nps.Services
                     });
 
                     //将服务器信息与设备应用密钥关联
+                    _npsAppSecretRepository.Attach(npsAppSecret);
                     npsAppSecret.NpsServerId = npsAppSecret.NpsServer.Id;
                     await _npsAppSecretRepository.UpdateAsync(npsAppSecret);
                 }

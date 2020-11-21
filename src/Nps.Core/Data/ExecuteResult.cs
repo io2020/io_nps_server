@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Nps.Core.Infrastructure;
+﻿using Nps.Core.Infrastructure;
 
 namespace Nps.Core.Data
 {
@@ -12,7 +11,6 @@ namespace Nps.Core.Data
         /// <summary>
         /// 是否成功标记
         /// </summary>
-        [JsonIgnore]
         public bool IsSuccess { get; private set; }
 
         /// <summary>

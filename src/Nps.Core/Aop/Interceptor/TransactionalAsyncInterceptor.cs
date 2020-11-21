@@ -62,20 +62,19 @@ namespace Nps.Core.Aop.Interceptor
                 string methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()";
                 int? hashCode = _unitOfWork.GetHashCode();
 
-                using (_logger.BeginScope("_unitOfWork:{hashCode}", hashCode))
+                using (_logger.BeginScope("_unitOfWork_Transactional_Intercept：{hashCode}", hashCode))
                 {
-                    _logger.LogInformation($"----- async Task 开始事务{hashCode} {methodName}----- ");
-
+                    _logger.LogInformation($"------ async Task Intercept 已开启事务拦截：工作单元编号：{hashCode}，方法全称：{methodName} ------");
                     try
                     {
                         await proceed(invocation).ConfigureAwait(false);
                         _unitOfWork.Commit();
-                        _logger.LogInformation($"----- async Task 事务 {hashCode} Commit----- ");
+                        _logger.LogInformation($"------ async Task Intercept 执行完成，已提交事务：工作单元编号：{hashCode} ------");
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         _unitOfWork.Rollback();
-                        _logger.LogError($"----- async Task 事务 {hashCode} Rollback----- ");
+                        _logger.LogError($"------ async Task Intercept 执行失败，失败原因：{ex.Message}；已回滚事务：工作单元编号：{hashCode} ------");
                         throw;
                     }
                     finally
@@ -101,25 +100,28 @@ namespace Nps.Core.Aop.Interceptor
             {
                 string methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()";
                 int hashCode = _unitOfWork.GetHashCode();
-                _logger.LogInformation($"----- async Task<TResult> 开始事务{hashCode} {methodName}----- ");
 
-                try
+                using (_logger.BeginScope("_unitOfWork_Transactional_Intercept：{hashCode}", hashCode))
                 {
-                    var result = await proceed(invocation).ConfigureAwait(false);
-                    _unitOfWork.Commit();
-                    _logger.LogInformation($"----- async Task<TResult> Commit事务{hashCode}----- ");
+                    _logger.LogInformation($"------ async Task<TResult> Intercept 已开启事务拦截：工作单元编号：{hashCode}，方法全称：{methodName} ------");
+                    try
+                    {
+                        var result = await proceed(invocation).ConfigureAwait(false);
+                        _unitOfWork.Commit();
+                        _logger.LogInformation($"------ async Task<TResult> Intercept 执行完成，已提交事务：工作单元编号：{hashCode} ------");
 
-                    return result;
-                }
-                catch (Exception)
-                {
-                    _unitOfWork.Rollback();
-                    _logger.LogError($"----- async Task<TResult> Rollback事务{hashCode}----- ");
-                    throw;
-                }
-                finally
-                {
-                    _unitOfWork.Dispose();
+                        return result;
+                    }
+                    catch (Exception ex)
+                    {
+                        _unitOfWork.Rollback();
+                        _logger.LogError($"------ async Task<TResult> Intercept 执行失败，失败原因：{ex.Message}；已回滚事务：工作单元编号：{hashCode} ------");
+                        throw;
+                    }
+                    finally
+                    {
+                        _unitOfWork.Dispose();
+                    }
                 }
             }
             else
