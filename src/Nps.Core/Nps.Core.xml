@@ -34,50 +34,33 @@
             事务隔离级别
             </summary>
         </member>
-        <member name="T:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor">
+        <member name="T:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor">
             <summary>
-            工作单元异步Aop
+            同步/异步事务拦截器
             </summary>
         </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.#ctor(FreeSql.UnitOfWorkManager,Microsoft.Extensions.Logging.ILogger{Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor})">
-            <summary>
-            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor"/>实例
-            </summary>
-            <param name="unitOfWorkManager">UnitOfWorkManager</param>
-            <param name="logger">ILogger</param>
-        </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.TryBegin(Castle.DynamicProxy.IInvocation)">
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor.#ctor(FreeSql.UnitOfWorkManager,Microsoft.Extensions.Logging.ILogger{Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor})" -->
+        <member name="M:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor.TryBegin(Castle.DynamicProxy.IInvocation)">
             <summary>
             是否需要启动事务
             </summary>
             <param name="invocation">IInvocation</param>
             <returns>True/False</returns>
         </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptSynchronous(Castle.DynamicProxy.IInvocation)">
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor.InterceptAsync(Castle.DynamicProxy.IInvocation,System.Func{Castle.DynamicProxy.IInvocation,System.Threading.Tasks.Task})" -->
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor.InterceptAsync``1(Castle.DynamicProxy.IInvocation,System.Func{Castle.DynamicProxy.IInvocation,System.Threading.Tasks.Task{``0}})" -->
+        <member name="T:Nps.Core.Aop.Interceptor.TransactionalInterceptor">
             <summary>
-            拦截同步执行的方法
-            </summary>
-            <param name="invocation">IInvocation</param>
-        </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptAsynchronous(Castle.DynamicProxy.IInvocation)">
-            <summary>
-            拦截返回结果为Task的方法
-            </summary>
-            <param name="invocation">IInvocation</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor.InterceptAsynchronous``1(Castle.DynamicProxy.IInvocation)" -->
-        <member name="T:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor">
-            <summary>
-            工作单元Aop
+            事务同步拦截器
             </summary>
         </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor.#ctor(Nps.Core.Aop.Interceptor.UnitOfWorkAsyncInterceptor)">
+        <member name="M:Nps.Core.Aop.Interceptor.TransactionalInterceptor.#ctor(Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor)">
             <summary>
-            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor"/>实例
+            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.TransactionalInterceptor"/>实例
             </summary>
-            <param name="interceptor">UnitOfWorkAsyncInterceptor</param>
+            <param name="asyncInterceptor">TransactionalAsyncInterceptor</param>
         </member>
-        <member name="M:Nps.Core.Aop.Interceptor.UnitOfWorkInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+        <member name="M:Nps.Core.Aop.Interceptor.TransactionalInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
             <summary>
             开启拦截
             </summary>
@@ -884,6 +867,25 @@
             <summary>
             获取错误码，当为0时，代表正常
             </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.Extensions.Extension">
+            <summary>
+            系统扩展--日期
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extension.ToTimestamp(System.DateTime)">
+            <summary>
+            时间转时间戳-毫秒
+            </summary>
+            <param name="dateTime">需要转换的时间</param>
+            <returns>返回时间戳</returns>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.Extensions.Extension.ToTimestampSeconds(System.DateTime)">
+            <summary>
+            时间转时间戳-秒
+            </summary>
+            <param name="dateTime">需要转换的时间</param>
+            <returns>返回时间戳</returns>
         </member>
         <member name="T:Nps.Core.Infrastructure.Extensions.Extention">
             <summary>

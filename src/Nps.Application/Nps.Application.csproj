@@ -12,6 +12,13 @@
   <PropertyGroup>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Nps\Services\INpsAppSecretService.cs" />
+    <Compile Remove="Nps\Services\INpsChannelService.cs" />
+    <Compile Remove="Nps\Services\NpsAppSecretService.cs" />
+    <Compile Remove="Nps\Services\NpsChannelService.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />

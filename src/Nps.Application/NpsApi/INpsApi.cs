@@ -34,7 +34,7 @@ namespace Nps.Application.NpsApi
         /// 获取服务端时间
         /// </summary>
         [HttpPost("auth/gettime")]
-        ITask<ServerTimeOutput> SystemTimeAsync();
+        ITask<ServerTimeOutput> ServerTimeAsync();
 
         #endregion
 

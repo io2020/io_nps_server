@@ -24,7 +24,7 @@ namespace Nps.Test
         {
             var authCpryKey = await _npsApi.AuthKeyAsync();
 
-            var serverTime = await _npsApi.SystemTimeAsync();
+            var serverTime = await _npsApi.ServerTimeAsync();
             var authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
 
             var clients = await _npsApi.ClientListAsync(new Application.NpsApi.Dtos.ClientListInput
@@ -37,7 +37,7 @@ namespace Nps.Test
                 Limit = "10"
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var client = await _npsApi.ClientAsync(new Application.NpsApi.Dtos.ClientIdInput
             {
@@ -46,7 +46,7 @@ namespace Nps.Test
                 Timestamp = serverTime.Timestamp
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var appSecret = _guidGenerator.Create().ToString("N");
 
@@ -58,7 +58,7 @@ namespace Nps.Test
                 AppSecret = appSecret
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             appSecret = _guidGenerator.Create().ToString("N");
 
@@ -71,7 +71,7 @@ namespace Nps.Test
                 AppSecret = appSecret
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var deleteClient = await _npsApi.DeleteClientAsync(new Application.NpsApi.Dtos.ClientIdInput
             {
@@ -90,7 +90,7 @@ namespace Nps.Test
         {
             var authCpryKey = await _npsApi.AuthKeyAsync();
 
-            var serverTime = await _npsApi.SystemTimeAsync();
+            var serverTime = await _npsApi.ServerTimeAsync();
             var authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
 
             var clientChannels = await _npsApi.ChannelListAsync(new Application.NpsApi.Dtos.ChannelListInput
@@ -103,7 +103,7 @@ namespace Nps.Test
                 Limit = "10"
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var clientChannel = await _npsApi.ChannelAsync(new Application.NpsApi.Dtos.ChannelIdInput
             {
@@ -112,7 +112,7 @@ namespace Nps.Test
                 Timestamp = serverTime.Timestamp
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
 
             var addClientChannel = await _npsApi.AddChannelAsync(new Application.NpsApi.Dtos.ChannelAddInput
@@ -125,7 +125,7 @@ namespace Nps.Test
                 ClientId = 9
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
 
             var editClientChannel = await _npsApi.EditChannelAsync(new Application.NpsApi.Dtos.ChannelEditInput
@@ -139,7 +139,7 @@ namespace Nps.Test
                 ClientId = 9
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var startClientChannel = await _npsApi.StartChannelAsync(new Application.NpsApi.Dtos.ChannelIdInput
             {
@@ -148,7 +148,7 @@ namespace Nps.Test
                 Id = 7
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var stopClientChannel = await _npsApi.StopChannelAsync(new Application.NpsApi.Dtos.ChannelIdInput
             {
@@ -157,7 +157,7 @@ namespace Nps.Test
                 Id = 7
             });
 
-            serverTime = await _npsApi.SystemTimeAsync();
+            serverTime = await _npsApi.ServerTimeAsync();
             authKey = Core.Infrastructure.Helpers.EncryptHelper.Md5By32($"jyioself2020{serverTime.Timestamp}").ToLower();
             var deleteClientChannel = await _npsApi.DeleteChannelAsync(new Application.NpsApi.Dtos.ChannelIdInput
             {

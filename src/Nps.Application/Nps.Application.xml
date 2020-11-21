@@ -430,7 +430,7 @@
             </summary>
             <returns>将返回加密后的authKey，采用aes cbc加密，请使用与服务端配置文件中cryptKey相同的密钥进行解密</returns>
         </member>
-        <member name="M:Nps.Application.NpsApi.INpsApi.SystemTimeAsync">
+        <member name="M:Nps.Application.NpsApi.INpsApi.ServerTimeAsync">
             <summary>
             获取服务端时间
             </summary>
@@ -495,6 +495,41 @@
             停止隧道
             </summary>
         </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsOpenInput">
+            <summary>
+            开通客户端输入参数
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.DeviceUniqueId">
+            <summary>
+            设备唯一标识，不同用户允许重复
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.OpenPorts">
+            <summary>
+            需要开通的端口列表
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsConfigConnAllow">
+            <summary>
+            是否允许客户端以配置文件模式连接
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsCompress">
+            <summary>
+            是否压缩
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsCrypt">
+            <summary>
+            是否加密
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.Remarks">
+            <summary>
+            备注信息
+            </summary>
+        </member>
         <member name="T:Nps.Application.Nps.Dots.NpsServerInput">
             <summary>
             Nps服务器查询条件
@@ -540,6 +575,49 @@
             连接协议类型
             </summary>
         </member>
+        <member name="T:Nps.Application.Nps.Services.INpsClientService">
+            <summary>
+            Nps客户端服务接口
+            </summary>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetListAsync">
+            <summary>
+            分页查询所有已开通服务列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetAsync(System.String)">
+            <summary>
+            根据设备唯一标识，查询已开通服务列表
+            </summary>
+            <param name="deviceUniqueId">设备唯一标识</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsOpenInput)">
+            <summary>
+            开通服务
+            </summary>
+            <param name="input">开通服务参数</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.DeleteAsync">
+            <summary>
+            删除服务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.StartAsync">
+            <summary>
+            开启服务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.StopAsync">
+            <summary>
+            停止服务
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Nps.Application.Nps.Services.INpsServerService">
             <summary>
             Nps服务器服务
@@ -558,6 +636,46 @@
             </summary>
             <param name="input">查询条件</param>
             <returns>服务器信息列表</returns>
+        </member>
+        <member name="T:Nps.Application.Nps.Services.NpsClientService">
+            <summary>
+            Nps客户端服务
+            </summary>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.#ctor(Microsoft.Extensions.Logging.ILogger{Nps.Application.Nps.Services.NpsClientService},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsAppSecret},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsClient},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsChannel},Nps.Application.NpsApi.INpsApi,Nps.Core.Infrastructure.IdGenerators.IGuidGenerator)">
+            <summary>
+            初始化一个<see cref="T:Nps.Application.Nps.Services.NpsClientService"/>实例
+            </summary>
+            <param name="logger">日志对象</param>
+            <param name="npsServerRepository">Nps服务器仓储</param>
+            <param name="npsAppSecretRepository">Nps应用密钥仓储</param>
+            <param name="npsClientRepository">Nps客户端仓储</param>
+            <param name="npsChannelRepository">Nps隧道仓储</param>
+            <param name="npsApi">Nps服务器Api</param>
+            <param name="guidGenerator">有序GUID生成器</param>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetNpsAppSecretAsync(System.String)">
+            <summary>
+            检测设备是否已创建过唯一识别密钥,
+            如果不存在，则创建
+            </summary>
+            <param name="deviceUniqueId">设备唯一识别码</param>
+            <returns>返回设备密钥信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.GetNpsClientAsync(Nps.Data.Entities.NpsAppSecret,Nps.Application.Nps.Dots.NpsOpenInput)">
+            <summary>
+            检测设备是否已创建过客户端
+            如果不存在，则创建
+            </summary>
+            <param name="npsAppSecret">设备唯一密钥</param>
+            <param name="input">开通客户端输入参数</param>
+            <returns>返回设备客户端</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.Prepare">
+            <summary>
+            请求Api前准备验签内容
+            </summary>
+            <returns>返回验签内容</returns>
         </member>
         <member name="T:Nps.Application.Nps.Services.NpsServerService">
             <summary>
@@ -583,6 +701,11 @@
             </summary>
             <param name="input">查询条件</param>
             <returns>服务器信息列表</returns>
+        </member>
+        <member name="T:Nps.Application.Nps.Validation.NpsOpenInputValidation">
+            <summary>
+            开通端口参数验证
+            </summary>
         </member>
     </members>
 </doc>

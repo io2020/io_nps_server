@@ -47,65 +47,65 @@ namespace Nps.Data.FreeSql
                 });
             });
 
-            //初始化Nps服务器数据
-            codeFirst.Entity<NpsServer>(e =>
-            {
-                e.HasData(new NpsServer
-                {
-                    HostDomain = "http://8.131.77.125:7501",
-                    HostIP = "8.131.77.125",
-                    HostPort = 7501,
-                    ClientConnectPort = 8024,
-                    ProtocolType = "tcp",
-                    HttpPort = 8001,
-                    HttpsPort = 8443,
-                    Version = "0.26.9",
-                    CreateTime = DateTime.Now,
-                    //初始化Nps服务器数据 1对多级联保存
-                    NpsAppSecrets = new List<NpsAppSecret>
-                    {
-                        new NpsAppSecret
-                        {
-                            DeviceUniqueId=Guid.NewGuid().ToString("N"),
-                            AppSecret=Guid.NewGuid().ToString("N"),
-                            CreateTime=DateTime.Now,
-                            IsDeleted=false,
-                            NpsClient=new NpsClient
-                            {
-                                RemoteClientId=11,
-                                IsConfigConnAllow=true,
-                                IsCompress=false,
-                                IsCrypt=true,
-                                Remark="添加客户端",
-                                NpsChannels=new List<NpsChannel>
-                                {
-                                    new NpsChannel
-                                    {
-                                        RemoteChannelId=15,
-                                        ServerPort=20005,
-                                        TargetAddress="6688",
-                                        Remark="添加隧道"
-                                    }
-                                }
-                            }
-                        },
-                        new NpsAppSecret
-                        {
-                            DeviceUniqueId=Guid.NewGuid().ToString("N"),
-                            AppSecret=Guid.NewGuid().ToString("N"),
-                            CreateTime=DateTime.Now,
-                            IsDeleted=false
-                        },
-                        new NpsAppSecret
-                        {
-                            DeviceUniqueId=Guid.NewGuid().ToString("N"),
-                            AppSecret=Guid.NewGuid().ToString("N"),
-                            CreateTime=DateTime.Now,
-                            IsDeleted=false
-                        }
-                    }
-                });
-            });
+            ////初始化Nps服务器数据
+            //codeFirst.Entity<NpsServer>(e =>
+            //{
+            //    e.HasData(new NpsServer
+            //    {
+            //        HostDomain = "http://8.131.77.125:7501",
+            //        HostIP = "8.131.77.125",
+            //        HostPort = 7501,
+            //        ClientConnectPort = 8024,
+            //        ProtocolType = "tcp",
+            //        HttpPort = 8001,
+            //        HttpsPort = 8443,
+            //        Version = "0.26.9",
+            //        CreateTime = DateTime.Now,
+            //        //初始化Nps服务器数据 1对多级联保存
+            //        NpsAppSecrets = new List<NpsAppSecret>
+            //        {
+            //            new NpsAppSecret
+            //            {
+            //                DeviceUniqueId=Guid.NewGuid().ToString("N"),
+            //                AppSecret=Guid.NewGuid().ToString("N"),
+            //                CreateTime=DateTime.Now,
+            //                IsDeleted=false,
+            //                NpsClient=new NpsClient
+            //                {
+            //                    RemoteClientId=11,
+            //                    IsConfigConnAllow=true,
+            //                    IsCompress=false,
+            //                    IsCrypt=true,
+            //                    Remark="添加客户端",
+            //                    NpsChannels=new List<NpsChannel>
+            //                    {
+            //                        new NpsChannel
+            //                        {
+            //                            RemoteChannelId=15,
+            //                            ServerPort=20005,
+            //                            TargetAddress="6688",
+            //                            Remark="添加隧道"
+            //                        }
+            //                    }
+            //                }
+            //            },
+            //            new NpsAppSecret
+            //            {
+            //                DeviceUniqueId=Guid.NewGuid().ToString("N"),
+            //                AppSecret=Guid.NewGuid().ToString("N"),
+            //                CreateTime=DateTime.Now,
+            //                IsDeleted=false
+            //            },
+            //            new NpsAppSecret
+            //            {
+            //                DeviceUniqueId=Guid.NewGuid().ToString("N"),
+            //                AppSecret=Guid.NewGuid().ToString("N"),
+            //                CreateTime=DateTime.Now,
+            //                IsDeleted=false
+            //            }
+            //        }
+            //    });
+            //});
 
             return codeFirst;
         }

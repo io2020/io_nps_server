@@ -12,8 +12,16 @@
   <PropertyGroup>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Aop\Interceptor\UnitOfWorkAsyncInterceptor.cs" />
+    <Compile Remove="Aop\Interceptor\UnitOfWorkInterceptor.cs" />
+  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Castle.Core.AsyncInterceptor" Version="1.7.0" />
