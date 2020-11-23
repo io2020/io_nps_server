@@ -19,7 +19,7 @@ namespace Nps.Api
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 // 配置日志输出到控制台
-                .WriteTo.Console()
+                .WriteTo.Console(theme: Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme.Code)
                 // 配置日志输出到文件，文件输出到当前项目的 logs 目录下
                 // 日记的生成周期为每天
                 .WriteTo.File(Path.Combine("Logs", @"log.txt"), rollingInterval: RollingInterval.Day)
