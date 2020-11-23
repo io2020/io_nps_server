@@ -9,13 +9,6 @@ namespace Nps.Application.Nps.Services
     public interface INpsClientService
     {
         /// <summary>
-        /// 根据设备唯一标识，查询已开通服务列表
-        /// </summary>
-        /// <param name="deviceUniqueId">设备唯一标识</param>
-        /// <returns></returns>
-        Task<bool> GetAsync(string deviceUniqueId);
-
-        /// <summary>
         /// 分页查询所有已开通服务列表
         /// </summary>
         /// <returns></returns>
@@ -33,17 +26,5 @@ namespace Nps.Application.Nps.Services
         /// </summary>
         /// <returns></returns>
         Task<bool> DeleteAsync();
-
-        /// <summary>
-        /// 开启服务
-        /// </summary>
-        /// <returns></returns>
-        Task<bool> StartAsync();
-
-        /// <summary>
-        /// 停止服务
-        /// </summary>
-        /// <returns></returns>
-        Task<bool> StopAsync();
     }
 }

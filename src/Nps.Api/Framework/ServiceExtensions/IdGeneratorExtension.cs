@@ -1,9 +1,9 @@
-﻿using Nps.Core.Infrastructure;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.Configs;
 using Nps.Core.Infrastructure.IdGenerators;
 using Nps.Core.Infrastructure.IdGenerators.Core;
 using Nps.Core.Infrastructure.IdGenerators.Ids;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace Nps.Api.Framework.ServiceExtensions
@@ -26,8 +26,8 @@ namespace Nps.Api.Framework.ServiceExtensions
             //注入雪花算法Id
             services.AddSingleton(x =>
             {
-                var dataCenterId = AppSettings.Get(new string[] { "IdGenerator", "DataCenterId" }).ToInt32OrDefault(11);
-                var workerId = AppSettings.Get(new string[] { "IdGenerator", "WorkerId" }).ToInt32OrDefault(11);
+                var dataCenterId = AppSettings.Get(NpsEnvironmentConsts.NPS_IDGENERATOR_DATACENTERID).ToInt32OrDefault(11);
+                var workerId = AppSettings.Get(NpsEnvironmentConsts.NPS_IDGENERATOR_WORKEID).ToInt32OrDefault(11);
 
                 return new SnowflakeId(dataCenterId, workerId);
             });
@@ -36,7 +36,7 @@ namespace Nps.Api.Framework.ServiceExtensions
             //注入有序Guid
             services.AddSingleton(x =>
             {
-                var dataTypeValue = AppSettings.Get(new string[] { "Database", "DataType" }).ToInt32OrDefault(0);
+                var dataTypeValue = AppSettings.Get(NpsEnvironmentConsts.NPS_DB_DATETYPE).ToInt32OrDefault(0);
                 var sequentialGuidType = SequentialGuidType.SequentialAsString;
                 if (dataTypeValue == 1)
                 {

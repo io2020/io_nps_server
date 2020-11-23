@@ -1,9 +1,10 @@
 using Autofac.Extensions.DependencyInjection;
-using Nps.Core.Infrastructure.Configs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
 using System;
+using System.IO;
 
 namespace Nps.Api
 {
@@ -12,8 +13,16 @@ namespace Nps.Api
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(AppSettings.Load())
+                // 最小的日志输出级别
+                .MinimumLevel.Information()
+                // 日志调用类命名空间如果以 Microsoft 开头，覆盖日志输出最小级别为 Information
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
+                // 配置日志输出到控制台
+                .WriteTo.Console()
+                // 配置日志输出到文件，文件输出到当前项目的 logs 目录下
+                // 日记的生成周期为每天
+                .WriteTo.File(Path.Combine("Logs", @"log.txt"), rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             try

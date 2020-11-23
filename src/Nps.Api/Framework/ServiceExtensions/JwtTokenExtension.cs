@@ -27,13 +27,13 @@ namespace Nps.Api.Framework.ServiceExtensions
         public static JsonWebTokenSettings AddSecurity(this IServiceCollection services)
         {
             var jsonWebTokenSettings = new JsonWebTokenSettings(
-                            AppSettings.Get(new string[] { "Authentication", "JwtBearer", "SecurityKey" }),
+                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_SECURITYKEY),
                             new TimeSpan(1, 0, 0, 0),
-                            AppSettings.Get(new string[] { "Authentication", "JwtBearer", "Audience" }),
-                            AppSettings.Get(new string[] { "Authentication", "JwtBearer", "Issuer" })
+                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_AUDIENCE),
+                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_ISSUER)
                        );
             services.AddHash();
-            services.AddCryptography(AppSettings.Get(new string[] { "Authentication", "JwtBearer", "Cryptography" }));
+            services.AddCryptography(AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_CRYPTOGRAPHY));
             services.AddJsonWebToken(jsonWebTokenSettings);
             return jsonWebTokenSettings;
         }

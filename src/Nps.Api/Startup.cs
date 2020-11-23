@@ -14,7 +14,7 @@ namespace Nps.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; } = AppSettings.Load();
 
         public IWebHostEnvironment Environment { get; }
 

@@ -36,5 +36,14 @@
     <ProjectReference Include="..\Nps.Application\Nps.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="初始化添加环境变量_生产环境.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="初始化添加环境变量_预生产环境.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>

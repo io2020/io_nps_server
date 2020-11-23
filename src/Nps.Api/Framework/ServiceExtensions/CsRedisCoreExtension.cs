@@ -21,9 +21,9 @@ namespace Nps.Api.Framework.ServiceExtensions
 
             Check.NotNull(services, nameof(services));
 
-            if (AppSettings.Get(new string[] { "Database", "IsUsedRedis" }).ToBooleanOrDefault(false))
+            if (AppSettings.Get(NpsEnvironmentConsts.NPS_DB_ISUSEDREDIS).ToBooleanOrDefault(false))
             {
-                var redisConnectionString = AppSettings.Get(new string[] { "Database", "RedisConnectionStrings" });
+                var redisConnectionString = AppSettings.Get(NpsEnvironmentConsts.NPS_DB_REDISCONNECTSTRING);
 
                 //初始化 CSRedisClient
                 CSRedisClient csRedisClient = new CSRedisClient(redisConnectionString);

@@ -776,11 +776,6 @@
             配置帮助类
             </summary>
         </member>
-        <member name="P:Nps.Core.Infrastructure.Configs.AppSettings.WriteLine">
-            <summary>
-            输出内容
-            </summary>
-        </member>
         <member name="P:Nps.Core.Infrastructure.Configs.AppSettings.Configuration">
             <summary>
             应用程序配置属性
@@ -792,13 +787,11 @@
             </summary>
             <param name="configuration">应用程序配置属性</param>
         </member>
-        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Load(System.String,System.String)">
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Load">
             <summary>
             加载配置文件
             </summary>
-            <param name="configFileName">配置文件名。默认：appsettings.json</param>
-            <param name="basePath">基路径</param>
-            <returns>返回配置文件信息</returns>
+            <returns>返回IConfiguration</returns>
         </member>
         <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])">
             <summary>
@@ -817,18 +810,10 @@
         </member>
         <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String)">
             <summary>
-            获取节点值
+            获取系统环境变量值
             </summary>
-            <param name="sections">节点参数配置</param>
-            <returns>返回节点值</returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get``1(System.String)">
-            <summary>
-            获取节点值
-            </summary>
-            <typeparam name="T">泛型，值类型</typeparam>
-            <param name="sections">节点参数配置</param>
-            <returns>返回节点值</returns>
+            <param name="environmentName">环境变量名称</param>
+            <returns>返回系统环境变量值</returns>
         </member>
         <member name="T:Nps.Core.Infrastructure.Exceptions.NpsException">
             <summary>
@@ -1145,11 +1130,6 @@
             <param name="type">指定类型</param>
             <returns></returns>
         </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsAsync(System.Reflection.MethodInfo)">
-            <summary>
-            方法是否是异步
-            </summary>
-        </member>
         <member name="M:Nps.Core.Infrastructure.Helpers.ReflectionHelper.IsBaseOn(System.Type,System.Type)">
             <summary>
             返回当前类型是否是指定基类的派生类
@@ -1171,440 +1151,12 @@
             验证 操作
             </summary>
         </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsEmail(System.String,System.Boolean)">
-            <summary>
-            是否邮箱
-            </summary>
-            <param name="value">邮箱地址</param>
-            <param name="isRestrict">是否按严格模式验证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.HasEmail(System.String,System.Boolean)">
-            <summary>
-            是否存在邮箱
-            </summary>
-            <param name="value">值</param>
-            <param name="isRestrict">是否按严格模式验证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPhoneNumber(System.String)">
-            <summary>
-            是否合法的手机号码
-            </summary>
-            <param name="value">手机号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMobileNumberSimple(System.String,System.Boolean)">
-            <summary>
-            是否手机号码
-            </summary>
-            <param name="value">手机号码</param>
-            <param name="isRestrict">是否按严格模式验证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMobileNumber(System.String)">
-            <summary>
-            是否手机号码
-            </summary>
-            <param name="value">手机号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.HasMobileNumberSimple(System.String,System.Boolean)">
-            <summary>
-            是否存在手机号码
-            </summary>
-            <param name="value">值</param>
-            <param name="isRestrict">是否按严格模式验证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaMobilePhone(System.String)">
-            <summary>
-            是否中国移动号码
-            </summary>
-            <param name="value">手机号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaUnicomPhone(System.String)">
-            <summary>
-            是否中国联通号码
-            </summary>
-            <param name="value">手机号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinaTelecomPhone(System.String)">
-            <summary>
-            是否中国电信号码
-            </summary>
-            <param name="value">手机号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsTel(System.String)">
-            <summary>
-            是否中国电话，格式：010-85849685
-            </summary>
-            <param name="value">电话</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsIdCard(System.String)">
-            <summary>
-            是否身份证号码
-            </summary>
-            <param name="value">身份证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsBase64String(System.String)">
-            <summary>
-            是否Base64编码
-            </summary>
-            <param name="value">Base64字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsGuid(System.String)">
-            <summary>
-            是否Guid
-            </summary>
-            <param name="guid">Guid字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUrl(System.String)">
-            <summary>
-            是否Url地址（统一资源定位）
-            </summary>
-            <param name="value">url地址</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUri(System.String)">
-            <summary>
-            是否Uri（统一资源标识）
-            </summary>
-            <param name="value">uri</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMainDomainUrl(System.String)">
-            <summary>
-            是否主域名或者www开头的域名
-            </summary>
-            <param name="value">url地址</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMainDomain(System.String)">
-            <summary>
-            是否主域名
-            </summary>
-            <param name="value">域名字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDomain(System.String)">
-            <summary>
-            是否域名
-            </summary>
-            <param name="value">域名字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsMac(System.String)">
-            <summary>
-            是否Mac地址
-            </summary>
-            <param name="value">Mac地址</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPositiveInteger(System.String)">
-            <summary>
-            是否大于0的正整数
-            </summary>
-            <param name="value">正整数</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsInt32(System.String)">
-            <summary>
-            是否Int32类型
-            </summary>
-            <param name="value">整数</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDouble(System.String)">
-            <summary>
-            是否Double类型
-            </summary>
-            <param name="value">小数</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDouble(System.String,System.Double,System.Double,System.Int32)">
-            <summary>
-            是否Double类型
-            </summary>
-            <param name="value">小数</param>
-            <param name="minValue">最小值</param>
-            <param name="maxValue">最大值</param>
-            <param name="digit">小数位数，如果是0则不检测</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordOne(System.String)">
-            <summary>
-            是否密码One的格式，6-25位包含特殊字符
-            </summary>
-            <param name="value">密码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordOne(System.String,System.Int32,System.Int32)">
-            <summary>
-            是否密码One的格式，指定密码长度，包含特殊字符
-            </summary>
-            <param name="value">密码</param>
-            <param name="min">最小长度</param>
-            <param name="max">最大长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPasswordTwo(System.String)">
-            <summary>
-            是否密码Two的格式，6-25位包含特殊字符
-            </summary>
-            <param name="value">密码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLoginName(System.String)">
-            <summary>
-            是否登录账号，6-30位长度
-            </summary>
-            <param name="value">登录账号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLoginName(System.String,System.Int32,System.Int32)">
-            <summary>
-            是否登录账号
-            </summary>
-            <param name="value">登录账号</param>
-            <param name="min">最小长度</param>
-            <param name="max">最大长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsBandCard(System.String)">
-            <summary>
-            是否银行卡号，16位或19位银行卡（简单校验）
-            </summary>
-            <param name="value">银行卡号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsSafeSqlString(System.String)">
-            <summary>
-            是否安全Sql语句
-            </summary>
-            <param name="value">sql语句</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsVersion(System.String,System.Int32)">
-            <summary>
-            是否有效版本号，范例：1.3,1.1.5,1.25.256
-            </summary>
-            <param name="value">版本号</param>
-            <param name="length">长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChineseWord(System.String)">
-            <summary>
-            是否中文字符
-            </summary>
-            <param name="value">中文字符</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinese(System.String)">
-            <summary>
-            是否中文
-            </summary>
-            <param name="value">中文</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsContainsChinese(System.String)">
-            <summary>
-            是否包含中文
-            </summary>
-            <param name="value">中文</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsContainsNumber(System.String)">
-            <summary>
-            是否包含数字
-            </summary>
-            <param name="value">数字</param>
-            <returns></returns>
-        </member>
         <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsIpAddress(System.String)">
             <summary>
             是否IP地址
             </summary>
             <param name="value">ip地址</param>
             <returns>结果</returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsInteger(System.String)">
-            <summary>
-            是否整数
-            </summary>
-            <param name="value">值</param>
-            <returns>结果</returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUnicode(System.String)">
-            <summary>
-            是否Unicode字符串
-            </summary>
-            <param name="value">unicode字符串</param>
-            <returns>结果</returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLengthStr(System.String,System.Int32,System.Int32)">
-            <summary>
-            字符串长度是否在指定范围内，一个中文为2个字符
-            </summary>
-            <param name="value">字符串</param>
-            <param name="begin">开始</param>
-            <param name="end">结束</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsChinesePostalCode(System.String)">
-            <summary>
-            是否中国邮政编码，6位数字
-            </summary>
-            <param name="value">邮政编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsNormalChar(System.String)">
-            <summary>
-            是否正常字符，字母、数字、下划线的组合
-            </summary>
-            <param name="value">字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsPostfix(System.String,System.String[])">
-            <summary>
-            是否指定后缀
-            </summary>
-            <param name="value">字符串</param>
-            <param name="postfixs">后缀名数组</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDecimal(System.String)">
-            <summary>
-            是否数字型
-            </summary>
-            <param name="value">数字</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsRepeat(System.String)">
-            <summary>
-            是否重复，范例：112,返回true
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsQQ(System.String)">
-            <summary>
-            是否合法QQ号码
-            </summary>
-            <param name="value">QQ号码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsColorValue(System.String)">
-            <summary>
-            是否颜色值。检查颜色值是否为3/6位的合法颜色值。例如：FFF、FFFFFF
-            </summary>
-            <param name="value">颜色值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsWideWord(System.String)">
-            <summary>
-            是否全角字符，包含汉字在内
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsNarrowWord(System.String)">
-            <summary>
-            是否半角字符，包含汉字在内
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsOnlyNumber(System.String)">
-            <summary>
-            是否数字。0-9的数字，不包含符号"."和"-"
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUpperCaseChar(System.String)">
-            <summary>
-            是否大写英文字母组成的字符串
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsUpperCaseChar(System.Char)">
-            <summary>
-            是否大写英文字母
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLowerCaseChar(System.String)">
-            <summary>
-            是否小写英文字母组成的字符串
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsLowerCaseChar(System.Char)">
-            <summary>
-            是否小写英文字母
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsTime(System.String)">
-            <summary>
-            是否时间格式
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.Boolean)">
-            <summary>
-            是否日期
-            </summary>
-            <param name="value">日期字符串</param>
-            <param name="isRegex">是否正则验证</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.String)">
-            <summary>
-            是否日期
-            </summary>
-            <param name="value">日期字符串</param>
-            <param name="format">格式化字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDate(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
-            <summary>
-            是否日期
-            </summary>
-            <param name="value">日期字符串</param>
-            <param name="format">格式化字符串</param>
-            <param name="provider">格式化提供者</param>
-            <param name="styles">日期格式</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDateTimeMin(System.String,System.DateTime)">
-            <summary>
-            是否大于最小时间
-            </summary>
-            <param name="value">时间</param>
-            <param name="min">最小时间</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Helpers.RegexHelper.IsDateTimeMax(System.String,System.DateTime)">
-            <summary>
-            是否小于最大时间
-            </summary>
-            <param name="value">时间</param>
-            <param name="max">最大时间</param>
-            <returns></returns>
         </member>
         <member name="T:Nps.Core.Infrastructure.IdGenerators.Core.GuidGenerator">
             <summary>
@@ -2017,6 +1569,81 @@
         <member name="T:Nps.Core.Infrastructure.IdGenerators.IStringIdGenerator">
             <summary>
             定义ObjectId生成器
+            </summary>
+        </member>
+        <member name="T:Nps.Core.Infrastructure.NpsEnvironmentConsts">
+            <summary>
+            Nps环境变量常量
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SYNCSTRUCTURE">
+            <summary>
+            数据库是否同步表结构
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SYNCDATA">
+            <summary>
+            数据库是否同步数据
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_DATETYPE">
+            <summary>
+            数据库类型 MySql = 0, SqlServer = 1
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_MASTERCONNECTSTRING">
+            <summary>
+            数据库主库连接字符串
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SLAVECONNECTSTRING">
+            <summary>
+            数据库从库连接字符串
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_ISUSEDREDIS">
+            <summary>
+            是否启用Redis
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_REDISCONNECTSTRING">
+            <summary>
+            Redis连接字符串
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_SECURITYKEY">
+            <summary>
+            JwtBearer-SecurityKey
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_ISSUER">
+            <summary>
+            JwtBearer-发行人
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_AUDIENCE">
+            <summary>
+            JwtBearer-受众人
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_CRYPTOGRAPHY">
+            <summary>
+            JwtBearer-CRYPTOGRAPHY
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_IDGENERATOR_DATACENTERID">
+            <summary>
+            雪花ID生成器数据中心ID，取值0-31
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_IDGENERATOR_WORKEID">
+            <summary>
+            雪花ID生成器工作机器ID，取值0-31
+            </summary>
+        </member>
+        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_REMOTEHOST">
+            <summary>
+            NPS远程服务器地址
             </summary>
         </member>
         <member name="T:Nps.Core.Infrastructure.StatusCode">
@@ -2587,21 +2214,6 @@
         <member name="P:Nps.Core.Services.DomainService.Mapper">
             <summary>
             获取AutoMapper对象
-            </summary>
-        </member>
-        <member name="P:Nps.Core.Services.DomainService.Db">
-            <summary>
-            获取ORM对象
-            </summary>
-        </member>
-        <member name="P:Nps.Core.Services.DomainService.UnitOfWorkManager">
-            <summary>
-            获取工作单元对象
-            </summary>
-        </member>
-        <member name="P:Nps.Core.Services.DomainService.AuthorizationService">
-            <summary>
-            获取认证服务
             </summary>
         </member>
         <member name="T:Nps.Core.Services.IDomainService">

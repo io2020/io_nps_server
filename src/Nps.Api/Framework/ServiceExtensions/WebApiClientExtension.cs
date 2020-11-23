@@ -24,7 +24,7 @@ namespace Nps.Api.Framework.ServiceExtensions
 
             services.AddHttpApi<INpsApi>(option =>
             {
-                option.HttpHost = new Uri("http://8.131.77.125:7501/");
+                option.HttpHost = new Uri(NpsEnvironmentConsts.NPS_REMOTEHOST);
                 option.FormatOptions = new FormatOptions { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
             });
 

@@ -71,11 +71,6 @@ namespace Nps.Application.Nps.Services
             _npsChannelRepository = npsChannelRepository;
         }
 
-        public Task<bool> GetAsync(string deviceUniqueId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<bool> GetListAsync()
         {
             throw new NotImplementedException();
@@ -424,16 +419,6 @@ namespace Nps.Application.Nps.Services
         }
 
         public Task<bool> DeleteAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> StartAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> StopAsync()
         {
             throw new NotImplementedException();
         }

@@ -585,24 +585,9 @@
             Nps服务器输出结果
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.Id">
-            <summary>
-            服务器Id
-            </summary>
-        </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostDomain">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ServerIPAddress">
             <summary>
             服务地址
-            </summary>
-        </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostIP">
-            <summary>
-            服务IP地址
-            </summary>
-        </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.HostPort">
-            <summary>
-            服务端口
             </summary>
         </member>
         <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ClientConnectPort">
@@ -795,6 +780,55 @@
             <summary>
             开通端口参数验证
             </summary>
+        </member>
+        <member name="T:Nps.Application.SysLog.Dtos.SqlCurdAddInput">
+            <summary>
+            SQL CURD语句写入参数
+            </summary>
+        </member>
+        <member name="P:Nps.Application.SysLog.Dtos.SqlCurdAddInput.FullName">
+            <summary>
+            实体完整名称
+            </summary>
+        </member>
+        <member name="P:Nps.Application.SysLog.Dtos.SqlCurdAddInput.ExecuteMilliseconds">
+            <summary>
+            SQL语句执行耗时（毫秒）
+            </summary>
+        </member>
+        <member name="P:Nps.Application.SysLog.Dtos.SqlCurdAddInput.Sql">
+            <summary>
+            执行的SQL语句
+            </summary>
+        </member>
+        <member name="T:Nps.Application.SysLog.Services.ISqlCurdService">
+            <summary>
+            SQL语句写入服务接口
+            </summary>
+        </member>
+        <member name="M:Nps.Application.SysLog.Services.ISqlCurdService.Create(Nps.Application.SysLog.Dtos.SqlCurdAddInput)">
+            <summary>
+            记录业务执行SQL执行语句
+            </summary>
+            <param name="input">写入参数</param>
+        </member>
+        <member name="T:Nps.Application.SysLog.Services.SqlCurdService">
+            <summary>
+            SQL语句写入服务
+            </summary>
+        </member>
+        <member name="M:Nps.Application.SysLog.Services.SqlCurdService.#ctor(IFreeSql,Nps.Core.Security.ICurrentUser)">
+            <summary>
+            初始化一个<see cref="T:Nps.Application.SysLog.Services.SqlCurdService"/>实例
+            </summary>
+            <param name="freeSql">IFreeSql</param>
+            <param name="currentUser">ICurrentUser</param>
+        </member>
+        <member name="M:Nps.Application.SysLog.Services.SqlCurdService.Create(Nps.Application.SysLog.Dtos.SqlCurdAddInput)">
+            <summary>
+            记录业务执行SQL执行语句
+            </summary>
+            <param name="input">写入参数</param>
         </member>
     </members>
 </doc>
