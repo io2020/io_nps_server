@@ -5,6 +5,10 @@ WORKDIR /source
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY src/Nps.Api/*.csproj ./src/Nps.Api/
+COPY test/Nps.Test/*.csproj ./test/Nps.Test/
+COPY src/Nps.Core/*.csproj ./src/Nps.Core/
+COPY src/Nps.Data/*.csproj ./src/Nps.Data/
+COPY src/Nps.Application/*.csproj ./src/Nps.Application/
 RUN dotnet restore -r linux-x64
 
 # copy everything else and build app
