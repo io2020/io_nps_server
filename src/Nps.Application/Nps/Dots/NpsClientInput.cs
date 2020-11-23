@@ -5,7 +5,7 @@ namespace Nps.Application.Nps.Dots
     /// <summary>
     /// 开通客户端输入参数
     /// </summary>
-    public class NpsOpenInput
+    public class NpsClientOpenInput
     {
         /// <summary>
         /// 设备唯一标识，不同用户允许重复
@@ -36,5 +36,37 @@ namespace Nps.Application.Nps.Dots
         /// 备注信息
         /// </summary>
         public string Remark { get; set; }
+    }
+
+    /// <summary>
+    /// 删除客户端输入参数
+    /// </summary>
+    public class NpsClientDeleteInput
+    {
+        /// <summary>
+        /// 设备唯一标识，不同用户允许重复
+        /// </summary>
+        public string DeviceUniqueId { get; set; }
+
+        /// <summary>
+        /// 需要删除的客户端端口列表
+        /// </summary>
+        public List<string> DeletePorts { get; set; }
+    }
+
+    /// <summary>
+    /// 查询客户端输入参数
+    /// </summary>
+    public class NpsClientSearchInput
+    {
+        /// <summary>
+        /// 设备唯一标识，不同用户允许重复
+        /// </summary>
+        public string DeviceUniqueId { get; set; }
+
+        /// <summary>
+        /// 需要删除的客户端端口列表
+        /// </summary>
+        public List<string> SearchPorts { get; set; }
     }
 }

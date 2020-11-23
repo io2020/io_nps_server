@@ -29,11 +29,11 @@ namespace Nps.Application.Nps.Services
         /// </summary>
         /// <param name="serverIPAddress">服务器IP地址</param>
         /// <returns>返回服务器信息</returns>
-        public async Task<NpsServerOutput> GetAsync(string serverIPAddress)
+        public async Task<NpsServerSearchOutput> GetAsync(string serverIPAddress)
         {
             var server = await _npsServerRepository
                 .Where(x => x.ServerIPAddress == serverIPAddress)
-                .ToOneAsync<NpsServerOutput>();
+                .ToOneAsync<NpsServerSearchOutput>();
 
             return server;
         }
@@ -43,12 +43,12 @@ namespace Nps.Application.Nps.Services
         /// </summary>
         /// <param name="input">查询条件</param>
         /// <returns>服务器信息列表</returns>
-        public async Task<PagingOutput<NpsServerOutput>> GetListAsync(PagingInput<NpsServerInput> input)
+        public async Task<PagingOutput<NpsServerSearchOutput>> SearchAsync(PagingInput<NpsServerSearchInput> input)
         {
             var servers = await _npsServerRepository
                 .WhereIf(input.Filter.ServerIPAddress.IsNotNullOrEmpty(), x => x.ServerIPAddress == input.Filter.ServerIPAddress)
                 .OrderByDescending(x => x.CreateTime)
-                .ToPagingListAsync<NpsServer, NpsServerOutput>(input, out long count);
+                .ToPagingListAsync<NpsServer, NpsServerSearchOutput>(input, out long count);
 
             return servers.ToPagingOutput(count);
         }

@@ -1,4 +1,6 @@
 ﻿using Nps.Application.Nps.Dots;
+using Nps.Core.Data;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Nps.Application.Nps.Services
@@ -11,20 +13,22 @@ namespace Nps.Application.Nps.Services
         /// <summary>
         /// 分页查询所有已开通服务列表
         /// </summary>
-        /// <returns></returns>
-        Task<bool> GetListAsync();
+        /// <param name="input">查询服务参数</param>
+        /// <returns>分页返回查询结果</returns>
+        Task<List<NpsClientOpenedOutput>> SearchAsync(PagingInput<NpsClientSearchInput> input);
 
         /// <summary>
         /// 开通服务
         /// </summary>
         /// <param name="input">开通服务参数</param>
         /// <returns>返回设备已开通端口结果</returns>
-        Task<NpsOpenedOutput> OpenAsync(NpsOpenInput input);
+        Task<NpsClientOpenedOutput> OpenAsync(NpsClientOpenInput input);
 
         /// <summary>
         /// 删除服务
         /// </summary>
-        /// <returns></returns>
-        Task<bool> DeleteAsync();
+        /// <param name="input">删除服务参数</param>
+        /// <returns>返回删除结果</returns>
+        Task<List<NpsClientDeletedOutput>> DeleteAsync(NpsClientDeleteInput input);
     }
 }

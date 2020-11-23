@@ -3,7 +3,7 @@
     /// <summary>
     /// Nps服务器查询条件
     /// </summary>
-    public class NpsServerInput
+    public class NpsServerSearchInput
     {
         /// <summary>
         /// 服务器主机IP

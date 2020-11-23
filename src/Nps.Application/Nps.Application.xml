@@ -495,107 +495,157 @@
             停止隧道
             </summary>
         </member>
-        <member name="T:Nps.Application.Nps.Dots.NpsOpenInput">
+        <member name="T:Nps.Application.Nps.Dots.NpsClientOpenInput">
             <summary>
             开通客户端输入参数
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.DeviceUniqueId">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.DeviceUniqueId">
             <summary>
             设备唯一标识，不同用户允许重复
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.OpenPorts">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.OpenPorts">
             <summary>
             需要开通的端口列表
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsConfigConnectAllow">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.IsConfigConnectAllow">
             <summary>
             是否允许客户端以配置文件模式连接
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsCompress">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.IsCompress">
             <summary>
             是否压缩
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.IsCrypt">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.IsCrypt">
             <summary>
             是否加密
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenInput.Remark">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenInput.Remark">
             <summary>
             备注信息
             </summary>
         </member>
-        <member name="T:Nps.Application.Nps.Dots.NpsOpenedOutput">
+        <member name="T:Nps.Application.Nps.Dots.NpsClientDeleteInput">
+            <summary>
+            删除客户端输入参数
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientDeleteInput.DeviceUniqueId">
+            <summary>
+            设备唯一标识，不同用户允许重复
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientDeleteInput.DeletePorts">
+            <summary>
+            需要删除的客户端端口列表
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsClientSearchInput">
+            <summary>
+            查询客户端输入参数
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientSearchInput.DeviceUniqueId">
+            <summary>
+            设备唯一标识，不同用户允许重复
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientSearchInput.SearchPorts">
+            <summary>
+            需要删除的客户端端口列表
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsClientOpenedOutput">
             <summary>
             设备开通端口输出
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedOutput.DeviceUniqueId">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.DeviceUniqueId">
             <summary>
             设备唯一识别编码
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedOutput.OpenPorts">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.OpenPorts">
             <summary>
             已开通端口列表
             </summary>
         </member>
-        <member name="T:Nps.Application.Nps.Dots.NpsOpenedPortOutput">
+        <member name="T:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput">
             <summary>
             开通端口
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ServerIPAddress">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ServerIPAddress">
             <summary>
             服务器地址
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ClientConnectPort">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ClientConnectPort">
             <summary>
             客户端连接端口
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.ServerPort">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ServerPort">
             <summary>
             服务器端口
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsOpenedPortOutput.DeviceAddress">
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.DeviceAddress">
             <summary>
             客户端地址，ip+端口/端口
             </summary>
         </member>
-        <member name="T:Nps.Application.Nps.Dots.NpsServerInput">
+        <member name="T:Nps.Application.Nps.Dots.NpsClientDeletedOutput">
+            <summary>
+            设备删除输出
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientDeletedOutput.DeviceAddress">
+            <summary>
+            设备客户端地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientDeletedOutput.RemoteStatus">
+            <summary>
+            远程删除执行状态
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientDeletedOutput.RemoteMessage">
+            <summary>
+            远程删除执行消息
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Dots.NpsServerSearchInput">
             <summary>
             Nps服务器查询条件
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerInput.ServerIPAddress">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerSearchInput.ServerIPAddress">
             <summary>
             服务器主机IP
             </summary>
         </member>
-        <member name="T:Nps.Application.Nps.Dots.NpsServerOutput">
+        <member name="T:Nps.Application.Nps.Dots.NpsServerSearchOutput">
             <summary>
             Nps服务器输出结果
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ServerIPAddress">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerSearchOutput.ServerIPAddress">
             <summary>
             服务地址
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ClientConnectPort">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerSearchOutput.ClientConnectPort">
             <summary>
             客户端连接端口
             </summary>
         </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsServerOutput.ProtocolType">
+        <member name="P:Nps.Application.Nps.Dots.NpsServerSearchOutput.ProtocolType">
             <summary>
             连接协议类型
             </summary>
@@ -605,43 +655,26 @@
             Nps客户端服务接口
             </summary>
         </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetAsync(System.String)">
-            <summary>
-            根据设备唯一标识，查询已开通服务列表
-            </summary>
-            <param name="deviceUniqueId">设备唯一标识</param>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.GetListAsync">
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsClientSearchInput})">
             <summary>
             分页查询所有已开通服务列表
             </summary>
-            <returns></returns>
+            <param name="input">查询服务参数</param>
+            <returns>分页返回查询结果</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsOpenInput)">
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsClientOpenInput)">
             <summary>
             开通服务
             </summary>
             <param name="input">开通服务参数</param>
             <returns>返回设备已开通端口结果</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.DeleteAsync">
+        <member name="M:Nps.Application.Nps.Services.INpsClientService.DeleteAsync(Nps.Application.Nps.Dots.NpsClientDeleteInput)">
             <summary>
             删除服务
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.StartAsync">
-            <summary>
-            开启服务
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Nps.Application.Nps.Services.INpsClientService.StopAsync">
-            <summary>
-            停止服务
-            </summary>
-            <returns></returns>
+            <param name="input">删除服务参数</param>
+            <returns>是否成功删除</returns>
         </member>
         <member name="T:Nps.Application.Nps.Services.INpsServerService">
             <summary>
@@ -655,7 +688,7 @@
             <param name="hostIP">服务IP</param>
             <returns>返回服务器信息</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.INpsServerService.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">
+        <member name="M:Nps.Application.Nps.Services.INpsServerService.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
             <summary>
             根据条件分页查询服务器信息
             </summary>
@@ -679,7 +712,14 @@
             <param name="npsClientRepository">Nps客户端仓储</param>
             <param name="npsChannelRepository">Nps隧道仓储</param>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsOpenInput)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsClientSearchInput})">
+            <summary>
+            分页查询所有已开通服务列表
+            </summary>
+            <param name="input">查询服务参数</param>
+            <returns>分页返回查询结果</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.OpenAsync(Nps.Application.Nps.Dots.NpsClientOpenInput)">
             <summary>
             设备开通服务
             </summary>
@@ -701,7 +741,7 @@
             <param name="npsAppSecret">NpsAppSecret</param>
             <returns>返回NpsAppSecret</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsClientIfCheckNullAsync(Nps.Application.Nps.Dots.NpsOpenInput,Nps.Data.Entities.NpsAppSecret)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsClientIfCheckNullAsync(Nps.Application.Nps.Dots.NpsClientOpenInput,Nps.Data.Entities.NpsAppSecret)">
             <summary>
             检测设备是否已创建过客户端，如果不存在，则创建
             </summary>
@@ -723,7 +763,7 @@
             <param name="deviceAppSecret">设备应用唯一秘钥</param>
             <returns>返回服务器客户端信息</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsChannelIfCheckNullAsync(Nps.Application.Nps.Dots.NpsOpenInput,Nps.Data.Entities.NpsAppSecret)">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.CreateNpsChannelIfCheckNullAsync(Nps.Application.Nps.Dots.NpsClientOpenInput,Nps.Data.Entities.NpsAppSecret)">
             <summary>
             检查是否已创建服务器客户端隧道，如果不存在，则创建
             </summary>
@@ -744,6 +784,13 @@
             </summary>
             <param name="remoteClientId">服务器客户端Id</param>
             <returns>返回服务器客户端隧道信息</returns>
+        </member>
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.DeleteAsync(Nps.Application.Nps.Dots.NpsClientDeleteInput)">
+            <summary>
+            设备端口删除服务
+            </summary>
+            <param name="input">删除服务参数</param>
+            <returns>是否成功删除</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.BeforeRequestNpsApiAsync">
             <summary>
@@ -769,16 +816,21 @@
             <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsServerService.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">
+        <member name="M:Nps.Application.Nps.Services.NpsServerService.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
             <summary>
             根据条件分页查询服务器信息
             </summary>
             <param name="input">查询条件</param>
             <returns>服务器信息列表</returns>
         </member>
-        <member name="T:Nps.Application.Nps.Validation.NpsOpenInputValidation">
+        <member name="T:Nps.Application.Nps.Validation.NpsClientOpenInputValidation">
             <summary>
             开通端口参数验证
+            </summary>
+        </member>
+        <member name="T:Nps.Application.Nps.Validation.NpsClientDeleteInputValidation">
+            <summary>
+            删除端口参数验证
             </summary>
         </member>
         <member name="T:Nps.Application.SysLog.Dtos.SqlCurdAddInput">

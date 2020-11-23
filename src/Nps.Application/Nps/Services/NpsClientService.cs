@@ -3,6 +3,7 @@ using Nps.Application.Nps.Dots;
 using Nps.Application.NpsApi;
 using Nps.Application.NpsApi.Dtos;
 using Nps.Core.Aop.Attributes;
+using Nps.Core.Data;
 using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.Exceptions;
 using Nps.Core.Infrastructure.Extensions;
@@ -71,10 +72,67 @@ namespace Nps.Application.Nps.Services
             _npsChannelRepository = npsChannelRepository;
         }
 
-        public Task<bool> GetListAsync()
+        #region 设备端口查询服务
+
+        /// <summary>
+        /// 分页查询所有已开通服务列表
+        /// </summary>
+        /// <param name="input">查询服务参数</param>
+        /// <returns>分页返回查询结果</returns>
+        public async Task<List<NpsClientOpenedOutput>> SearchAsync(PagingInput<NpsClientSearchInput> input)
         {
-            throw new NotImplementedException();
+            var outputs = new List<NpsClientOpenedOutput>();
+
+            var npsAppSecrets = await _npsAppSecretRepository
+                .Where(x => x.CreateUserId == CurrentUser.UserId)
+                .WhereIf(input.Filter?.DeviceUniqueId?.IsNotNullOrEmpty() ?? false, x => x.DeviceUniqueId == input.Filter.DeviceUniqueId)
+                .WhereCascade(x => x.IsDeleted == false)
+                .Include(x => x.NpsServer)
+                .Include(x => x.NpsClient)
+                .ToListAsync();
+            if (npsAppSecrets.Count == 0)
+            {
+                return outputs;
+            }
+
+            var npsClientIds = npsAppSecrets.Select(x => x.NpsClient?.Id ?? 0).ToList();
+
+            var npsChannels = await _npsChannelRepository
+                .Where(x => x.IsDeleted == false)
+                .Where(x => npsClientIds.Contains(x.NpsClientId))
+                .WhereIf(input.Filter?.SearchPorts.IsNotNull() ?? false, x => input.Filter.SearchPorts.Contains(x.DeviceAddress))
+                .ToListAsync();
+            if (npsChannels.Count == 0)
+            {
+                return outputs;
+            }
+
+            npsAppSecrets.ForEach(npsAppSecret =>
+            {
+                if (npsAppSecret.NpsClient != null)
+                    npsAppSecret.NpsClient.NpsChannels = npsChannels.Where(x => x.NpsClientId == npsAppSecret.NpsClient?.Id).ToList();
+            });
+
+            try
+            {
+                npsAppSecrets.ForEach(npsAppSecret =>
+                {
+                    var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
+                    outputs.Add(npsClientOpenedOutput);
+                });
+
+
+                return outputs;
+            }
+            catch (Exception ex)
+            {
+                throw new NpsException(ex.Message, StatusCode.Error);
+            }
         }
+
+        #endregion
+
+        #region 设备端口开通服务
 
         /// <summary>
         /// 设备开通服务
@@ -82,7 +140,7 @@ namespace Nps.Application.Nps.Services
         /// <param name="input">设备开通服务输入参数</param>
         /// <returns>返回执行结果</returns>
         [Transactional]
-        public async Task<NpsOpenedOutput> OpenAsync(NpsOpenInput input)
+        public async Task<NpsClientOpenedOutput> OpenAsync(NpsClientOpenInput input)
         {
             _logger.LogInformation($"开始准备开通设备端口，{input.ToJson()}");
 
@@ -103,9 +161,9 @@ namespace Nps.Application.Nps.Services
 
             try
             {
-                var npsDeviceOpenOutput = Mapper.Map<NpsOpenedOutput>(npsAppSecret);
+                var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
 
-                return npsDeviceOpenOutput;
+                return npsClientOpenedOutput;
             }
             catch (Exception ex)
             {
@@ -159,7 +217,7 @@ namespace Nps.Application.Nps.Services
         /// <param name="input">开通客户端输入参数</param>
         /// <param name="npsAppSecret">NpsAppSecret</param>
         /// <returns>返回NpsAppSecret</returns>
-        private async Task<NpsAppSecret> CreateNpsClientIfCheckNullAsync(NpsOpenInput input, NpsAppSecret npsAppSecret)
+        private async Task<NpsAppSecret> CreateNpsClientIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
 
@@ -241,7 +299,14 @@ namespace Nps.Application.Nps.Services
                         ClientConnectPort = clientListOutput.ClientConnectPort.ToInt32OrDefault(0),
                         ProtocolType = _protocolType
                     });
+                }
+            }
 
+            //若该设备无对应的服务器信息
+            if (npsAppSecret.NpsServerId == 0)
+            {
+                if (npsAppSecret?.NpsServer?.Id > 0)
+                {
                     //将服务器信息与设备应用密钥关联
                     _npsAppSecretRepository.Attach(npsAppSecret);
                     npsAppSecret.NpsServerId = npsAppSecret.NpsServer.Id;
@@ -279,7 +344,7 @@ namespace Nps.Application.Nps.Services
         /// <param name="input">设备开通服务输入参数</param>
         /// <param name="npsAppSecret">NpsAppSecret</param>
         /// <returns>返回NpsAppSecret</returns>
-        private async Task<NpsAppSecret> CreateNpsChannelIfCheckNullAsync(NpsOpenInput input, NpsAppSecret npsAppSecret)
+        private async Task<NpsAppSecret> CreateNpsChannelIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
@@ -404,6 +469,70 @@ namespace Nps.Application.Nps.Services
             return searchApiResult ?? null;
         }
 
+        #endregion
+
+        #region 设备端口删除服务
+
+        /// <summary>
+        /// 设备端口删除服务
+        /// </summary>
+        /// <param name="input">删除服务参数</param>
+        /// <returns>返回删除结果</returns>
+        public async Task<List<NpsClientDeletedOutput>> DeleteAsync(NpsClientDeleteInput input)
+        {
+            var deletedOutputs = new List<NpsClientDeletedOutput>();
+
+            //查询设备对应的应用密钥信息
+            var npsAppSecret = await _npsAppSecretRepository
+                .Where(x => x.DeviceUniqueId == input.DeviceUniqueId)
+                .Where(x => x.CreateUserId == CurrentUser.UserId)
+                .WhereCascade(x => x.IsDeleted == false)
+                .Include(x => x.NpsServer)
+                .Include(x => x.NpsClient)
+                .ToOneAsync();
+            if (npsAppSecret == null || npsAppSecret.NpsClient == null)
+            {
+                throw new NpsException("删除失败，查询不存在", StatusCode.NotFound);
+            }
+
+            //查询需要删除的隧道列表
+            var npsChannels = await _npsChannelRepository
+                .Where(x => x.NpsClientId == npsAppSecret.NpsClient.Id)
+                .Where(x => input.DeletePorts.Contains(x.DeviceAddress))
+                .ToListAsync();
+            if (npsChannels.Count == 0)
+            {
+                throw new NpsException("删除失败，查询不存在", StatusCode.NotFound);
+            }
+
+            var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+            for (int index = 0; index < npsChannels.Count; index++)
+            {
+                var npsChannel = npsChannels[index];
+
+                var deletedOutput = new NpsClientDeletedOutput { DeviceAddress = npsChannel.DeviceAddress };
+                //向远程服务发送删除指令
+                var remoteApiResult = await _npsApi.DeleteChannelAsync(new ChannelIdInput
+                {
+                    AuthKey = authKey,
+                    Timestamp = timestamp,
+                    Id = npsChannel.RemoteChannelId
+                });
+                deletedOutput.RemoteStatus = remoteApiResult.Status;
+                deletedOutput.RemoteMessage = remoteApiResult.Message;
+                deletedOutputs.Add(deletedOutput);
+                //远程服务器删除成功后，删除本地隧道数据
+                if (remoteApiResult.Status == 1)
+                {
+                    await _npsChannelRepository.DeleteAsync(npsChannel.Id);
+                }
+            }
+
+            return deletedOutputs;
+        }
+
+        #endregion
+
         /// <summary>
         /// 请求Api前准备验签内容
         /// </summary>
@@ -416,11 +545,6 @@ namespace Nps.Application.Nps.Services
             string authKey = EncryptHelper.Md5By32($"{_auth_Key}{timestamp}").ToLower();
 
             return new(authKey, timestamp);
-        }
-
-        public Task<bool> DeleteAsync()
-        {
-            throw new NotImplementedException();
         }
     }
 }

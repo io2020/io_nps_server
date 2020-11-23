@@ -47,7 +47,7 @@
             <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ServerController.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerInput})">
+        <member name="M:Nps.Api.Controllers.Nps.ServerController.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
             <summary>
             根据条件分页查询服务器信息
             </summary>

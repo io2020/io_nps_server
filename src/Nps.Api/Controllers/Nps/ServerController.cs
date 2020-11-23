@@ -46,10 +46,10 @@ namespace Nps.Api.Controllers.Nps
         /// </summary>
         /// <param name="input">查询条件</param>
         /// <returns>服务器信息列表</returns>
-        [HttpPost("PageList")]
-        public async Task<IExecuteResult> GetListAsync(PagingInput<NpsServerInput> input)
+        [HttpPost("search")]
+        public async Task<IExecuteResult> SearchAsync(PagingInput<NpsServerSearchInput> input)
         {
-            return ExecuteResult.Ok(await _npsServerService.GetListAsync(input));
+            return ExecuteResult.Ok(await _npsServerService.SearchAsync(input));
         }
     }
 }

@@ -9,20 +9,20 @@ namespace Nps.Application.Nps.Prefile
     {
         public NpsPrefile()
         {
-            CreateMap<NpsServer, NpsServerOutput>();
+            CreateMap<NpsServer, NpsServerSearchOutput>();
 
-            CreateMap<NpsAppSecret, NpsOpenedOutput>()
+            CreateMap<NpsAppSecret, NpsClientOpenedOutput>()
                 .ForMember(dest => dest.DeviceUniqueId, options => options.MapFrom(src => src.DeviceUniqueId))
                 .ForMember(dest => dest.OpenPorts, options => options.MapFrom(src => DefineConvertCleverMagic(src)));
         }
 
-        private static List<NpsOpenedPortOutput> DefineConvertCleverMagic(NpsAppSecret source)
+        private static List<NpsClientOpenedPortOutput> DefineConvertCleverMagic(NpsAppSecret source)
         {
-            var output = new List<NpsOpenedPortOutput>();
+            var output = new List<NpsClientOpenedPortOutput>();
 
             source?.NpsClient?.NpsChannels?.ForEach(src =>
             {
-                output.Add(new NpsOpenedPortOutput
+                output.Add(new NpsClientOpenedPortOutput
                 {
                     ServerIPAddress = source?.NpsServer?.ServerIPAddress,
                     ClientConnectPort = source?.NpsServer?.ClientConnectPort.ToString(),

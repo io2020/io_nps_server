@@ -3,7 +3,7 @@
     /// <summary>
     /// Nps服务器输出结果
     /// </summary>
-    public class NpsServerOutput
+    public class NpsServerSearchOutput
     {
         /// <summary>
         /// 服务地址

@@ -37,6 +37,6 @@ rem 雪花ID生成器工作机器ID，取值0-31
 setx NPS_IDGENERATOR_WORKEID 11 /M
 
 rem NPS远程服务器地址
-setx NPS_IDGENERATOR_WORKEID "http://8.131.77.125:7501/" /M
+setx NPS_REMOTEHOST "http://8.131.77.125:7501/" /M
 
 pause
