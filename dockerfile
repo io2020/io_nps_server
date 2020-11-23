@@ -4,16 +4,16 @@ WORKDIR /source
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY aspnetapp/*.csproj ./aspnetapp/
+COPY src/Nps.Api/*.csproj ./Nps.Api
 RUN dotnet restore -r linux-x64
 
 # copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /source/aspnetapp
+COPY src/Nps.Api/. ./Nps.Api/
+WORKDIR /source/Nps.Api
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim-amd64
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["./aspnetapp"]
+ENTRYPOINT ["./Nps.Api"]
