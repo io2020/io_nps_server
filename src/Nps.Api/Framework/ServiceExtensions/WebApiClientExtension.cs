@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Nps.Application.NpsApi;
 using Nps.Core.Infrastructure;
-using Nps.Core.Infrastructure.Configs;
 using Serilog;
 using System;
 using WebApiClient;
@@ -25,7 +24,7 @@ namespace Nps.Api.Framework.ServiceExtensions
 
             services.AddHttpApi<INpsApi>(option =>
             {
-                option.HttpHost = new Uri(AppSettings.Get(NpsEnvironmentConsts.NPS_REMOTEHOST));
+                option.HttpHost = new Uri(NpsEnvironment.NPS_REMOTEHOST);
                 option.FormatOptions = new FormatOptions { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
             });
 

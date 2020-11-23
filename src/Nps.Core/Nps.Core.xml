@@ -793,13 +793,7 @@
             </summary>
             <returns>返回IConfiguration</returns>
         </member>
-        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])">
-            <summary>
-            获取节点值
-            </summary>
-            <param name="sections">节点参数配置</param>
-            <returns>返回节点值</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])" -->
         <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get``1(System.String[])">
             <summary>
             获取节点值
@@ -807,13 +801,6 @@
             <typeparam name="T">泛型，值类型</typeparam>
             <param name="sections">节点参数配置</param>
             <returns>返回节点值</returns>
-        </member>
-        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String)">
-            <summary>
-            获取系统环境变量值
-            </summary>
-            <param name="environmentName">环境变量名称</param>
-            <returns>返回系统环境变量值</returns>
         </member>
         <member name="T:Nps.Core.Infrastructure.Exceptions.NpsException">
             <summary>
@@ -1571,80 +1558,88 @@
             定义ObjectId生成器
             </summary>
         </member>
-        <member name="T:Nps.Core.Infrastructure.NpsEnvironmentConsts">
+        <member name="T:Nps.Core.Infrastructure.NpsEnvironment">
             <summary>
             Nps环境变量常量
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SYNCSTRUCTURE">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_SYNCSTRUCTURE">
             <summary>
             数据库是否同步表结构
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SYNCDATA">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_SYNCDATA">
             <summary>
             数据库是否同步数据
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_DATETYPE">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_DATETYPE">
             <summary>
             数据库类型 MySql = 0, SqlServer = 1
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_MASTERCONNECTSTRING">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_MASTERCONNECTSTRING">
             <summary>
             数据库主库连接字符串
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_SLAVECONNECTSTRING">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_SLAVECONNECTSTRING">
             <summary>
             数据库从库连接字符串
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_ISUSEDREDIS">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_ISUSEDREDIS">
             <summary>
             是否启用Redis
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_DB_REDISCONNECTSTRING">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_DB_REDISCONNECTSTRING">
             <summary>
             Redis连接字符串
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_SECURITYKEY">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_AUTH_JWT_SECURITYKEY">
             <summary>
             JwtBearer-SecurityKey
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_ISSUER">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_AUTH_JWT_ISSUER">
             <summary>
             JwtBearer-发行人
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_AUDIENCE">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_AUTH_JWT_AUDIENCE">
             <summary>
             JwtBearer-受众人
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_AUTH_JWT_CRYPTOGRAPHY">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_AUTH_JWT_CRYPTOGRAPHY">
             <summary>
             JwtBearer-CRYPTOGRAPHY
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_IDGENERATOR_DATACENTERID">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_IDGENERATOR_DATACENTERID">
             <summary>
             雪花ID生成器数据中心ID，取值0-31
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_IDGENERATOR_WORKEID">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_IDGENERATOR_WORKEID">
             <summary>
             雪花ID生成器工作机器ID，取值0-31
             </summary>
         </member>
-        <member name="F:Nps.Core.Infrastructure.NpsEnvironmentConsts.NPS_REMOTEHOST">
+        <member name="P:Nps.Core.Infrastructure.NpsEnvironment.NPS_REMOTEHOST">
             <summary>
             NPS远程服务器地址
             </summary>
+        </member>
+        <member name="M:Nps.Core.Infrastructure.NpsEnvironment.Get(System.String,System.String)">
+            <summary>
+            获取系统环境变量值
+            </summary>
+            <param name="environmentName">环境变量名称</param>
+            <param name="defaultValue">默认值</param>
+            <returns>返回系统环境变量值</returns>
         </member>
         <member name="T:Nps.Core.Infrastructure.StatusCode">
             <summary>

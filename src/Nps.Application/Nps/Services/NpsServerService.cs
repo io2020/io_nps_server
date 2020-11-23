@@ -46,7 +46,7 @@ namespace Nps.Application.Nps.Services
         public async Task<PagingOutput<NpsServerSearchOutput>> SearchAsync(PagingInput<NpsServerSearchInput> input)
         {
             var servers = await _npsServerRepository
-                .WhereIf(input.Filter.ServerIPAddress.IsNotNullOrEmpty(), x => x.ServerIPAddress == input.Filter.ServerIPAddress)
+                .WhereIf(input.Filter?.ServerIPAddress.IsNotNullOrEmpty() ?? false, x => x.ServerIPAddress == input.Filter.ServerIPAddress)
                 .OrderByDescending(x => x.CreateTime)
                 .ToPagingListAsync<NpsServer, NpsServerSearchOutput>(input, out long count);
 

@@ -66,19 +66,5 @@ namespace Nps.Core.Infrastructure.Configs
             }
             return default;
         }
-
-        /// <summary>
-        /// 获取系统环境变量值
-        /// </summary>
-        /// <param name="environmentName">环境变量名称</param>
-        /// <returns>返回系统环境变量值</returns>
-        public static string Get(string environmentName)
-        {
-            if (environmentName.IsNotNullOrWhiteSpace())
-            {
-                return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Machine) ?? "";
-            }
-            return "";
-        }
     }
 }

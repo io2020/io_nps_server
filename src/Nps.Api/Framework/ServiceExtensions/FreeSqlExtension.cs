@@ -1,18 +1,17 @@
 ﻿using FreeSql;
 using FreeSql.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Nps.Application.SysLog.Dtos;
 using Nps.Application.SysLog.Services;
 using Nps.Core.Aop.Attributes;
 using Nps.Core.Entities;
-using Nps.Core.Infrastructure.Configs;
+using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.IdGenerators;
 using Nps.Data.FreeSql;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using StackExchange.Profiling;
 using System;
 using System.Threading.Tasks;
-using Nps.Core.Infrastructure;
 
 namespace Nps.Api.Framework.ServiceExtensions
 {
@@ -30,15 +29,14 @@ namespace Nps.Api.Framework.ServiceExtensions
             Log.Logger.Information("Initialize FreeSql Start;");
 
             //获取数据库类型及其连接字符串
-            var dataTypeValue = AppSettings.Get(NpsEnvironmentConsts.NPS_DB_DATETYPE);
-            var dataTypeConnectionString = string.Empty;
+            var dataTypeValue = NpsEnvironment.NPS_DB_DATETYPE;
+            var dataTypeConnectionString = NpsEnvironment.NPS_DB_MASTERCONNECTSTRING;
             if (Enum.TryParse(dataTypeValue, out DataType dataType))
             {
                 if (!Enum.IsDefined(typeof(DataType), dataType))
                 {
                     Log.Error($"数据库配置Database:ConnectionStrings:DataType:{dataType}无效");
                 }
-                dataTypeConnectionString = AppSettings.Get(NpsEnvironmentConsts.NPS_DB_MASTERCONNECTSTRING);
                 if (dataTypeConnectionString.IsNullOrWhiteSpace())
                 {
                     Log.Error($"数据库配置Database:ConnectionStrings:{dataType}连接字符串无效");
@@ -54,7 +52,7 @@ namespace Nps.Api.Framework.ServiceExtensions
                 .UseConnectionString(dataType, dataTypeConnectionString)
                 .UseNameConvert(NameConvertType.PascalCaseToUnderscoreWithLower)
                 //设置是否自动同步表结构，开发环境必备
-                .UseAutoSyncStructure(AppSettings.Get(NpsEnvironmentConsts.NPS_DB_SYNCSTRUCTURE).ToBooleanOrDefault(false))
+                .UseAutoSyncStructure(NpsEnvironment.NPS_DB_SYNCSTRUCTURE.ToBooleanOrDefault(false))
                 .UseNoneCommandParameter(true)
                 .UseMonitorCommand(cmd => { }, (cmd, traceLog) =>
                 {//监听所有命令
@@ -145,11 +143,11 @@ namespace Nps.Api.Framework.ServiceExtensions
                 //注意：只有当CURD到此表时，才会自动生成表结构。
                 //如需系统运行时迁移表结构，请使用SyncStructure方法
                 //在运行时直接生成表结构
-                if (AppSettings.Get(NpsEnvironmentConsts.NPS_DB_SYNCSTRUCTURE).ToBooleanOrDefault(true))
+                if (NpsEnvironment.NPS_DB_SYNCSTRUCTURE.ToBooleanOrDefault(false))
                 {
                     freeSql.CodeFirst
                         .ConfigEntity()
-                        .SeedData(AppSettings.Get(NpsEnvironmentConsts.NPS_DB_SYNCDATA).ToBooleanOrDefault(true))//初始化部分数据
+                        .SeedData(NpsEnvironment.NPS_DB_SYNCDATA.ToBooleanOrDefault(false))//初始化部分数据
                         .SyncStructure(FreeSqlEntitySyncStructure.FindIEntities(new string[] { "Nps.Data" }));
                 }
             }

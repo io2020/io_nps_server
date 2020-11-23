@@ -1,7 +1,6 @@
 ﻿using CSRedis;
 using Microsoft.Extensions.DependencyInjection;
 using Nps.Core.Infrastructure;
-using Nps.Core.Infrastructure.Configs;
 using Serilog;
 
 namespace Nps.Api.Framework.ServiceExtensions
@@ -21,12 +20,10 @@ namespace Nps.Api.Framework.ServiceExtensions
 
             Check.NotNull(services, nameof(services));
 
-            if (AppSettings.Get(NpsEnvironmentConsts.NPS_DB_ISUSEDREDIS).ToBooleanOrDefault(false))
+            if (NpsEnvironment.NPS_DB_ISUSEDREDIS.ToBooleanOrDefault(false))
             {
-                var redisConnectionString = AppSettings.Get(NpsEnvironmentConsts.NPS_DB_REDISCONNECTSTRING);
-
                 //初始化 CSRedisClient
-                CSRedisClient csRedisClient = new CSRedisClient(redisConnectionString);
+                CSRedisClient csRedisClient = new CSRedisClient(NpsEnvironment.NPS_DB_REDISCONNECTSTRING);
                 //初始化 RedisHelper
                 RedisHelper.Initialization(csRedisClient);
             }

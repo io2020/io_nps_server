@@ -1,12 +1,11 @@
 ﻿using DotNetCore.Security;
-using Nps.Core.Data;
-using Nps.Core.Infrastructure;
-using Nps.Core.Infrastructure.Configs;
-using Nps.Core.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Nps.Core.Data;
+using Nps.Core.Infrastructure;
+using Nps.Core.Infrastructure.Extensions;
 using Serilog;
 using System;
 using System.Threading.Tasks;
@@ -27,13 +26,13 @@ namespace Nps.Api.Framework.ServiceExtensions
         public static JsonWebTokenSettings AddSecurity(this IServiceCollection services)
         {
             var jsonWebTokenSettings = new JsonWebTokenSettings(
-                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_SECURITYKEY),
+                            NpsEnvironment.NPS_AUTH_JWT_SECURITYKEY,
                             new TimeSpan(1, 0, 0, 0),
-                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_AUDIENCE),
-                            AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_ISSUER)
+                            NpsEnvironment.NPS_AUTH_JWT_AUDIENCE,
+                            NpsEnvironment.NPS_AUTH_JWT_ISSUER
                        );
             services.AddHash();
-            services.AddCryptography(AppSettings.Get(NpsEnvironmentConsts.NPS_AUTH_JWT_CRYPTOGRAPHY));
+            services.AddCryptography(NpsEnvironment.NPS_AUTH_JWT_CRYPTOGRAPHY);
             services.AddJsonWebToken(jsonWebTokenSettings);
             return jsonWebTokenSettings;
         }
