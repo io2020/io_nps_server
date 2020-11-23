@@ -20,7 +20,7 @@ rem 是否启用Redis
 setx NPS_DB_ISUSEDREDIS true /M
 
 rem Redis连接字符串
-setx NPS_DB_REDISCONNECTSTRING "r-m5ep2cn21tb7lvk0hxpd.redis.rds.aliyuncs.com:6379,password=soonSmart_Redis,defaultDatabase=11" /M
+setx NPS_DB_REDISCONNECTSTRING "r-m5ep2cn21tb7lvk0hxpd.redis.rds.aliyuncs.com:6379,password=soonSmart_Redis,defaultDatabase=7" /M
 
 setx NPS_AUTH_JWT_SECURITYKEY "nps-dotnetfive-SecurityKey" /M
 
