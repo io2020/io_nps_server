@@ -20,6 +20,9 @@ COPY src/Nps.Application/. ./src/Nps.Application/
 WORKDIR /source/src/Nps.Api
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false --no-restore
 
+#EXPOSE 映射端口
+EXPOSE 7001
+
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim-amd64
 WORKDIR /app
