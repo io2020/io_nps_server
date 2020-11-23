@@ -793,7 +793,13 @@
             </summary>
             <returns>返回IConfiguration</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])" -->
+        <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get(System.String[])">
+            <summary>
+            获取节点值
+            </summary>
+            <param name="sections">节点参数配置</param>
+            <returns>返回节点值</returns>
+        </member>
         <member name="M:Nps.Core.Infrastructure.Configs.AppSettings.Get``1(System.String[])">
             <summary>
             获取节点值
