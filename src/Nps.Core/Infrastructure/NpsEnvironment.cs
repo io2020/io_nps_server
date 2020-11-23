@@ -25,12 +25,12 @@ namespace Nps.Core.Infrastructure
         /// <summary>
         /// 数据库主库连接字符串
         /// </summary>
-        public static string NPS_DB_MASTERCONNECTSTRING => Get("NPS_DB_MASTERCONNECTSTRING", "Data Source=rm-2zel8sk911c1l1g6a8o.mysql.rds.aliyuncs.com;Port=3306;User ID=ionps;Password=ioNPS2020; Initial Catalog=ionps;Charset=utf8mb4; SslMode=none;Min pool size=1");
+        public static string NPS_DB_MASTERCONNECTSTRING => Get("NPS_DB_MASTERCONNECTSTRING", "Data Source=rm-2zel8sk911c1l1g6a8o.mysql.rds.aliyuncs.com;Port=3306;User ID=ionps;Password=ioNPS2020;Initial Catalog=ionps;Charset=utf8mb4;SslMode=none;Min pool size=1");
 
         /// <summary>
         /// 数据库从库连接字符串
         /// </summary>
-        public static string NPS_DB_SLAVECONNECTSTRING => Get("NPS_DB_SLAVECONNECTSTRING", "Data Source=cpftu7fes6yg2ar7rn2j-rw4rm.rwlb.rds.aliyuncs.com;Port=3306;User ID=ionps;Password=ioNPS2020; Initial Catalog=ionps;Charset=utf8mb4; SslMode=none;Min pool size=1");
+        public static string NPS_DB_SLAVECONNECTSTRING => Get("NPS_DB_SLAVECONNECTSTRING", "Data Source=cpftu7fes6yg2ar7rn2j-rw4rm.rwlb.rds.aliyuncs.com;Port=3306;User ID=ionps;Password=ioNPS2020;Initial Catalog=ionps;Charset=utf8mb4;SslMode=none;Min pool size=1");
 
         /// <summary>
         /// 是否启用Redis
