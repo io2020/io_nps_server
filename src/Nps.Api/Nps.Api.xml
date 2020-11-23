@@ -29,6 +29,38 @@
             <param name="refreshToken">刷新Token</param>
             <returns>返回执行结果</returns>
         </member>
+        <member name="T:Nps.Api.Controllers.Nps.ClientController">
+            <summary>
+            Nps客户端
+            </summary>
+        </member>
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.#ctor(Nps.Application.Nps.Services.INpsClientService)">
+            <summary>
+            初始化一个<see cref="T:Nps.Api.Controllers.Nps.ClientController"/>实例
+            </summary>
+            <param name="npsClientService">NpsClient服务</param>
+        </member>
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsClientSearchInput})">
+            <summary>
+            设备查询服务，根据条件分页查询客户端信息
+            </summary>
+            <param name="input">查询条件</param>
+            <returns>客户端列表</returns>
+        </member>
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.OpenAsync(Nps.Application.Nps.Dots.NpsClientOpenInput)">
+            <summary>
+            设备开通服务
+            </summary>
+            <param name="input">设备开通服务输入参数</param>
+            <returns>返回执行结果</returns>
+        </member>
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.DeleteAsync(Nps.Application.Nps.Dots.NpsClientDeleteInput)">
+            <summary>
+            设备端口删除服务
+            </summary>
+            <param name="input">删除服务参数</param>
+            <returns>返回删除结果</returns>
+        </member>
         <member name="T:Nps.Api.Controllers.Nps.ServerController">
             <summary>
             Nps服务器
@@ -47,7 +79,7 @@
             <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ServerController.GetListAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
+        <member name="M:Nps.Api.Controllers.Nps.ServerController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
             <summary>
             根据条件分页查询服务器信息
             </summary>

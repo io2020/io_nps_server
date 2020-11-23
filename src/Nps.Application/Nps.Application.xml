@@ -674,7 +674,7 @@
             删除服务
             </summary>
             <param name="input">删除服务参数</param>
-            <returns>是否成功删除</returns>
+            <returns>返回删除结果</returns>
         </member>
         <member name="T:Nps.Application.Nps.Services.INpsServerService">
             <summary>
@@ -790,7 +790,7 @@
             设备端口删除服务
             </summary>
             <param name="input">删除服务参数</param>
-            <returns>是否成功删除</returns>
+            <returns>返回删除结果</returns>
         </member>
         <member name="M:Nps.Application.Nps.Services.NpsClientService.BeforeRequestNpsApiAsync">
             <summary>
