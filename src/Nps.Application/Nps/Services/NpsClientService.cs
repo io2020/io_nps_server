@@ -12,6 +12,7 @@ using Nps.Core.Infrastructure.IdGenerators;
 using Nps.Core.Repositories;
 using Nps.Core.Services;
 using Nps.Data.Entities;
+using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,21 +114,12 @@ namespace Nps.Application.Nps.Services
                     npsAppSecret.NpsClient.NpsChannels = npsChannels.Where(x => x.NpsClientId == npsAppSecret.NpsClient?.Id).ToList();
             });
 
-            try
+            npsAppSecrets.ForEach(npsAppSecret =>
             {
-                npsAppSecrets.ForEach(npsAppSecret =>
-                {
-                    var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
-                    outputs.Add(npsClientOpenedOutput);
-                });
-
-
-                return outputs;
-            }
-            catch (Exception ex)
-            {
-                throw new NpsException(ex.Message, StatusCode.Error);
-            }
+                var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
+                outputs.Add(npsClientOpenedOutput);
+            });
+            return outputs;
         }
 
         #endregion
@@ -159,16 +151,8 @@ namespace Nps.Application.Nps.Services
 
             _logger.LogInformation($"已成功开通设备端口，{input.ToJson()}");
 
-            try
-            {
-                var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
-
-                return npsClientOpenedOutput;
-            }
-            catch (Exception ex)
-            {
-                throw new NpsException(ex.Message, StatusCode.Error);
-            }
+            var npsClientOpenedOutput = Mapper.Map<NpsClientOpenedOutput>(npsAppSecret);
+            return npsClientOpenedOutput;
         }
 
         /// <summary>
@@ -178,6 +162,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> GetNpsAppSecretAsync(string deviceUniqueId)
         {
+            MiniProfiler.Current.Step("GetNpsAppSecretAsync");
             _logger.LogInformation($"根据设备唯一识别编码，查询Nps应用密钥、Nps服务器、Nps客户端、Nps隧道，设备唯一识别编码：{deviceUniqueId}");
 
             return await _npsAppSecretRepository
@@ -198,6 +183,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsAppSecretIfCheckNullAsync(string deviceUniqueId, NpsAppSecret npsAppSecret)
         {
+            MiniProfiler.Current.Step("CreateNpsAppSecretIfCheckNullAsync");
             _logger.LogInformation($"检测设备是否已创建过唯一识别密钥，设备唯一识别编码：{deviceUniqueId}");
             if (npsAppSecret == null)
             {
@@ -219,6 +205,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsClientIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
+            MiniProfiler.Current.Step("CreateNpsClientIfCheckNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
 
             _logger.LogInformation($"检测设备是否已创建过客户端，设备唯一识别编码：{npsAppSecret.DeviceUniqueId}");
@@ -263,54 +250,58 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> UpdateNpsClientOrNpsServerIfCheckNotNullAsync(NpsAppSecret npsAppSecret)
         {
+            MiniProfiler.Current.Step("UpdateNpsClientOrNpsServerIfCheckNotNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
 
             _logger.LogInformation($"检查是否更新NpsAppSecret、NpsServer、NpsClient，设备唯一识别编码：{npsAppSecret.DeviceUniqueId}");
-            var clientListOutput = await GetRemoteClientOutputAsync(npsAppSecret.AppSecret);
-            if (clientListOutput == null || clientListOutput.Datas == null || clientListOutput.Datas.Count == 0)
+            if (npsAppSecret.NpsClient.RemoteClientId == 0 || npsAppSecret.NpsServer == null || npsAppSecret.NpsServerId == 0)
             {
-                return npsAppSecret;
-            }
+                var clientListOutput = await GetRemoteClientOutputAsync(npsAppSecret.AppSecret);
+                if (clientListOutput == null || clientListOutput.Datas == null || clientListOutput.Datas.Count == 0)
+                {
+                    return npsAppSecret;
+                }
 
-            //若本地数据库Nps客户端表中无远程Nps客户端Id，则将远程客户端信息回写
-            if (npsAppSecret.NpsClient.RemoteClientId == 0)
-            {
-                var remoteNpsClient = clientListOutput.Datas[0];
+                //若本地数据库Nps客户端表中无远程Nps客户端Id，则将远程客户端信息回写
+                if (npsAppSecret.NpsClient.RemoteClientId == 0)
+                {
+                    var remoteNpsClient = clientListOutput.Datas[0];
 
-                _npsClientRepository.Attach(npsAppSecret.NpsClient);
-                npsAppSecret.NpsClient.RemoteClientId = remoteNpsClient.Id;
-                npsAppSecret.NpsClient.Status = remoteNpsClient.Status;
-                npsAppSecret.NpsClient.IsConnect = remoteNpsClient.IsConnect;
-                npsAppSecret.NpsClient.LastConnectAddress = remoteNpsClient.LastConnectAddress;
-                await _npsClientRepository.UpdateAsync(npsAppSecret.NpsClient);
-            }
+                    _npsClientRepository.Attach(npsAppSecret.NpsClient);
+                    npsAppSecret.NpsClient.RemoteClientId = remoteNpsClient.Id;
+                    npsAppSecret.NpsClient.Status = remoteNpsClient.Status;
+                    npsAppSecret.NpsClient.IsConnect = remoteNpsClient.IsConnect;
+                    npsAppSecret.NpsClient.LastConnectAddress = remoteNpsClient.LastConnectAddress;
+                    await _npsClientRepository.UpdateAsync(npsAppSecret.NpsClient);
+                }
 
-            //若该设备无对应的服务器信息，则将服务器写入本地数据库
-            if (npsAppSecret.NpsServer == null)
-            {
-                //先根据IP地址查询服务器是否存在
-                npsAppSecret.NpsServer = await _npsServerRepository.Where(x => x.ServerIPAddress == clientListOutput.ServerIPAddress).ToOneAsync();
+                //若该设备无对应的服务器信息，则将服务器写入本地数据库
                 if (npsAppSecret.NpsServer == null)
                 {
-                    npsAppSecret.NpsServer = await _npsServerRepository.InsertAsync(new NpsServer
+                    //先根据IP地址查询服务器是否存在
+                    npsAppSecret.NpsServer = await _npsServerRepository.Where(x => x.ServerIPAddress == clientListOutput.ServerIPAddress).ToOneAsync();
+                    if (npsAppSecret.NpsServer == null)
                     {
-                        ServerIPAddress = clientListOutput.ServerIPAddress,
-                        ClientConnectPort = clientListOutput.ClientConnectPort.ToInt32OrDefault(0),
-                        ProtocolType = _protocolType
-                    });
+                        npsAppSecret.NpsServer = await _npsServerRepository.InsertAsync(new NpsServer
+                        {
+                            ServerIPAddress = clientListOutput.ServerIPAddress,
+                            ClientConnectPort = clientListOutput.ClientConnectPort.ToInt32OrDefault(0),
+                            ProtocolType = _protocolType
+                        });
+                    }
                 }
-            }
 
-            //若该设备无对应的服务器信息
-            if (npsAppSecret.NpsServerId == 0)
-            {
-                if (npsAppSecret?.NpsServer?.Id > 0)
+                //若该设备无对应的服务器信息
+                if (npsAppSecret.NpsServerId == 0)
                 {
-                    //将服务器信息与设备应用密钥关联
-                    _npsAppSecretRepository.Attach(npsAppSecret);
-                    npsAppSecret.NpsServerId = npsAppSecret.NpsServer.Id;
-                    await _npsAppSecretRepository.UpdateAsync(npsAppSecret);
+                    if (npsAppSecret?.NpsServer?.Id > 0)
+                    {
+                        //将服务器信息与设备应用密钥关联
+                        _npsAppSecretRepository.Attach(npsAppSecret);
+                        npsAppSecret.NpsServerId = npsAppSecret.NpsServer.Id;
+                        await _npsAppSecretRepository.UpdateAsync(npsAppSecret);
+                    }
                 }
             }
 
@@ -324,6 +315,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回服务器客户端信息</returns>
         private async Task<ClientListOutput> GetRemoteClientOutputAsync(string deviceAppSecret)
         {
+            MiniProfiler.Current.Step("GetRemoteClientOutputAsync");
             var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
             var searchApiResult = await _npsApi.ClientListAsync(new ClientListInput
             {
@@ -346,6 +338,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsChannelIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
+            MiniProfiler.Current.Step("CreateNpsChannelIfCheckNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
 
@@ -419,6 +412,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> UpdateNpsChannelsIfCheckNotNullAsync(NpsAppSecret npsAppSecret)
         {
+            MiniProfiler.Current.Step("UpdateNpsChannelsIfCheckNotNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
             Check.NotNull(npsAppSecret.NpsClient.NpsChannels, nameof(npsAppSecret.NpsClient.NpsChannels));
@@ -455,6 +449,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回服务器客户端隧道信息</returns>
         private async Task<ChannelListOutput> GetRemoteChannelOutputAsync(int remoteClientId)
         {
+            MiniProfiler.Current.Step("UpdateNpsChannelsIfCheckNotNullAsync");
             var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
             var searchApiResult = await _npsApi.ChannelListAsync(new ChannelListInput
             {

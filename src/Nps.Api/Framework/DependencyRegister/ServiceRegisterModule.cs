@@ -16,11 +16,15 @@ namespace Nps.Api.Framework.DependencyRegister
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ServiceAsyncInterceptor>();
+            builder.RegisterType<ServiceInterceptor>();
+
             builder.RegisterType<TransactionalAsyncInterceptor>();
             builder.RegisterType<TransactionalInterceptor>();
 
             List<Type> interceptorServiceTypes = new List<Type>()
             {
+                typeof(ServiceInterceptor),
                 typeof(TransactionalInterceptor)
             };
 

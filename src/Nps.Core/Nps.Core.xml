@@ -34,6 +34,35 @@
             事务隔离级别
             </summary>
         </member>
+        <member name="T:Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor">
+            <summary>
+            同步/异步服务层异常/性能拦截器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor})">
+            <summary>
+            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor"/>实例
+            </summary>
+            <param name="logger">日志对象</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor.InterceptAsync(Castle.DynamicProxy.IInvocation,System.Func{Castle.DynamicProxy.IInvocation,System.Threading.Tasks.Task})" -->
+        <!-- Badly formed XML comment ignored for member "M:Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor.InterceptAsync``1(Castle.DynamicProxy.IInvocation,System.Func{Castle.DynamicProxy.IInvocation,System.Threading.Tasks.Task{``0}})" -->
+        <member name="T:Nps.Core.Aop.Interceptor.ServiceInterceptor">
+            <summary>
+            同步服务层异常/性能拦截器
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.ServiceInterceptor.#ctor(Nps.Core.Aop.Interceptor.ServiceAsyncInterceptor)">
+            <summary>
+            初始化一个<see cref="T:Nps.Core.Aop.Interceptor.ServiceInterceptor"/>实例
+            </summary>
+        </member>
+        <member name="M:Nps.Core.Aop.Interceptor.ServiceInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            同步拦截方法
+            </summary>
+            <param name="invocation">IInvocation</param>
+        </member>
         <member name="T:Nps.Core.Aop.Interceptor.TransactionalAsyncInterceptor">
             <summary>
             同步/异步事务拦截器

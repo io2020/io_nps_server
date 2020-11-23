@@ -49,7 +49,7 @@ namespace Nps.Api.Controllers.Nps
         /// </summary>
         /// <param name="input">删除服务参数</param>
         /// <returns>返回删除结果</returns>
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public async Task<IExecuteResult> DeleteAsync(NpsClientDeleteInput input)
         {
             return ExecuteResult.Ok(await _npsClientService.DeleteAsync(input));
