@@ -86,7 +86,7 @@ namespace Nps.Application.Nps.Services
 
             var npsAppSecrets = await _npsAppSecretRepository
                 .Where(x => x.CreateUserId == CurrentUser.UserId)
-                .WhereIf(input.Filter?.DeviceUniqueId?.IsNotNullOrEmpty() ?? false, x => x.DeviceUniqueId == input.Filter.DeviceUniqueId)
+                .WhereIf(input.Filter?.DeviceUniqueId.IsNotNullOrEmpty() ?? false, x => x.DeviceUniqueId == input.Filter.DeviceUniqueId)
                 .WhereCascade(x => x.IsDeleted == false)
                 .Include(x => x.NpsServer)
                 .Include(x => x.NpsClient)
@@ -142,11 +142,17 @@ namespace Nps.Application.Nps.Services
                 throw new NpsException("用户不存在，请先登录", StatusCode.AuthenticationFailed);
             }
 
+            MiniProfiler.Current.Step("GetNpsAppSecretAsync");
             var npsAppSecret = await GetNpsAppSecretAsync(input.DeviceUniqueId);
+            MiniProfiler.Current.Step("CreateNpsAppSecretIfCheckNullAsync");
             npsAppSecret = await CreateNpsAppSecretIfCheckNullAsync(input.DeviceUniqueId, npsAppSecret);
+            MiniProfiler.Current.Step("CreateNpsClientIfCheckNullAsync");
             npsAppSecret = await CreateNpsClientIfCheckNullAsync(input, npsAppSecret);
+            MiniProfiler.Current.Step("UpdateNpsClientOrNpsServerIfCheckNotNullAsync");
             npsAppSecret = await UpdateNpsClientOrNpsServerIfCheckNotNullAsync(npsAppSecret);
+            MiniProfiler.Current.Step("CreateNpsChannelIfCheckNullAsync");
             npsAppSecret = await CreateNpsChannelIfCheckNullAsync(input, npsAppSecret);
+            MiniProfiler.Current.Step("UpdateNpsChannelsIfCheckNotNullAsync");
             npsAppSecret = await UpdateNpsChannelsIfCheckNotNullAsync(npsAppSecret);
 
             _logger.LogInformation($"已成功开通设备端口，{input.ToJson()}");
@@ -162,7 +168,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> GetNpsAppSecretAsync(string deviceUniqueId)
         {
-            MiniProfiler.Current.Step("GetNpsAppSecretAsync");
             _logger.LogInformation($"根据设备唯一识别编码，查询Nps应用密钥、Nps服务器、Nps客户端、Nps隧道，设备唯一识别编码：{deviceUniqueId}");
 
             return await _npsAppSecretRepository
@@ -183,7 +188,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsAppSecretIfCheckNullAsync(string deviceUniqueId, NpsAppSecret npsAppSecret)
         {
-            MiniProfiler.Current.Step("CreateNpsAppSecretIfCheckNullAsync");
             _logger.LogInformation($"检测设备是否已创建过唯一识别密钥，设备唯一识别编码：{deviceUniqueId}");
             if (npsAppSecret == null)
             {
@@ -205,7 +209,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsClientIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
-            MiniProfiler.Current.Step("CreateNpsClientIfCheckNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
 
             _logger.LogInformation($"检测设备是否已创建过客户端，设备唯一识别编码：{npsAppSecret.DeviceUniqueId}");
@@ -250,7 +253,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> UpdateNpsClientOrNpsServerIfCheckNotNullAsync(NpsAppSecret npsAppSecret)
         {
-            MiniProfiler.Current.Step("UpdateNpsClientOrNpsServerIfCheckNotNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
 
@@ -338,7 +340,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> CreateNpsChannelIfCheckNullAsync(NpsClientOpenInput input, NpsAppSecret npsAppSecret)
         {
-            MiniProfiler.Current.Step("CreateNpsChannelIfCheckNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
 
@@ -389,8 +390,6 @@ namespace Nps.Application.Nps.Services
                         _logger.LogError($"开通客户端{npsAppSecret.DeviceUniqueId},端口{needOpenPorts[index]},{remoteApiResult.Message}");
                         continue;
                     }
-
-                    await Task.Delay(150);
                 }
 
                 if (needOpenNpsChannels.Count > 0)
@@ -412,7 +411,6 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回NpsAppSecret</returns>
         private async Task<NpsAppSecret> UpdateNpsChannelsIfCheckNotNullAsync(NpsAppSecret npsAppSecret)
         {
-            MiniProfiler.Current.Step("UpdateNpsChannelsIfCheckNotNullAsync");
             Check.NotNull(npsAppSecret, nameof(npsAppSecret));
             Check.NotNull(npsAppSecret.NpsClient, nameof(npsAppSecret.NpsClient));
             Check.NotNull(npsAppSecret.NpsClient.NpsChannels, nameof(npsAppSecret.NpsClient.NpsChannels));
@@ -449,7 +447,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回服务器客户端隧道信息</returns>
         private async Task<ChannelListOutput> GetRemoteChannelOutputAsync(int remoteClientId)
         {
-            MiniProfiler.Current.Step("UpdateNpsChannelsIfCheckNotNullAsync");
+            MiniProfiler.Current.Step("GetRemoteChannelOutputAsync");
             var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
             var searchApiResult = await _npsApi.ChannelListAsync(new ChannelListInput
             {
@@ -500,6 +498,7 @@ namespace Nps.Application.Nps.Services
                 throw new NpsException("删除失败，查询不存在", StatusCode.NotFound);
             }
 
+            var deletedChannels = new List<NpsChannel>();
             var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
             for (int index = 0; index < npsChannels.Count; index++)
             {
@@ -516,11 +515,15 @@ namespace Nps.Application.Nps.Services
                 deletedOutput.RemoteStatus = remoteApiResult.Status;
                 deletedOutput.RemoteMessage = remoteApiResult.Message;
                 deletedOutputs.Add(deletedOutput);
-                //远程服务器删除成功后，删除本地隧道数据
+
                 if (remoteApiResult.Status == 1)
-                {
-                    await _npsChannelRepository.DeleteAsync(npsChannel.Id);
+                {//远程服务器删除成功后，删除至删除集合列表，统一删除
+                    deletedChannels.Add(npsChannel);
                 }
+            }
+            if (deletedChannels.Count > 0)
+            {
+                await _npsChannelRepository.DeleteAsync(deletedChannels);
             }
 
             return deletedOutputs;
