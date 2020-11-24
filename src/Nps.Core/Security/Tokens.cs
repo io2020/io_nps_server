@@ -12,13 +12,16 @@ namespace Nps.Core.Security
         /// </summary>
         /// <param name="accessToken">访问Token</param>
         /// <param name="refreshToken">刷新Token</param>
-        public Tokens(string accessToken, string refreshToken)
+        /// <param name="expiresIn">token到期时间</param>
+        public Tokens(string accessToken, string refreshToken, string expiresIn)
         {
             accessToken.CheckNotNullOrEmpty(nameof(accessToken));
             refreshToken.CheckNotNullOrEmpty(nameof(refreshToken));
+            expiresIn.CheckNotNullOrEmpty(nameof(expiresIn));
 
             AccessToken = accessToken;
             RefreshToken = refreshToken;
+            ExpiresIn = expiresIn;
         }
 
         /// <summary>
@@ -30,6 +33,11 @@ namespace Nps.Core.Security
         /// Refresh_Token
         /// </summary>
         public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// 到期时间
+        /// </summary>
+        public string ExpiresIn { get; set; }
 
         /// <summary>
         /// 重载

@@ -1,22 +1,23 @@
 ﻿using CSRedis;
 using Microsoft.Extensions.DependencyInjection;
+using Nps.Core.Caching;
 using Nps.Core.Infrastructure;
 using Serilog;
 
 namespace Nps.Api.Framework.ServiceExtensions
 {
     /// <summary>
-    /// IServiceCollection扩展-Redis
+    /// IServiceCollection扩展-缓存
     /// </summary>
-    public static class CsRedisCoreExtension
+    public static class CachingExtension
     {
         /// <summary>
-        /// 注入Redis
+        /// 注入自定义缓存
         /// </summary>
         /// <param name="services">IServiceCollection</param>
-        public static void AddDefineRedis(this IServiceCollection services)
+        public static void AddDefineCache(this IServiceCollection services)
         {
-            Log.Logger.Information("Initialize CSRedisCore Start;");
+            Log.Logger.Information("Initialize Caching Start;");
 
             Check.NotNull(services, nameof(services));
 
@@ -26,9 +27,15 @@ namespace Nps.Api.Framework.ServiceExtensions
                 CSRedisClient csRedisClient = new CSRedisClient(NpsEnvironment.NPS_DB_REDISCONNECTSTRING);
                 //初始化 RedisHelper
                 RedisHelper.Initialization(csRedisClient);
+
+                services.AddSingleton<ICaching, RedisCache>();
+            }
+            else
+            {
+                services.AddSingleton<ICaching, MemoryCache>();
             }
 
-            Log.Logger.Information("Initialize CSRedisCore End;");
+            Log.Logger.Information("Initialize Caching End;");
         }
     }
 }

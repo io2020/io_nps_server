@@ -59,8 +59,8 @@ namespace Nps.Core.Aop.Interceptor
         {
             if (TryBegin(invocation))
             {
-                string methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()";
-                int? hashCode = _unitOfWork.GetHashCode();
+                var methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()->";
+                var hashCode = _unitOfWork.GetHashCode();
 
                 using (_logger.BeginScope("_unitOfWork_Transactional_Intercept：{hashCode}", hashCode))
                 {
@@ -98,8 +98,8 @@ namespace Nps.Core.Aop.Interceptor
         {
             if (TryBegin(invocation))
             {
-                string methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()";
-                int hashCode = _unitOfWork.GetHashCode();
+                var methodName = $"{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()->";
+                var hashCode = _unitOfWork.GetHashCode();
 
                 using (_logger.BeginScope("_unitOfWork_Transactional_Intercept：{hashCode}", hashCode))
                 {

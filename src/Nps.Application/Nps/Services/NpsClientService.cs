@@ -45,6 +45,8 @@ namespace Nps.Application.Nps.Services
 
         private readonly string _protocolType = "tcp";
 
+        private readonly string _npsApi_Auth_CacheKey = "Cache_Nps_RemoteApi_Auth_Key";
+
         /// <summary>
         /// 初始化一个<see cref="NpsClientService"/>实例
         /// </summary>
@@ -215,11 +217,11 @@ namespace Nps.Application.Nps.Services
             if (npsAppSecret.NpsClient == null)
             {
                 //调用远程Api执行添加客户端
-                var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+                var baseAuthInput = await BeforeRequestNpsApiAsync();
                 var remoteApiResult = await _npsApi.AddClientAsync(new ClientAddInput
                 {
-                    AuthKey = authKey,
-                    Timestamp = timestamp,
+                    AuthKey = baseAuthInput.AuthKey,
+                    Timestamp = baseAuthInput.Timestamp,
                     AppSecret = npsAppSecret.AppSecret,
                     IsConfigConnectAllow = input.IsConfigConnectAllow.ToInt32OrDefault(1),
                     IsCompress = input.IsCompress.ToInt32OrDefault(0),
@@ -318,11 +320,11 @@ namespace Nps.Application.Nps.Services
         private async Task<ClientListOutput> GetRemoteClientOutputAsync(string deviceAppSecret)
         {
             MiniProfiler.Current.Step("GetRemoteClientOutputAsync");
-            var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+            var baseAuthInput = await BeforeRequestNpsApiAsync();
             var searchApiResult = await _npsApi.ClientListAsync(new ClientListInput
             {
-                AuthKey = authKey,
-                Timestamp = timestamp,
+                AuthKey = baseAuthInput.AuthKey,
+                Timestamp = baseAuthInput.Timestamp,
                 KeyWords = deviceAppSecret,
                 OrderType = "asc",
                 Offset = "0",
@@ -361,15 +363,15 @@ namespace Nps.Application.Nps.Services
                 var nowMaxServerPort = await _npsChannelRepository.Select.MaxAsync(x => x.ServerPort);
                 var startServerPort = nowMaxServerPort == 0 ? _minServerPort : nowMaxServerPort;
 
-                var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+                var baseAuthInput = await BeforeRequestNpsApiAsync();
                 for (int index = 0; index < needOpenPorts.Count; index++)
                 {
                     //向远程服务器添加隧道
                     var remark = $"{input.Remark}_隧道_{startServerPort += 1}";
                     var remoteApiResult = await _npsApi.AddChannelAsync(new ChannelAddInput
                     {
-                        AuthKey = authKey,
-                        Timestamp = timestamp,
+                        AuthKey = baseAuthInput.AuthKey,
+                        Timestamp = baseAuthInput.Timestamp,
                         Remark = remark,
                         ServerPort = startServerPort,
                         TargetAddress = needOpenPorts[index],
@@ -448,11 +450,11 @@ namespace Nps.Application.Nps.Services
         private async Task<ChannelListOutput> GetRemoteChannelOutputAsync(int remoteClientId)
         {
             MiniProfiler.Current.Step("GetRemoteChannelOutputAsync");
-            var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+            var baseAuthInput = await BeforeRequestNpsApiAsync();
             var searchApiResult = await _npsApi.ChannelListAsync(new ChannelListInput
             {
-                AuthKey = authKey,
-                Timestamp = timestamp,
+                AuthKey = baseAuthInput.AuthKey,
+                Timestamp = baseAuthInput.Timestamp,
                 ClientId = remoteClientId,
                 KeyWords = "",
                 Offset = "0",
@@ -499,7 +501,7 @@ namespace Nps.Application.Nps.Services
             }
 
             var deletedChannels = new List<NpsChannel>();
-            var (authKey, timestamp) = await BeforeRequestNpsApiAsync();
+            var baseAuthInput = await BeforeRequestNpsApiAsync();
             for (int index = 0; index < npsChannels.Count; index++)
             {
                 var npsChannel = npsChannels[index];
@@ -508,8 +510,8 @@ namespace Nps.Application.Nps.Services
                 //向远程服务发送删除指令
                 var remoteApiResult = await _npsApi.DeleteChannelAsync(new ChannelIdInput
                 {
-                    AuthKey = authKey,
-                    Timestamp = timestamp,
+                    AuthKey = baseAuthInput.AuthKey,
+                    Timestamp = baseAuthInput.Timestamp,
                     Id = npsChannel.RemoteChannelId
                 });
                 deletedOutput.RemoteStatus = remoteApiResult.Status;
@@ -535,14 +537,30 @@ namespace Nps.Application.Nps.Services
         /// 请求Api前准备验签内容
         /// </summary>
         /// <returns>返回验签内容</returns>
-        private async Task<(string authKey, string timestamp)> BeforeRequestNpsApiAsync()
+        //[Caching(AbsoluteExpiration = 15, ExpirationType = ExpirationType.Second)]
+        private async Task<BaseAuthInput> BeforeRequestNpsApiAsync()
         {
-            var serverTime = await _npsApi.ServerTimeAsync();
-            string timestamp = serverTime?.Timestamp ?? DateTime.Now.ToTimestamp();
+            var cacheValue = await RedisHelper.GetAsync(_npsApi_Auth_CacheKey);
+            if (cacheValue == null)
+            {
+                var serverTime = await _npsApi.ServerTimeAsync();
+                string timestamp = serverTime?.Timestamp ?? DateTime.Now.ToTimestamp();
+                string authKey = EncryptHelper.Md5By32($"{_auth_Key}{timestamp}").ToLower();
 
-            string authKey = EncryptHelper.Md5By32($"{_auth_Key}{timestamp}").ToLower();
+                var baseAuthInput = new BaseAuthInput
+                {
+                    AuthKey = authKey,
+                    Timestamp = timestamp
+                };
 
-            return new(authKey, timestamp);
+                await RedisHelper.SetAsync(_npsApi_Auth_CacheKey, baseAuthInput.ToJson(), TimeSpan.FromSeconds(15));
+
+                return baseAuthInput;
+            }
+            else
+            {
+                return cacheValue.FromJson<BaseAuthInput>();
+            }
         }
     }
 }

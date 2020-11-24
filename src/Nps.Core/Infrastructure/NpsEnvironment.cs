@@ -63,6 +63,11 @@ namespace Nps.Core.Infrastructure
         public static string NPS_AUTH_JWT_CRYPTOGRAPHY => Get("NPS_AUTH_JWT_CRYPTOGRAPHY", "nps-dotnetfive-cryptography");
 
         /// <summary>
+        /// JwtBearer-相对过期时间，默认15天
+        /// </summary>
+        public static string NPS_AUTH_JWT_EXPIRESIN => Get("NPS_AUTH_JWT_EXPIRESIN", "15");
+
+        /// <summary>
         /// 雪花ID生成器数据中心ID，取值0-31
         /// </summary>
         public static string NPS_IDGENERATOR_DATACENTERID => Get("NPS_IDGENERATOR_DATACENTERID", "11");

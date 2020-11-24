@@ -30,6 +30,8 @@ setx NPS_AUTH_JWT_AUDIENCE "Nps.Api" /M
 
 setx NPS_AUTH_JWT_CRYPTOGRAPHY "nps-dotnetfive-cryptography" /M
 
+setx NPS_AUTH_JWT_EXPIRESIN "15" /M
+
 rem 雪花ID生成器数据中心ID，取值0-31
 setx NPS_IDGENERATOR_DATACENTERID 1 /M
 

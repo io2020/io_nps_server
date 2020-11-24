@@ -27,7 +27,7 @@ namespace Nps.Api.Framework.ServiceExtensions
         {
             var jsonWebTokenSettings = new JsonWebTokenSettings(
                             NpsEnvironment.NPS_AUTH_JWT_SECURITYKEY,
-                            new TimeSpan(365, 0, 0, 0),
+                            new TimeSpan(NpsEnvironment.NPS_AUTH_JWT_EXPIRESIN.ToInt32OrDefault(15), 0, 0, 0),
                             NpsEnvironment.NPS_AUTH_JWT_AUDIENCE,
                             NpsEnvironment.NPS_AUTH_JWT_ISSUER
                        );

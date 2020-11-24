@@ -1,6 +1,7 @@
 ﻿using DotNetCore.Security;
 using Microsoft.Extensions.Logging;
 using Nps.Application.Account.Dtos;
+using Nps.Core.Aop.Attributes;
 using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.Exceptions;
 using Nps.Core.Infrastructure.Helpers;
@@ -37,6 +38,7 @@ namespace Nps.Application.Account.Services
             _logger = logger;
         }
 
+        [Caching(AbsoluteExpiration = 15, ExpirationType = ExpirationType.Day)]
         public async Task<Tokens> LoginAsync(LoginInput input)
         {
             _logger.LogInformation("Login With Jwt Begin;");
@@ -105,7 +107,8 @@ namespace Nps.Application.Account.Services
             user.RefreshToken = refreshToken;
             await _userRepository.UpdateAsync(user);
 
-            return new Tokens(token, refreshToken);
+            var jwtToken = _jsonWebTokenService.Decode(token);
+            return new Tokens(token, refreshToken, jwtToken["exp"]?.ToString());
         }
 
         private static string GenerateToken(int size = 32)

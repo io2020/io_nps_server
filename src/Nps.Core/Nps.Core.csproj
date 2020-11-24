@@ -14,6 +14,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Remove="Aop\BlogUserAuditAOP.cs" />
     <Compile Remove="Aop\Interceptor\UnitOfWorkAsyncInterceptor.cs" />
     <Compile Remove="Aop\Interceptor\UnitOfWorkInterceptor.cs" />
   </ItemGroup>

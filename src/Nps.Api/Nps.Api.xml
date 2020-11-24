@@ -176,14 +176,14 @@
             </summary>
             <param name="services">IServiceCollection</param>
         </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.CsRedisCoreExtension">
+        <member name="T:Nps.Api.Framework.ServiceExtensions.CachingExtension">
             <summary>
-            IServiceCollection扩展-Redis
+            IServiceCollection扩展-缓存
             </summary>
         </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.CsRedisCoreExtension.AddDefineRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Nps.Api.Framework.ServiceExtensions.CachingExtension.AddDefineCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            注入Redis
+            注入自定义缓存
             </summary>
             <param name="services">IServiceCollection</param>
         </member>

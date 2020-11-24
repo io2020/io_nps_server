@@ -26,16 +26,14 @@ namespace Nps.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //注入配置文件
-            services.AddSingleton(new AppSettings(Configuration));
             //注入当前用户
             services.AddCurrentUser();
             //注入ID生成器
             services.AddIdGenerator();
             //注入FreeSql
             services.AddFreeSql();
-            //注入Redis
-            services.AddDefineRedis();
+            //注入Cache
+            services.AddDefineCache();
             //注入Jwt认证
             services.AddJwtBearer();
             //注入对象映射

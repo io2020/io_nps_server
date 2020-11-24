@@ -19,12 +19,16 @@ namespace Nps.Api.Framework.DependencyRegister
             builder.RegisterType<ServiceAsyncInterceptor>();
             builder.RegisterType<ServiceInterceptor>();
 
+            builder.RegisterType<CachingAsyncInterceptor>();
+            builder.RegisterType<CachingInterceptor>();
+
             builder.RegisterType<TransactionalAsyncInterceptor>();
             builder.RegisterType<TransactionalInterceptor>();
 
             List<Type> interceptorServiceTypes = new List<Type>()
             {
                 typeof(ServiceInterceptor),
+                typeof(CachingInterceptor),
                 typeof(TransactionalInterceptor)
             };
 

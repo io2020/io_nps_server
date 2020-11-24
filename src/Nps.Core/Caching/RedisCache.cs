@@ -1,45 +1,14 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Nps.Core.Caching
 {
     /// <summary>
-    /// 内存缓存
+    /// Redis缓存
     /// </summary>
-    public class MemoryCache : ICaching
+    public class RedisCache : ICaching
     {
-        //内存缓存对象
-        private readonly IMemoryCache _memoryCache;
-
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="memoryCache">IMemoryCache</param>
-        public MemoryCache(IMemoryCache memoryCache)
-        {
-            _memoryCache = memoryCache;
-        }
-
-        //获取所有缓存Key
-        private List<string> GetAllKeys()
-        {
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-            var entries = _memoryCache.GetType().GetField("_entries", flags).GetValue(_memoryCache);
-            var keys = new List<string>();
-            if (entries is not IDictionary cacheItems) return keys;
-            foreach (DictionaryEntry cacheItem in cacheItems)
-            {
-                keys.Add(cacheItem.Key.ToString());
-            }
-            return keys;
-        }
-
         #region Exist
 
         /// <summary>
@@ -48,7 +17,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public bool Exists(string key)
         {
-            return _memoryCache.TryGetValue(key, out _);
+            return RedisHelper.Exists(key);
         }
 
         /// <summary>
@@ -57,7 +26,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public async Task<bool> ExistsAsync(string key)
         {
-            return await Task.FromResult(_memoryCache.TryGetValue(key, out _));
+            return await RedisHelper.ExistsAsync(key);
         }
 
         #endregion
@@ -70,7 +39,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public string Get(string key)
         {
-            return _memoryCache.Get(key)?.ToString();
+            return RedisHelper.Get(key);
         }
 
         /// <summary>
@@ -80,7 +49,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public T Get<T>(string key)
         {
-            return _memoryCache.Get<T>(key);
+            return RedisHelper.Get<T>(key);
         }
 
         /// <summary>
@@ -89,7 +58,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public async Task<string> GetAsync(string key)
         {
-            return await Task.FromResult(Get(key));
+            return await RedisHelper.GetAsync(key);
         }
 
         /// <summary>
@@ -99,7 +68,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public async Task<T> GetAsync<T>(string key)
         {
-            return await Task.FromResult(Get<T>(key));
+            return await RedisHelper.GetAsync<T>(key);
         }
 
         #endregion
@@ -113,8 +82,7 @@ namespace Nps.Core.Caching
         /// <param name="value">值</param>
         public bool Set(string key, object value)
         {
-            _memoryCache.Set(key, value);
-            return true;
+            return RedisHelper.Set(key, value);
         }
 
         /// <summary>
@@ -125,8 +93,7 @@ namespace Nps.Core.Caching
         /// <param name="expire">有效期</param>
         public bool Set(string key, object value, TimeSpan expire)
         {
-            _memoryCache.Set(key, value, expire);
-            return true;
+            return RedisHelper.Set(key, value, expire);
         }
 
         /// <summary>
@@ -136,8 +103,7 @@ namespace Nps.Core.Caching
         /// <param name="value">值</param>
         public async Task<bool> SetAsync(string key, object value)
         {
-            Set(key, value);
-            return await Task.FromResult(true);
+            return await RedisHelper.SetAsync(key, value);
         }
 
         /// <summary>
@@ -148,8 +114,7 @@ namespace Nps.Core.Caching
         /// <param name="expire">有效期</param>
         public async Task<bool> SetAsync(string key, object value, TimeSpan expire)
         {
-            Set(key, value, expire);
-            return await Task.FromResult(true);
+            return await RedisHelper.SetAsync(key, value, expire);
         }
 
         #endregion
@@ -162,11 +127,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public long Remove(params string[] key)
         {
-            foreach (var k in key)
-            {
-                _memoryCache.Remove(k);
-            }
-            return key.Length;
+            return RedisHelper.Del(key);
         }
 
         /// <summary>
@@ -175,12 +136,7 @@ namespace Nps.Core.Caching
         /// <param name="key">键</param>
         public async Task<long> RemoveAsync(params string[] key)
         {
-            foreach (var k in key)
-            {
-                _memoryCache.Remove(k);
-            }
-
-            return await Task.FromResult(key.Length.ToLong());
+            return await RedisHelper.DelAsync(key);
         }
 
         /// <summary>
@@ -192,13 +148,12 @@ namespace Nps.Core.Caching
             if (pattern.IsNull())
                 return default;
 
-            pattern = Regex.Replace(pattern, @"\{.*\}", "(.*)");
+            pattern = Regex.Replace(pattern, @"\{.*\}", "*");
 
-            var keys = GetAllKeys().Where(k => Regex.IsMatch(k, pattern));
-
-            if (keys != null && keys.Count() > 0)
+            var keys = (await RedisHelper.KeysAsync(pattern));
+            if (keys != null && keys.Length > 0)
             {
-                return await RemoveAsync(keys.ToArray());
+                return await RedisHelper.DelAsync(keys);
             }
 
             return default;

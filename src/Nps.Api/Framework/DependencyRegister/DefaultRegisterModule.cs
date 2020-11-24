@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Nps.Core.Caching;
 using System.Linq;
 using System.Reflection;
 
@@ -23,8 +22,6 @@ namespace Nps.Api.Framework.DependencyRegister
         {
             //注入配置文件
             builder.RegisterInstance(_configuration).AsImplementedInterfaces().PropertiesAutowired().SingleInstance();
-
-            builder.RegisterType<MemoryCache>().As<ICaching>().SingleInstance();
 
             //获取所有控制器类型并使用属性注入
             //需要在Startup文件中添加 services.AddControllers().AddControllersAsServices();作为属性注入

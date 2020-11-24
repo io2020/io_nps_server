@@ -31,7 +31,7 @@ namespace Nps.Core.Aop.Interceptor
         /// <param name="proceed">Func<IInvocation, Task></param>
         protected override async Task InterceptAsync(IInvocation invocation, Func<IInvocation, Task> proceed)
         {
-            string methodName = $"执行Service方法：{invocation.Method.Name}()->";
+            var methodName = $"执行{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()->";
             var hashCode = invocation.GetHashCode();
 
             using (_logger.BeginScope("_service_Intercept：{hashCode}", hashCode))
@@ -43,7 +43,7 @@ namespace Nps.Core.Aop.Interceptor
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"{methodName}出现异常，异常原因：{ex.Message + ex.InnerException}.");
+                    _logger.LogError($"执行{methodName}出现异常，异常原因：{ex.Message + ex.InnerException}.");
                     throw new NpsException(ex.Message, StatusCode.Error);
                 }
             }
@@ -56,7 +56,7 @@ namespace Nps.Core.Aop.Interceptor
         /// <param name="proceed">Func<IInvocation, Task></param>
         protected override async Task<TResult> InterceptAsync<TResult>(IInvocation invocation, Func<IInvocation, Task<TResult>> proceed)
         {
-            string methodName = $"执行Service方法：{invocation.Method.Name}()->";
+            var methodName = $"执行{invocation.MethodInvocationTarget.DeclaringType?.FullName}.{invocation.Method.Name}()->";
             var hashCode = invocation.GetHashCode();
 
             using (_logger.BeginScope("_service_Result_Intercept：{hashCode}", hashCode))
@@ -69,7 +69,7 @@ namespace Nps.Core.Aop.Interceptor
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"{methodName}出现异常，异常原因：{ex.Message + ex.InnerException}.");
+                    _logger.LogError($"执行{methodName}出现异常，异常原因：{ex.Message + ex.InnerException}.");
                     throw new NpsException(ex.Message, StatusCode.Error);
                 }
             }
