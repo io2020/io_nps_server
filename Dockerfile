@@ -1,0 +1,30 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
+
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY src/Nps.Api/*.csproj ./src/Nps.Api/
+COPY test/Nps.Test/*.csproj ./test/Nps.Test/
+COPY src/Nps.Core/*.csproj ./src/Nps.Core/
+COPY src/Nps.Data/*.csproj ./src/Nps.Data/
+COPY src/Nps.Application/*.csproj ./src/Nps.Application/
+RUN dotnet restore -r linux-x64
+
+# copy everything else and build app
+COPY src/Nps.Api/. ./src/Nps.Api/
+COPY test/Nps.Test/. ./test/Nps.Test/
+COPY src/Nps.Core/. ./src/Nps.Core/
+COPY src/Nps.Data/. ./src/Nps.Data/
+COPY src/Nps.Application/. ./src/Nps.Application/
+WORKDIR /source/src/Nps.Api
+RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false --no-restore
+
+#EXPOSE 映射端口
+EXPOSE 7001
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim-amd64
+WORKDIR /app
+COPY --from=build /app ./
+ENTRYPOINT ["./Nps.Api"]
