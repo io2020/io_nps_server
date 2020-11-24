@@ -537,7 +537,6 @@ namespace Nps.Application.Nps.Services
         /// 请求Api前准备验签内容
         /// </summary>
         /// <returns>返回验签内容</returns>
-        //[Caching(AbsoluteExpiration = 15, ExpirationType = ExpirationType.Second)]
         private async Task<BaseAuthInput> BeforeRequestNpsApiAsync()
         {
             var cacheValue = await RedisHelper.GetAsync(_npsApi_Auth_CacheKey);
