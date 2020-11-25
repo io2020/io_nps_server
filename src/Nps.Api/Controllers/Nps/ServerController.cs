@@ -11,7 +11,7 @@ namespace Nps.Api.Controllers.Nps
     /// <summary>
     /// Nps服务器
     /// </summary>
-    public class ServerController : BaseAdminApiController
+    public class ServerController : BaseApiController
     {
         private readonly INpsServerService _npsServerService;
 

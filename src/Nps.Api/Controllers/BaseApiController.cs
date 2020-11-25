@@ -7,7 +7,7 @@ namespace Nps.Api.Controllers
     [ApiController]
     [Authorize]
     [Route("api/nps/[Controller]")]
-    public class BaseAdminApiController : ControllerBase
+    public class BaseApiController : ControllerBase
     {
 
     }

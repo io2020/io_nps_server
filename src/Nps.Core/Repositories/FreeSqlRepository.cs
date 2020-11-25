@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Nps.Core.Repositories
@@ -88,11 +89,12 @@ namespace Nps.Core.Repositories
         /// 插入实体
         /// </summary>
         /// <param name="entity">实体</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回实体对象</returns>
-        public override Task<TEntity> InsertAsync(TEntity entity)
+        public override Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             BeforeInsert(entity);
-            return base.InsertAsync(entity);
+            return base.InsertAsync(entity, cancellationToken);
         }
 
         /// <summary>
@@ -113,14 +115,15 @@ namespace Nps.Core.Repositories
         /// 批量插入实体
         /// </summary>
         /// <param name="entities">实体列表</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回实体列表对象</returns>
-        public override Task<List<TEntity>> InsertAsync(IEnumerable<TEntity> entities)
+        public override Task<List<TEntity>> InsertAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
             foreach (TEntity entity in entities)
             {
                 BeforeInsert(entity);
             }
-            return base.InsertAsync(entities);
+            return base.InsertAsync(entities, cancellationToken);
         }
 
         #endregion
@@ -158,11 +161,12 @@ namespace Nps.Core.Repositories
         /// 更新实体
         /// </summary>
         /// <param name="entity">实体</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override Task<int> UpdateAsync(TEntity entity)
+        public override Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             BeforeUpdate(entity);
-            return base.UpdateAsync(entity);
+            return base.UpdateAsync(entity, cancellationToken);
         }
 
         /// <summary>
@@ -183,14 +187,15 @@ namespace Nps.Core.Repositories
         /// 批量更新实体
         /// </summary>
         /// <param name="entities">实体列表</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override Task<int> UpdateAsync(IEnumerable<TEntity> entities)
+        public override Task<int> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
             foreach (var entity in entities)
             {
                 BeforeUpdate(entity);
             }
-            return base.UpdateAsync(entities);
+            return base.UpdateAsync(entities, cancellationToken);
         }
 
         #endregion
@@ -214,12 +219,13 @@ namespace Nps.Core.Repositories
         /// 插入或更新实体
         /// </summary>
         /// <param name="entity">实体</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回实体对象</returns>
-        public override async Task<TEntity> InsertOrUpdateAsync(TEntity entity)
+        public override async Task<TEntity> InsertOrUpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             BeforeInsert(entity);
             BeforeUpdate(entity);
-            await base.InsertOrUpdateAsync(entity);
+            await base.InsertOrUpdateAsync(entity, cancellationToken);
             return entity;
         }
 
@@ -319,27 +325,29 @@ namespace Nps.Core.Repositories
         /// 删除实体
         /// </summary>
         /// <param name="id">主键值</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override async Task<int> DeleteAsync(TKey id)
+        public override async Task<int> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
         {
-            TEntity entity = await GetAsync(id);
+            TEntity entity = await GetAsync(id, cancellationToken);
             if (entity is IDeleteAuditEntity)
             {
-                return Orm.Update<TEntity>(entity)
+                return await Orm.Update<TEntity>(entity)
                            .Set(a => (a as IDeleteAuditEntity).IsDeleted, true)
                            .Set(a => (a as IDeleteAuditEntity).DeleteUserId, _currentUser.UserId)
                            .Set(a => (a as IDeleteAuditEntity).DeleteTime, DateTime.Now)
-                           .ExecuteAffrows();
+                           .ExecuteAffrowsAsync(cancellationToken);
             }
-            return await base.DeleteAsync(id);
+            return await base.DeleteAsync(id, cancellationToken);
         }
 
         /// <summary>
         /// 删除实体
         /// </summary>
         /// <param name="entity">实体</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override async Task<int> DeleteAsync(TEntity entity)
+        public override async Task<int> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity is IDeleteAuditEntity)
             {
@@ -347,17 +355,18 @@ namespace Nps.Core.Repositories
                     .Set(a => (a as IDeleteAuditEntity).IsDeleted, true)
                     .Set(a => (a as IDeleteAuditEntity).DeleteUserId, _currentUser.UserId)
                     .Set(a => (a as IDeleteAuditEntity).DeleteTime, DateTime.Now)
-                    .ExecuteAffrowsAsync();
+                    .ExecuteAffrowsAsync(cancellationToken);
             }
-            return base.Delete(entity);
+            return await base.DeleteAsync(entity, cancellationToken);
         }
 
         /// <summary>
         /// 批量删除实体
         /// </summary>
         /// <param name="entities">实体列表</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override async Task<int> DeleteAsync(IEnumerable<TEntity> entities)
+        public override async Task<int> DeleteAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
             if (entities.Any())
             {
@@ -371,17 +380,18 @@ namespace Nps.Core.Repositories
                         softDelete.DeleteTime = DateTime.Now;
                     }
                 }
-                return await UpdateAsync(entities);
+                return await UpdateAsync(entities, cancellationToken);
             }
-            return await base.DeleteAsync(entities);
+            return await base.DeleteAsync(entities, cancellationToken);
         }
 
         /// <summary>
         /// 根据条件删除实体
         /// </summary>
         /// <param name="predicate">实体删除条件</param>
+        /// <param name="cancellationToken">参数以令牌的形式转发</param>
         /// <returns>返回受影响的行数</returns>
-        public override async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> predicate)
+        public override async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             if (typeof(IDeleteAuditEntity).IsAssignableFrom(typeof(TEntity)))
             {
@@ -394,9 +404,9 @@ namespace Nps.Core.Repositories
                      .Set(a => (a as IDeleteAuditEntity).IsDeleted, true)
                      .Set(a => (a as IDeleteAuditEntity).DeleteUserId, _currentUser.UserId)
                      .Set(a => (a as IDeleteAuditEntity).DeleteTime, DateTime.Now)
-                     .ExecuteAffrowsAsync();
+                     .ExecuteAffrowsAsync(cancellationToken);
             }
-            return await base.DeleteAsync(predicate);
+            return await base.DeleteAsync(predicate, cancellationToken);
         }
 
         #endregion

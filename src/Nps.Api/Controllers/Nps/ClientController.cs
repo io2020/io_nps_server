@@ -9,7 +9,7 @@ namespace Nps.Api.Controllers.Nps
     /// <summary>
     /// Nps客户端
     /// </summary>
-    public class ClientController : BaseAdminApiController
+    public class ClientController : BaseApiController
     {
         private readonly INpsClientService _npsClientService;
 

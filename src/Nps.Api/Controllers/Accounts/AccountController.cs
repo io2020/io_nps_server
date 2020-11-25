@@ -10,7 +10,7 @@ namespace Nps.Api.Controllers.Accounts
     /// <summary>
     /// 用户认证
     /// </summary>
-    public class AccountController : BaseAdminApiController
+    public class AccountController : BaseApiController
     {
         private readonly ITokenService _tokenService;
 
