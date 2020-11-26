@@ -35,16 +35,16 @@ namespace Nps.Api.Framework.ServiceExtensions
             {
                 if (!Enum.IsDefined(typeof(DataType), dataType))
                 {
-                    Log.Error($"数据库配置Database:ConnectionStrings:DataType:{dataType}无效");
+                    Log.Error($"数据库配置DataType:{dataType}无效");
                 }
                 if (dataTypeConnectionString.IsNullOrWhiteSpace())
                 {
-                    Log.Error($"数据库配置Database:ConnectionStrings:{dataType}连接字符串无效");
+                    Log.Error($"数据库配置ConnectionStrings:{dataType}连接字符串无效");
                 }
             }
             else
             {
-                Log.Error($"数据库配置Database:ConnectionStrings:DataType:{dataTypeValue}无效");
+                Log.Error($"数据库配置DataType:{dataTypeValue}无效");
             }
 
             //创建建造器
@@ -56,7 +56,7 @@ namespace Nps.Api.Framework.ServiceExtensions
                 .UseNoneCommandParameter(true)
                 .UseMonitorCommand(cmd => { }, (cmd, traceLog) =>
                 {//监听所有命令
-                    Log.Logger.Information($"MonitorCommand:{traceLog};");
+                    Log.Logger.Debug($"MonitorCommand:{traceLog};");
                 });
 
             //生成数据库操作对象

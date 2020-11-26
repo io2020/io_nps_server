@@ -570,6 +570,26 @@
             设备唯一识别编码
             </summary>
         </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.VirtualKey">
+            <summary>
+            vKey
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.ServerDomain">
+            <summary>
+            服务器域名
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.ServerIPAddress">
+            <summary>
+            服务器地址
+            </summary>
+        </member>
+        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.ClientConnectPort">
+            <summary>
+            客户端连接端口
+            </summary>
+        </member>
         <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedOutput.OpenPorts">
             <summary>
             已开通端口列表
@@ -578,16 +598,6 @@
         <member name="T:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput">
             <summary>
             开通端口
-            </summary>
-        </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ServerIPAddress">
-            <summary>
-            服务器地址
-            </summary>
-        </member>
-        <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ClientConnectPort">
-            <summary>
-            客户端连接端口
             </summary>
         </member>
         <member name="P:Nps.Application.Nps.Dots.NpsClientOpenedPortOutput.ServerPort">

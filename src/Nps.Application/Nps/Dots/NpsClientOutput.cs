@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Nps.Application.Nps.Dots
 {
@@ -18,6 +19,24 @@ namespace Nps.Application.Nps.Dots
         public string VirtualKey { get; set; }
 
         /// <summary>
+        /// 服务器域名
+        /// </summary>
+        [JsonProperty("serverIP")]
+        public string ServerDomain { get; set; }
+
+        /// <summary>
+        /// 服务器地址
+        /// </summary>
+        [JsonIgnore]
+        public string ServerIPAddress { get; set; }
+
+        /// <summary>
+        /// 客户端连接端口
+        /// </summary>
+        [JsonIgnore]
+        public string ClientConnectPort { get; set; }
+
+        /// <summary>
         /// 已开通端口列表
         /// </summary>
         public List<NpsClientOpenedPortOutput> OpenPorts { get; set; }
@@ -28,16 +47,6 @@ namespace Nps.Application.Nps.Dots
     /// </summary>
     public class NpsClientOpenedPortOutput
     {
-        /// <summary>
-        /// 服务器地址
-        /// </summary>
-        public string ServerIPAddress { get; set; }
-
-        /// <summary>
-        /// 客户端连接端口
-        /// </summary>
-        public string ClientConnectPort { get; set; }
-
         /// <summary>
         /// 服务器端口
         /// </summary>
