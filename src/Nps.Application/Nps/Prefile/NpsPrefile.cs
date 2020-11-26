@@ -13,6 +13,7 @@ namespace Nps.Application.Nps.Prefile
 
             CreateMap<NpsAppSecret, NpsClientOpenedOutput>()
                 .ForMember(dest => dest.DeviceUniqueId, options => options.MapFrom(src => src.DeviceUniqueId))
+                .ForMember(dest => dest.VirtualKey, options => options.MapFrom(src => src.AppSecret))
                 .ForMember(dest => dest.OpenPorts, options => options.MapFrom(src => DefineConvertCleverMagic(src)));
         }
 

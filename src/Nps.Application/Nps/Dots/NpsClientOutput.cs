@@ -13,6 +13,11 @@ namespace Nps.Application.Nps.Dots
         public string DeviceUniqueId { get; set; }
 
         /// <summary>
+        /// vKey
+        /// </summary>
+        public string VirtualKey { get; set; }
+
+        /// <summary>
         /// 已开通端口列表
         /// </summary>
         public List<NpsClientOpenedPortOutput> OpenPorts { get; set; }
