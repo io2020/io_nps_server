@@ -14,7 +14,7 @@ namespace Nps.Application.Nps.Prefile
             CreateMap<NpsAppSecret, NpsClientOpenedOutput>()
                 .ForMember(dest => dest.DeviceUniqueId, options => options.MapFrom(src => src.DeviceUniqueId))
                 .ForMember(dest => dest.VirtualKey, options => options.MapFrom(src => src.AppSecret))
-                .ForMember(dest => dest.ServerDomain, options => options.MapFrom(src => $"http://{src.NpsServer.ServerIPAddress}:{src.NpsServer.ClientConnectPort}"))
+                //.ForMember(dest => dest.ServerDomain, options => options.MapFrom(src => $"http://{src.NpsServer.ServerIPAddress}:{src.NpsServer.ClientConnectPort}"))
                 .ForMember(dest => dest.ServerIPAddress, options => options.MapFrom(src => src.NpsServer.ServerIPAddress))
                 .ForMember(dest => dest.ClientConnectPort, options => options.MapFrom(src => src.NpsServer.ClientConnectPort.ToString()))
                 .ForMember(dest => dest.OpenPorts, options => options.MapFrom(src => DefineConvertCleverMagic(src)));
