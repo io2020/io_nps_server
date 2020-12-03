@@ -3,6 +3,7 @@ using Nps.Application.Nps.Dots;
 using Nps.Application.NpsApi;
 using Nps.Application.NpsApi.Dtos;
 using Nps.Core.Aop.Attributes;
+using Nps.Core.Caching;
 using Nps.Core.Data;
 using Nps.Core.Infrastructure;
 using Nps.Core.Infrastructure.Exceptions;
@@ -25,11 +26,13 @@ namespace Nps.Application.Nps.Services
     /// </summary>
     public class NpsClientService : DomainService, INpsClientService
     {
-        private readonly ILogger<NpsClientService> _logger;
-
         private readonly INpsApi _npsApi;
 
+        private readonly ICaching _caching;
+
         private readonly IGuidGenerator _guidGenerator;
+
+        private readonly ILogger<NpsClientService> _logger;
 
         private readonly IFreeSqlRepository<NpsServer> _npsServerRepository;
 
@@ -50,25 +53,28 @@ namespace Nps.Application.Nps.Services
         /// <summary>
         /// 初始化一个<see cref="NpsClientService"/>实例
         /// </summary>
-        /// <param name="logger">日志对象</param>
         /// <param name="npsApi">Nps服务器Api</param>
+        /// <param name="caching">缓存对象</param>
         /// <param name="guidGenerator">有序GUID生成器</param>
+        /// <param name="logger">日志对象</param>
         /// <param name="npsServerRepository">Nps服务器仓储</param>
         /// <param name="npsAppSecretRepository">Nps应用密钥仓储</param>
         /// <param name="npsClientRepository">Nps客户端仓储</param>
         /// <param name="npsChannelRepository">Nps隧道仓储</param>
         public NpsClientService(
-            ILogger<NpsClientService> logger,
             INpsApi npsApi,
+            ICaching caching,
             IGuidGenerator guidGenerator,
+            ILogger<NpsClientService> logger,
             IFreeSqlRepository<NpsServer> npsServerRepository,
             IFreeSqlRepository<NpsAppSecret> npsAppSecretRepository,
             IFreeSqlRepository<NpsClient> npsClientRepository,
             IFreeSqlRepository<NpsChannel> npsChannelRepository)
         {
-            _logger = logger;
             _npsApi = npsApi;
+            _caching = caching;
             _guidGenerator = guidGenerator;
+            _logger = logger;
             _npsServerRepository = npsServerRepository;
             _npsAppSecretRepository = npsAppSecretRepository;
             _npsClientRepository = npsClientRepository;
@@ -539,7 +545,7 @@ namespace Nps.Application.Nps.Services
         /// <returns>返回验签内容</returns>
         private async Task<BaseAuthInput> BeforeRequestNpsApiAsync()
         {
-            var cacheValue = await RedisHelper.GetAsync(_npsApi_Auth_CacheKey);
+            var cacheValue = await _caching.GetAsync(_npsApi_Auth_CacheKey);
             if (cacheValue == null)
             {
                 var serverTime = await _npsApi.ServerTimeAsync();
@@ -552,7 +558,7 @@ namespace Nps.Application.Nps.Services
                     Timestamp = timestamp
                 };
 
-                await RedisHelper.SetAsync(_npsApi_Auth_CacheKey, baseAuthInput.ToJson(), TimeSpan.FromSeconds(15));
+                await _caching.SetAsync(_npsApi_Auth_CacheKey, baseAuthInput.ToJson(), TimeSpan.FromSeconds(15));
 
                 return baseAuthInput;
             }

@@ -705,13 +705,14 @@
             Nps客户端服务
             </summary>
         </member>
-        <member name="M:Nps.Application.Nps.Services.NpsClientService.#ctor(Microsoft.Extensions.Logging.ILogger{Nps.Application.Nps.Services.NpsClientService},Nps.Application.NpsApi.INpsApi,Nps.Core.Infrastructure.IdGenerators.IGuidGenerator,Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsAppSecret},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsClient},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsChannel})">
+        <member name="M:Nps.Application.Nps.Services.NpsClientService.#ctor(Nps.Application.NpsApi.INpsApi,Nps.Core.Caching.ICaching,Nps.Core.Infrastructure.IdGenerators.IGuidGenerator,Microsoft.Extensions.Logging.ILogger{Nps.Application.Nps.Services.NpsClientService},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsServer},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsAppSecret},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsClient},Nps.Core.Repositories.IFreeSqlRepository{Nps.Data.Entities.NpsChannel})">
             <summary>
             初始化一个<see cref="T:Nps.Application.Nps.Services.NpsClientService"/>实例
             </summary>
-            <param name="logger">日志对象</param>
             <param name="npsApi">Nps服务器Api</param>
+            <param name="caching">缓存对象</param>
             <param name="guidGenerator">有序GUID生成器</param>
+            <param name="logger">日志对象</param>
             <param name="npsServerRepository">Nps服务器仓储</param>
             <param name="npsAppSecretRepository">Nps应用密钥仓储</param>
             <param name="npsClientRepository">Nps客户端仓储</param>
