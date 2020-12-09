@@ -1,4 +1,4 @@
-﻿using Nps.Core.Infrastructure;
+﻿using Nps.Infrastructure;
 using Nps.Core.Repositories;
 using Nps.Data.Entities;
 using System.Collections.Generic;

@@ -40,21 +40,21 @@
             </summary>
             <param name="npsClientService">NpsClient服务</param>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ClientController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsClientSearchInput})">
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dtos.NpsClientSearchInput})">
             <summary>
             设备查询服务，根据条件分页查询客户端信息
             </summary>
             <param name="input">查询条件</param>
             <returns>客户端列表</returns>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ClientController.OpenAsync(Nps.Application.Nps.Dots.NpsClientOpenInput)">
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.OpenAsync(Nps.Application.Nps.Dtos.NpsClientOpenInput)">
             <summary>
             设备开通服务
             </summary>
             <param name="input">设备开通服务输入参数</param>
             <returns>返回执行结果</returns>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ClientController.DeleteAsync(Nps.Application.Nps.Dots.NpsClientDeleteInput)">
+        <member name="M:Nps.Api.Controllers.Nps.ClientController.DeleteAsync(Nps.Application.Nps.Dtos.NpsClientDeleteInput)">
             <summary>
             设备端口删除服务
             </summary>
@@ -79,210 +79,12 @@
             <param name="serverIPAddress">服务器IP地址</param>
             <returns>返回服务器信息</returns>
         </member>
-        <member name="M:Nps.Api.Controllers.Nps.ServerController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dots.NpsServerSearchInput})">
+        <member name="M:Nps.Api.Controllers.Nps.ServerController.SearchAsync(Nps.Core.Data.PagingInput{Nps.Application.Nps.Dtos.NpsServerSearchInput})">
             <summary>
             根据条件分页查询服务器信息
             </summary>
             <param name="input">查询条件</param>
             <returns>服务器信息列表</returns>
-        </member>
-        <member name="M:Nps.Api.Framework.Aop.ActionTrackFilterAttribute.SkipLogging(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
-            <summary>
-            当方法或控制器上存在DisableAuditingAttribute特性标签时，不记录日志 
-            </summary>
-        </member>
-        <member name="T:Nps.Api.Framework.ApplicationExtensions.CorsExtension">
-            <summary>
-            IApplicationBuilder扩展-跨域
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ApplicationExtensions.CorsExtension.UseDefineCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary>
-            使用跨域
-            </summary>
-            <param name="app">IApplicationBuilder</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ApplicationExtensions.SerilogExtension">
-            <summary>
-            IApplicationBuilder扩展-Serilog高级用法
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ApplicationExtensions.SerilogExtension.EnrichFromRequest(Serilog.IDiagnosticContext,Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            定义Serilog摘要日志
-            </summary>
-            <param name="diagnosticContext">IDiagnosticContext</param>
-            <param name="httpContext">HttpContext</param>
-        </member>
-        <member name="M:Nps.Api.Framework.ApplicationExtensions.SerilogExtension.UseSerilogRequestLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary>
-            使用Serilog摘要日志
-            </summary>
-            <param name="app">IApplicationBuilder</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ApplicationExtensions.SwaggerExtension">
-            <summary>
-            IApplicationBuilder扩展-Swagger
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ApplicationExtensions.SwaggerExtension.UseDefineSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{System.IO.Stream})">
-            <summary>
-            使用Swagger
-            </summary>
-            <param name="app">IApplicationBuilder</param>
-            <param name="streamHtml">自定义首页路径</param>
-        </member>
-        <member name="T:Nps.Api.Framework.DependencyRegister.DefaultRegisterModule">
-            <summary>
-            基础注入
-            </summary>
-        </member>
-        <member name="T:Nps.Api.Framework.DependencyRegister.RepositoryRegisterModule">
-            <summary>
-            注入仓储
-            </summary>
-        </member>
-        <member name="T:Nps.Api.Framework.DependencyRegister.ServiceRegisterModule">
-            <summary>
-            注入服务
-            </summary>
-        </member>
-        <member name="T:Nps.Api.Framework.Middleware.CorsMiddleware">
-            <summary>
-            跨域中间件
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.Middleware.CorsMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            管道执行到该中间件时候下一个中间件的RequestDelegate请求委托，如果有其它参数，也同样通过注入的方式获得
-            </summary>
-            <param name="next">下一个处理者</param>
-        </member>
-        <member name="M:Nps.Api.Framework.Middleware.CorsMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            自定义中间件要执行的逻辑
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.AutoMapperExtension">
-            <summary>
-            IServiceCollection扩展-实体映射对象
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.AutoMapperExtension.AddDefineAutoMapper(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入AutoMapper
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.CachingExtension">
-            <summary>
-            IServiceCollection扩展-缓存
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.CachingExtension.AddDefineCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入自定义缓存
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.CurrentUserExtension">
-            <summary>
-            IServiceCollection扩展-当前用户
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.CurrentUserExtension.AddCurrentUser(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入当前登录用户，提前注入
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.FreeSqlExtension">
-            <summary>
-            IServiceCollection扩展-FreeSqlORM
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.FreeSqlExtension.AddFreeSql(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入FreeSql
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.IdGeneratorExtension">
-            <summary>
-            IServiceCollection扩展-ID生成器
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.IdGeneratorExtension.AddIdGenerator(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入ID生成器，首先需要注入此，避免之后引用时无法发现
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.JwtTokenExtension">
-            <summary>
-            IServiceCollection扩展-JWT认证
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.JwtTokenExtension.AddSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            根据配置文件创建JsonWebTokenSettings
-            默认过期时间为1天
-            </summary>
-            <param name="services">IServiceCollection</param>
-            <returns>JsonWebTokenSettings</returns>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.JwtTokenExtension.AddJwtBearer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入JWT
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.MiniProfilerExtension">
-            <summary>
-            IServiceCollection扩展-MiniProfiler接口性能监控
-            https://www.cnblogs.com/lwqlun/p/10222505.html
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.MiniProfilerExtension.AddDefineMiniProfiler(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入MiniProfiler
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.MvcControllersExtension">
-            <summary>
-            IServiceCollection扩展-MvcControllers、FluentValidation
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.MvcControllersExtension.AddDefineControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入MvcControllers、FluentValidation
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.SwaggerExtension">
-            <summary>
-            IServiceCollection扩展-Swagger文档展示
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.SwaggerExtension.AddDefineSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入Swagger，使用jwt授权方案
-            </summary>
-            <param name="services">IServiceCollection</param>
-        </member>
-        <member name="T:Nps.Api.Framework.ServiceExtensions.WebApiClientExtension">
-            <summary>
-            IServiceCollection扩展-WebApiClient文档展示
-            </summary>
-        </member>
-        <member name="M:Nps.Api.Framework.ServiceExtensions.WebApiClientExtension.AddDefineHttpApi(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入自定义WebApi
-            </summary>
-            <param name="services">IServiceCollection</param>
         </member>
     </members>
 </doc>

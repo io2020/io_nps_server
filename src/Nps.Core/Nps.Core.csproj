@@ -20,22 +20,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Castle.Core.AsyncInterceptor" Version="1.7.0" />
     <PackageReference Include="CSRedisCore" Version="3.6.5" />
-    <PackageReference Include="DotNetCore.Security" Version="13.1.0" />
-    <PackageReference Include="FreeSql" Version="2.0.102" />
-    <PackageReference Include="FreeSql.DbContext" Version="2.0.102" />
-    <PackageReference Include="FreeSql.Provider.MySql" Version="2.0.102" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
+    <PackageReference Include="DotNetCore.Security" Version="13.3.0" />
+    <PackageReference Include="FreeSql" Version="2.0.105" />
+    <PackageReference Include="FreeSql.DbContext" Version="2.0.105" />
+    <PackageReference Include="FreeSql.Provider.MySql" Version="2.0.105" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.1" />
-    <PackageReference Include="Z.ExtensionMethods" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nps.Infrastructure\Nps.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

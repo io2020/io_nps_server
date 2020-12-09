@@ -1,5 +1,5 @@
 ﻿using FreeSql;
-using Nps.Core.Infrastructure.Helpers;
+using Nps.Infrastructure.Helpers;
 using Nps.Data.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Nps.Core.Infrastructure.Extensions;
+﻿using Nps.Infrastructure.Extensions;
 
 namespace Nps.Core.Security
 {

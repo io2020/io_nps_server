@@ -16,11 +16,11 @@ namespace Nps.Test
         [Fact]
         public async Task GetListAsyncTest()
         {
-            var result = await _npsServerService.SearchAsync(new Core.Data.PagingInput<Application.Nps.Dots.NpsServerSearchInput>
+            var result = await _npsServerService.SearchAsync(new Core.Data.PagingInput<Application.Nps.Dtos.NpsServerSearchInput>
             {
                 PageIndex = 1,
                 PageSize = 10,
-                Filter = new Application.Nps.Dots.NpsServerSearchInput
+                Filter = new Application.Nps.Dtos.NpsServerSearchInput
                 {
                     ServerIPAddress = "8.131.77.125"
                 }

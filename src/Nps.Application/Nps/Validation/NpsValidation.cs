@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Nps.Application.Nps.Dots;
+using Nps.Application.Nps.Dtos;
 
 namespace Nps.Application.Nps.Validation
 {

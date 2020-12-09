@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nps.Application.Nps.Dots;
+using Nps.Application.Nps.Dtos;
 using Nps.Application.Nps.Services;
 using Nps.Core.Data;
-using Nps.Core.Infrastructure.Extensions;
-using Nps.Core.Infrastructure.Helpers;
+using Nps.Infrastructure.Extensions;
+using Nps.Infrastructure.Helpers;
 using System.Threading.Tasks;
 
 namespace Nps.Api.Controllers.Nps
@@ -35,7 +35,7 @@ namespace Nps.Api.Controllers.Nps
             serverIPAddress.CheckNotNullOrEmpty("服务器IP不能为空");
             if (!RegexHelper.IsIpAddress(serverIPAddress))
             {
-                return ExecuteResult.Error("请输入正确的IP地址格式", Core.Infrastructure.StatusCode.ParameterError);
+                return ExecuteResult.Error("请输入正确的IP地址格式", Infrastructure.StatusCode.ParameterError);
             }
 
             return ExecuteResult.Ok(await _npsServerService.GetAsync(serverIPAddress));

@@ -1,4 +1,4 @@
-﻿using Nps.Application.Nps.Dots;
+﻿using Nps.Application.Nps.Dtos;
 using Nps.Core.Data;
 using System.Threading.Tasks;
 

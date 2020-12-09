@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Logging;
 using Nps.Core.Aop.Attributes;
 using Nps.Core.Caching;
-using Nps.Core.Infrastructure;
-using Nps.Core.Infrastructure.Exceptions;
-using Nps.Core.Infrastructure.Extensions;
-using Nps.Core.Infrastructure.Helpers;
+using Nps.Infrastructure;
+using Nps.Infrastructure.Exceptions;
+using Nps.Infrastructure.Extensions;
+using Nps.Infrastructure.Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,9 +47,9 @@ namespace Nps.Core.Aop.Interceptor
 
             var defineKey = new
             {
-                ServiceName= typeName,
-                MethodName= methodName,
-                Arguments= methodArguments
+                ServiceName = typeName,
+                MethodName = methodName,
+                Arguments = methodArguments
             };
 
             string key = defineKey.ToJson();

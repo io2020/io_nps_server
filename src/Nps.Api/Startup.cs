@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nps.Api.Framework.ApplicationExtensions;
-using Nps.Api.Framework.DependencyRegister;
-using Nps.Api.Framework.ServiceExtensions;
-using Nps.Core.Infrastructure.Configs;
+using Nps.Core.Config;
+using Nps.Api.Extension.Application;
+using Nps.Api.Extension.Dependency;
+using Nps.Api.Extension.Service;
 using System.Reflection;
 
 namespace Nps.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; } = AppSettings.Load();
+        public IConfiguration Configuration { get; } = AppSetting.Load();
 
         public IWebHostEnvironment Environment { get; }
 

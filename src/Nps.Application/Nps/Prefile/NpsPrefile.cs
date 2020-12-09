@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Nps.Application.Nps.Dots;
+using Nps.Application.Nps.Dtos;
 using Nps.Data.Entities;
 using System.Collections.Generic;
 

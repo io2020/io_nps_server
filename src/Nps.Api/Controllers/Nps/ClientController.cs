@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nps.Application.Nps.Dots;
+using Nps.Application.Nps.Dtos;
 using Nps.Application.Nps.Services;
 using Nps.Core.Data;
 using System.Threading.Tasks;

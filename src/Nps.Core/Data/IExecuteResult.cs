@@ -1,4 +1,4 @@
-﻿using Nps.Core.Infrastructure;
+﻿using Nps.Infrastructure;
 
 namespace Nps.Core.Data
 {

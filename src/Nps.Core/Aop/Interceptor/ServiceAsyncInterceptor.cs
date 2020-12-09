@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Microsoft.Extensions.Logging;
-using Nps.Core.Infrastructure;
-using Nps.Core.Infrastructure.Exceptions;
+using Nps.Infrastructure;
+using Nps.Infrastructure.Exceptions;
 using StackExchange.Profiling;
 using System;
 using System.Threading.Tasks;

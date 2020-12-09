@@ -1,5 +1,5 @@
 ﻿using Nps.Core.Entities;
-using Nps.Core.Infrastructure.Helpers;
+using Nps.Infrastructure.Helpers;
 using System;
 using System.Linq;
 using System.Reflection;
