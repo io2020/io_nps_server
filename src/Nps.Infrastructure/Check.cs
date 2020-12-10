@@ -1,5 +1,4 @@
-﻿using Nps.Infrastructure.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -74,7 +73,7 @@ namespace Nps.Infrastructure
         /// <exception cref="ArgumentNullException"></exception>
         public static void NotNull<T>(T value, string paramName)
         {
-            Required<ArgumentNullException>(value != null, string.Format(Resources.ParameterCheck_NotNull, paramName));
+            Required<ArgumentNullException>(value != null, string.Format(CheckConsts.ParameterCheck_NotNull, paramName));
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace Nps.Infrastructure
         /// <exception cref="ArgumentException"></exception>
         public static void NotNullOrEmpty(string value, string paramName)
         {
-            Required<ArgumentException>(!string.IsNullOrEmpty(value), string.Format(Resources.ParameterCheck_NotNullOrEmpty_String, paramName));
+            Required<ArgumentException>(!string.IsNullOrEmpty(value), string.Format(CheckConsts.ParameterCheck_NotNullOrEmpty_String, paramName));
         }
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace Nps.Infrastructure
         /// <exception cref="ArgumentException"></exception>
         public static void NotEmpty(Guid value, string paramName)
         {
-            Required<ArgumentException>(value != Guid.Empty, string.Format(Resources.ParameterCheck_NotEmpty_Guid, paramName));
+            Required<ArgumentException>(value != Guid.Empty, string.Format(CheckConsts.ParameterCheck_NotEmpty_Guid, paramName));
         }
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace Nps.Infrastructure
         public static void NotNullOrEmpty<T>(IReadOnlyList<T> list, string paramName)
         {
             NotNull(list, paramName);
-            Required<ArgumentException>(list.Any(), string.Format(Resources.ParameterCheck_NotNullOrEmpty_Collection, paramName));
+            Required<ArgumentException>(list.Any(), string.Format(CheckConsts.ParameterCheck_NotNullOrEmpty_Collection, paramName));
         }
 
         /// <summary>
@@ -120,7 +119,7 @@ namespace Nps.Infrastructure
         public static void HasNoNulls<T>(IReadOnlyList<T> list, string paramName)
         {
             NotNull(list, paramName);
-            Required<ArgumentException>(list.All(m => m != null), string.Format(Resources.ParameterCheck_NotContainsNull_Collection, paramName));
+            Required<ArgumentException>(list.All(m => m != null), string.Format(CheckConsts.ParameterCheck_NotContainsNull_Collection, paramName));
         }
 
         /// <summary>
@@ -135,7 +134,7 @@ namespace Nps.Infrastructure
         public static void LessThan<T>(T value, string paramName, T target, bool canEqual = false) where T : IComparable<T>
         {
             bool flag = canEqual ? value.CompareTo(target) <= 0 : value.CompareTo(target) < 0;
-            string format = canEqual ? Resources.ParameterCheck_NotLessThanOrEqual : Resources.ParameterCheck_NotLessThan;
+            string format = canEqual ? CheckConsts.ParameterCheck_NotLessThanOrEqual : CheckConsts.ParameterCheck_NotLessThan;
             Required<ArgumentOutOfRangeException>(flag, string.Format(format, paramName, target));
         }
 
@@ -151,7 +150,7 @@ namespace Nps.Infrastructure
         public static void GreaterThan<T>(T value, string paramName, T target, bool canEqual = false) where T : IComparable<T>
         {
             bool flag = canEqual ? value.CompareTo(target) >= 0 : value.CompareTo(target) > 0;
-            string format = canEqual ? Resources.ParameterCheck_NotGreaterThanOrEqual : Resources.ParameterCheck_NotGreaterThan;
+            string format = canEqual ? CheckConsts.ParameterCheck_NotGreaterThanOrEqual : CheckConsts.ParameterCheck_NotGreaterThan;
             Required<ArgumentOutOfRangeException>(flag, string.Format(format, paramName, target));
         }
 
@@ -171,14 +170,14 @@ namespace Nps.Infrastructure
         {
             bool flag = startEqual ? value.CompareTo(start) >= 0 : value.CompareTo(start) > 0;
             string message = startEqual
-                ? string.Format(Resources.ParameterCheck_Between, paramName, start, end)
-                : string.Format(Resources.ParameterCheck_BetweenNotEqual, paramName, start, end, start);
+                ? string.Format(CheckConsts.ParameterCheck_Between, paramName, start, end)
+                : string.Format(CheckConsts.ParameterCheck_BetweenNotEqual, paramName, start, end, start);
             Required<ArgumentOutOfRangeException>(flag, message);
 
             flag = endEqual ? value.CompareTo(end) <= 0 : value.CompareTo(end) < 0;
             message = endEqual
-                ? string.Format(Resources.ParameterCheck_Between, paramName, start, end)
-                : string.Format(Resources.ParameterCheck_BetweenNotEqual, paramName, start, end, end);
+                ? string.Format(CheckConsts.ParameterCheck_Between, paramName, start, end)
+                : string.Format(CheckConsts.ParameterCheck_BetweenNotEqual, paramName, start, end, end);
             Required<ArgumentOutOfRangeException>(flag, message);
         }
 
@@ -192,7 +191,7 @@ namespace Nps.Infrastructure
         public static void DirectoryExists(string directory, string paramName = null)
         {
             NotNull(directory, paramName);
-            Required<DirectoryNotFoundException>(Directory.Exists(directory), string.Format(Resources.ParameterCheck_DirectoryNotExists, directory));
+            Required<DirectoryNotFoundException>(Directory.Exists(directory), string.Format(CheckConsts.ParameterCheck_DirectoryNotExists, directory));
         }
 
         /// <summary>
@@ -205,7 +204,7 @@ namespace Nps.Infrastructure
         public static void FileExists(string filename, string paramName = null)
         {
             NotNull(filename, paramName);
-            Required<FileNotFoundException>(File.Exists(filename), string.Format(Resources.ParameterCheck_FileNotExists, filename));
+            Required<FileNotFoundException>(File.Exists(filename), string.Format(CheckConsts.ParameterCheck_FileNotExists, filename));
         }
     }
 }
