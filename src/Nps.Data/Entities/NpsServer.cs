@@ -11,6 +11,12 @@ namespace Nps.Data.Entities
     public class NpsServer : CreateAuditEntity
     {
         /// <summary>
+        /// 服务器序列号
+        /// </summary>
+        [Column(StringLength = 5)]
+        public string SerialNumber { get; set; }
+
+        /// <summary>
         /// 服务IP地址
         /// </summary>
         [Column(StringLength = 100)]

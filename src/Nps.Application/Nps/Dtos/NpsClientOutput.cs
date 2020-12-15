@@ -34,6 +34,11 @@ namespace Nps.Application.Nps.Dtos
         public string ClientConnectPort { get; set; }
 
         /// <summary>
+        /// 服务器序列号
+        /// </summary>
+        public string SerialNumber { get; set; }
+
+        /// <summary>
         /// 已开通端口列表
         /// </summary>
         public List<NpsClientOpenedPortOutput> OpenPorts { get; set; }
