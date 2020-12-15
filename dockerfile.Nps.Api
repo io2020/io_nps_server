@@ -9,6 +9,8 @@ COPY test/Nps.Test/*.csproj ./test/Nps.Test/
 COPY src/Nps.Core/*.csproj ./src/Nps.Core/
 COPY src/Nps.Data/*.csproj ./src/Nps.Data/
 COPY src/Nps.Application/*.csproj ./src/Nps.Application/
+COPY src/Nps.Infrastructure/*.csproj ./src/Nps.Infrastructure/
+COPY src/Nps.Api.Extension/*.csproj ./src/Nps.Api.Extension/
 RUN dotnet restore -r linux-x64
 
 # copy everything else and build app
@@ -17,6 +19,8 @@ COPY test/Nps.Test/. ./test/Nps.Test/
 COPY src/Nps.Core/. ./src/Nps.Core/
 COPY src/Nps.Data/. ./src/Nps.Data/
 COPY src/Nps.Application/. ./src/Nps.Application/
+COPY src/Nps.Infrastructure/. ./src/Nps.Infrastructure/
+COPY src/Nps.Api.Extension/. ./src/Nps.Api.Extension/
 WORKDIR /source/src/Nps.Api
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false --no-restore
 
